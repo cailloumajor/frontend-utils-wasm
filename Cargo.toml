@@ -1,7 +1,10 @@
 [package]
 name = "influxdb-timeline"
+description = "Draw a timeline from InfluxDB data"
 version = "0.1.0"
 authors = [ "Arnaud Rocher <arnaud.roche3@gmail.com>" ]
+repository = "https://github.com/cailloumajor/influxdb-timeline"
+license = "MIT"
 edition = "2021"
 
 [lib]
