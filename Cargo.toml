@@ -14,7 +14,16 @@ crate-type = [ "cdylib", "rlib" ]
 default = [ "console_error_panic_hook" ]
 
 [dependencies]
+chrono = { version = "0.4.23", features = [ "serde" ] }
+csv = "1.1.6"
+gloo-console = "0.2.3"
+hex_color = "2.0.0"
+itertools = "0.10.5"
+plotters-canvas = "0.3.0"
+serde = { version = "1.0.150", features = [ "derive" ] }
+thiserror = "1.0.37"
 wasm-bindgen = "0.2.63"
+wasm-bindgen-futures = "0.4.33"
 
 # The `console_error_panic_hook` crate provides better debugging of panics by
 # logging them with `console.error`. This is great for development, but requires
@@ -22,10 +31,20 @@ wasm-bindgen = "0.2.63"
 # code size when deploying.
 console_error_panic_hook = { version = "0.1.6", optional = true }
 
-# `wee_alloc` is a tiny allocator for wasm that is only ~1K in code size
-# compared to the default allocator's ~10K. It is slower than the default
-# allocator, however.
-wee_alloc = { version = "0.4.5", optional = true }
+[dependencies.gloo-net]
+version = "0.2.5"
+default_features = false
+features = [ "http" ]
+
+[dependencies.plotters]
+version = "0.3.4"
+default_features = false
+features = [ "datetime" ]
+
+[dependencies.tsify]
+version = "0.4.3"
+default_features = false
+features = [ "js" ]
 
 [dev-dependencies]
 wasm-bindgen-test = "0.3.13"
