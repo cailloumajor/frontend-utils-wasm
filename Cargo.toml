@@ -46,8 +46,9 @@ version = "0.4.3"
 default_features = false
 features = [ "js" ]
 
-[dev-dependencies]
-wasm-bindgen-test = "0.3.13"
+[dependencies.web-sys]
+version = "0.3.60"
+features = [ "CanvasRenderingContext2d", "Event", "HtmlCanvasElement" ]
 
 [profile.release]
 # Tell `rustc` to optimize for small code size.

@@ -1,0 +1,19 @@
+{
+  "name": "influxdb-timeline-integration",
+  "private": true,
+  "source": "index.html",
+  "scripts": {
+    "start": "parcel --port 1234 --no-hmr",
+    "test:e2e": "cross-env TZ=UTC start-test 1234 'cypress open --e2e'",
+    "test:e2e:ci": "cross-env TZ=UTC start-test 1234 'cypress run --e2e'"
+  },
+  "devDependencies": {
+    "@frsource/cypress-plugin-visual-regression-diff": "^3.2.6",
+    "@types/connect": "^3.4.35",
+    "cross-env": "^7.0.3",
+    "cypress": "^12.1.0",
+    "parcel": "^2.8.1",
+    "start-server-and-test": "^1.15.2",
+    "typescript": "^4.9.4"
+  }
+}

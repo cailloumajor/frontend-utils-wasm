@@ -13,9 +13,10 @@ use plotters::prelude::*;
 use plotters_canvas::CanvasBackend;
 use serde::Deserialize;
 use tsify::Tsify;
-use wasm_bindgen::prelude::*;
+use wasm_bindgen::{prelude::*, JsCast};
+use web_sys::{CanvasRenderingContext2d, Event, HtmlCanvasElement};
 
-use errors::DrawInternalError;
+use errors::TimelineError;
 use model::{Record, TimeRange};
 
 #[derive(Deserialize, Tsify)]
@@ -31,7 +32,6 @@ struct InfluxdbConfig {
 #[tsify(from_wasm_abi)]
 #[serde(rename_all = "camelCase")]
 pub struct Config {
-    canvas_id: String,
     #[serde(flatten)]
     influxdb: InfluxdbConfig,
 }
@@ -41,25 +41,28 @@ pub struct Timeline;
 
 #[wasm_bindgen]
 impl Timeline {
-    pub async fn draw(config: Config) -> Result<(), JsError> {
+    pub async fn draw(canvas: HtmlCanvasElement, config: Config) -> Result<(), JsError> {
         utils::set_panic_hook();
 
-        let data = {
-            let _timer = gloo_console::Timer::new("getting InfluxDB data");
-            get_data(&config.influxdb).await?
-        };
-        let mut reader = ReaderBuilder::new().comment(Some(b'#')).from_reader(data);
+        canvas
+            .get_context("2d")
+            .unwrap()
+            .ok_or(TimelineError::GetCanvasContext)?
+            .dyn_into::<CanvasRenderingContext2d>()
+            .unwrap()
+            .clear_rect(0.0, 0.0, canvas.width().into(), canvas.height().into());
 
-        let _drawing_timer = gloo_console::Timer::new("timeline drawing");
+        let data = get_data(&config.influxdb).await?;
+        let mut reader = ReaderBuilder::new().comment(Some(b'#')).from_reader(data);
 
         let mut time_range_iter = reader.deserialize::<TimeRange>();
         let initial_position = time_range_iter.reader().position().clone();
         let time_range = time_range_iter
             .next()
-            .ok_or(DrawInternalError::EmptyDataset)??;
+            .ok_or(TimelineError::EmptyDataset)??;
 
-        let backend =
-            CanvasBackend::new(&config.canvas_id).ok_or(DrawInternalError::CanvasNotFound)?;
+        let backend = CanvasBackend::with_canvas_object(canvas.clone())
+            .ok_or(TimelineError::BackendCreation)?;
         let root = backend.into_drawing_area();
 
         let x_range = time_range.start..time_range.stop;
@@ -91,7 +94,7 @@ impl Timeline {
             .try_collect()?;
         for hex in deduplicated.iter().map(|record| &record.color).unique() {
             let HexColor { r, g, b, .. } =
-                HexColor::parse_rgb(hex).map_err(|err| DrawInternalError::HexColorParse {
+                HexColor::parse_rgb(hex).map_err(|err| TimelineError::HexColorParse {
                     source: err,
                     value: hex.clone(),
                 })?;
@@ -107,7 +110,10 @@ impl Timeline {
         });
 
         chart.draw_series(series)?;
+        root.present()?;
 
+        let drawed_event = Event::new("drawed").unwrap();
+        canvas.dispatch_event(&drawed_event).unwrap();
         Ok(())
     }
 }
@@ -120,6 +126,9 @@ async fn get_data(config: &InfluxdbConfig) -> Result<Cursor<Vec<u8>>, JsError> {
         .header("Content-Type", "application/vnd.flux")
         .body(&config.flux_query);
     let response = request.send().await?;
+    if !response.ok() {
+        return Err(TimelineError::ResponseStatus(response.status()).into());
+    }
     let data = response.binary().await?;
     Ok(Cursor::new(data))
 }

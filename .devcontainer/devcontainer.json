@@ -11,6 +11,8 @@
         "context": "."
     },
 
+    "forwardPorts": [5901, 6080],
+
     "containerEnv": {
         "http_proxy": "${localEnv:http_proxy}",
         "https_proxy": "${localEnv:https_proxy}",
@@ -21,7 +23,9 @@
         "ghcr.io/devcontainers/features/common-utils:1": {},
         "ghcr.io/devcontainers/features/rust:1": {
             "version": "none"
-        }
+        },
+        "ghcr.io/devcontainers/features/node:1": {},
+        "ghcr.io/devcontainers/features/desktop-lite:1": {}
     },
 
     // Configure tool-specific properties.
@@ -32,11 +36,16 @@
             "settings": {
                 "[toml][rust]": {
                     "editor.formatOnSave": true
+                },
+                "[css][html][javascript][typescript]": {
+                    "editor.defaultFormatter": "esbenp.prettier-vscode",
+                    "editor.formatOnSave": true
                 }
             },
             // Add the IDs of extensions you want installed when the container is created.
             "extensions": [
-                "editorconfig.editorconfig"
+                "editorconfig.editorconfig",
+                "esbenp.prettier-vscode"
             ]
         }
     },
