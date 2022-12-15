@@ -30,6 +30,6 @@ jobs:
           registry-url: https://npm.pkg.github.com/
           always-auth: true
       - name: Publish the package
-        run: npm publish
+        run: npm publish pkg/
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
