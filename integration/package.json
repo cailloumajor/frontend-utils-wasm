@@ -3,11 +3,12 @@
   "private": true,
   "source": "index.html",
   "scripts": {
-    "start": "parcel --port 1234 --no-hmr",
+    "start": "parcel --port 1234 --no-cache --no-hmr",
     "test:e2e": "cross-env TZ=UTC start-test 1234 'cypress open --e2e'",
     "test:e2e:ci": "cross-env TZ=UTC start-test 1234 'cypress run --e2e'"
   },
   "devDependencies": {
+    "@fontsource/roboto": "^4.5.8",
     "@frsource/cypress-plugin-visual-regression-diff": "^3.2.6",
     "@types/connect": "^3.4.35",
     "cross-env": "^7.0.3",
