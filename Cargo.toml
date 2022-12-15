@@ -22,7 +22,7 @@ itertools = "0.10.5"
 plotters-canvas = "0.3.0"
 serde = { version = "1.0.150", features = [ "derive" ] }
 thiserror = "1.0.37"
-wasm-bindgen = "0.2.63"
+wasm-bindgen = "0.2.83"
 wasm-bindgen-futures = "0.4.33"
 
 # The `console_error_panic_hook` crate provides better debugging of panics by
