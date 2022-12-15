@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.3](https://github.com/cailloumajor/influxdb-timeline/compare/v0.1.2...v0.1.3) (2022-12-15)
+
+
+### Bug Fixes
+
+* **ci:** publish with npm ([59f73dd](https://github.com/cailloumajor/influxdb-timeline/commit/59f73dd2c3998c2e5f5d96a0aaa6b2acac8f5c3f))
+
 ## [0.1.2](https://github.com/cailloumajor/influxdb-timeline/compare/v0.1.1...v0.1.2) (2022-12-15)
 
 
