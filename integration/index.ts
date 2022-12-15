@@ -1,3 +1,5 @@
+import "@fontsource/roboto"
+
 import init, { Timeline } from "../pkg"
 
 const canvas = document.getElementById("target-canvas") as HTMLCanvasElement
@@ -7,6 +9,7 @@ const errorOut = document.getElementById("error-out") as HTMLElement
 async function draw() {
   console.time("draw function")
   await Timeline.draw(canvas, {
+    fontFamily: "Roboto",
     influxdbUrl: "/api/influxdb",
     influxdbOrg: "testorg",
     influxdbToken: "testtoken",

@@ -10,6 +10,7 @@ use gloo_net::http::Request;
 use hex_color::HexColor;
 use itertools::Itertools;
 use plotters::prelude::*;
+use plotters::style::RelativeSize;
 use plotters_canvas::CanvasBackend;
 use serde::Deserialize;
 use tsify::Tsify;
@@ -32,6 +33,7 @@ struct InfluxdbConfig {
 #[tsify(from_wasm_abi)]
 #[serde(rename_all = "camelCase")]
 pub struct Config {
+    font_family: String,
     #[serde(flatten)]
     influxdb: InfluxdbConfig,
 }
@@ -67,13 +69,17 @@ impl Timeline {
 
         let x_range = time_range.start..time_range.stop;
         let mut chart = ChartBuilder::on(&root)
-            .margin(10)
-            .x_label_area_size(15)
-            .y_label_area_size(10)
+            .margin(RelativeSize::Height(0.03))
+            .x_label_area_size(RelativeSize::Height(0.13))
+            .y_label_area_size(RelativeSize::Height(0.1))
             .build_cartesian_2d(x_range, 0usize..10)?;
 
         chart
             .configure_mesh()
+            .label_style((
+                FontFamily::Name(&config.font_family),
+                RelativeSize::Height(0.12),
+            ))
             .x_label_formatter(&|label| format!("{}", label.format("%H:%M")))
             .x_labels(13)
             .x_max_light_lines(2)
