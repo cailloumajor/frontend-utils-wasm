@@ -24,7 +24,7 @@ jobs:
       - name: Install wasm-pack
         run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | bash
       - name: Build
-        run: wasm-pack build --target web
+        run: wasm-pack build --target web --scope ${{ github.repository_owner }}
       - uses: actions/setup-node@v3
         with:
           registry-url: https://npm.pkg.github.com/
