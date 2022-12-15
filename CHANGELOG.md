@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.5](https://github.com/cailloumajor/influxdb-timeline/compare/v0.1.4...v0.1.5) (2022-12-15)
+
+
+### Bug Fixes
+
+* **ci:** set package scope ([78fe5db](https://github.com/cailloumajor/influxdb-timeline/commit/78fe5dbfe1dcee7bbeb63cf48a35e4352b96b0f3))
+
 ## [0.1.4](https://github.com/cailloumajor/influxdb-timeline/compare/v0.1.3...v0.1.4) (2022-12-15)
 
 
