@@ -1,0 +1,32 @@
+name: Automated delivery
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  docker-release:
+    name: Build and release Node.js package
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Get Rust version from dev container Dockerfile
+        id: get-rust-version
+        run: |
+          echo "RUST_VERSION=$(grep -oP 'FROM rust:\K[\d.]+' .devcontainer/Dockerfile)" \
+          >> $GITHUB_OUTPUT
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: ${{ steps.get-rust-version.outputs.RUST_VERSION }}
+      - uses: Swatinem/rust-cache@v2
+      - name: Build
+        run: wasm-pack build --target web
+      - uses: actions/setup-node@v3
+        with:
+          registry-url: https://npm.pkg.github.com/
+      - name: Pack and publish
+        run: wasm-pack publish --target web pkg/
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
