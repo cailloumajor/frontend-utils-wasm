@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.2](https://github.com/cailloumajor/influxdb-timeline/compare/v0.1.1...v0.1.2) (2022-12-15)
+
+
+### Bug Fixes
+
+* **ci:** set always-auth ([0d10d2a](https://github.com/cailloumajor/influxdb-timeline/commit/0d10d2a4b1fc8740e0da26995188bbb5d357ed4f))
+
 ## [0.1.1](https://github.com/cailloumajor/influxdb-timeline/compare/v0.1.0...v0.1.1) (2022-12-15)
 
 
