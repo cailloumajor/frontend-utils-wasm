@@ -28,6 +28,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           registry-url: https://npm.pkg.github.com/
+          always-auth: true
       - name: Pack and publish
         run: wasm-pack publish --target web pkg/
         env:
