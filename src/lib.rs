@@ -128,6 +128,7 @@ async fn get_data(config: &InfluxdbConfig) -> Result<Cursor<Vec<u8>>, JsError> {
     let token = format!("Token {}", config.influxdb_token);
     let request = Request::post(&config.influxdb_url)
         .query([("org", &config.influxdb_org)])
+        .header("Accept", "application/csv")
         .header("Authorization", &token)
         .header("Content-Type", "application/vnd.flux")
         .body(&config.flux_query);
