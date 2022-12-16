@@ -35,7 +35,6 @@ describe("timeline", () => {
   })
 
   it("fails if record deserialization errors", () => {
-    const body = ""
     cy.intercept("/api/influxdb*", {
       body:
         "_start,_stop,_time,color\n" +
@@ -50,7 +49,6 @@ describe("timeline", () => {
   })
 
   it("fails if color parsing errors", () => {
-    const body = ""
     cy.intercept("/api/influxdb*", {
       body:
         "_start,_stop,_time,color\n" +
@@ -62,6 +60,26 @@ describe("timeline", () => {
     cy.get("@error")
       .should("include.text", "invalid")
       .and("include.text", "color")
+  })
+
+  it("sends a request compliant with InfluxDB needs", () => {
+    cy.intercept("/api/influxdb*").as("api-request")
+
+    cy.get("@button").click()
+
+    cy.wait("@api-request").then(({ request }) => {
+      expect(request.method).to.equal("POST")
+      expect(request.url).to.satisfy((rawUrl: string) => {
+        const url = new URL(rawUrl)
+        return url.searchParams.get("org") === "testorg"
+      })
+      expect(request.headers).to.include({
+        accept: "application/csv",
+        authorization: "Token testtoken",
+        "content-type": "application/vnd.flux",
+      })
+      expect(request.body).to.equal("testfluxquery")
+    })
   })
 
   it("renders according to snapshot", () => {
