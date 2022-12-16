@@ -39,22 +39,35 @@ pub struct Config {
 }
 
 #[wasm_bindgen]
-pub struct Timeline;
+pub struct Timeline {
+    canvas: HtmlCanvasElement,
+    config: Config,
+}
 
 #[wasm_bindgen]
 impl Timeline {
-    pub async fn draw(canvas: HtmlCanvasElement, config: Config) -> Result<(), JsError> {
+    #[wasm_bindgen(constructor)]
+    pub fn new(canvas: HtmlCanvasElement, config: Config) -> Self {
+        Self { canvas, config }
+    }
+
+    pub async fn draw(&self) -> Result<(), JsError> {
         utils::set_panic_hook();
 
-        canvas
+        self.canvas
             .get_context("2d")
             .unwrap()
             .ok_or(TimelineError::GetCanvasContext)?
             .dyn_into::<CanvasRenderingContext2d>()
             .unwrap()
-            .clear_rect(0.0, 0.0, canvas.width().into(), canvas.height().into());
+            .clear_rect(
+                0.0,
+                0.0,
+                self.canvas.width().into(),
+                self.canvas.height().into(),
+            );
 
-        let data = get_data(&config.influxdb).await?;
+        let data = get_data(&self.config.influxdb).await?;
         let mut reader = ReaderBuilder::new().comment(Some(b'#')).from_reader(data);
 
         let mut time_range_iter = reader.deserialize::<TimeRange>();
@@ -63,7 +76,7 @@ impl Timeline {
             .next()
             .ok_or(TimelineError::EmptyDataset)??;
 
-        let backend = CanvasBackend::with_canvas_object(canvas.clone())
+        let backend = CanvasBackend::with_canvas_object(self.canvas.clone())
             .ok_or(TimelineError::BackendCreation)?;
         let root = backend.into_drawing_area();
 
@@ -77,7 +90,7 @@ impl Timeline {
         chart
             .configure_mesh()
             .label_style((
-                FontFamily::Name(&config.font_family),
+                FontFamily::Name(&self.config.font_family),
                 RelativeSize::Height(0.12),
             ))
             .x_label_formatter(&|label| format!("{}", label.format("%H:%M")))
@@ -119,7 +132,7 @@ impl Timeline {
         root.present()?;
 
         let drawed_event = Event::new("drawed").unwrap();
-        canvas.dispatch_event(&drawed_event).unwrap();
+        self.canvas.dispatch_event(&drawed_event).unwrap();
         Ok(())
     }
 }
