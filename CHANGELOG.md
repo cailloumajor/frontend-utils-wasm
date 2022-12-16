@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/cailloumajor/influxdb-timeline/compare/v1.0.0...v1.1.0) (2022-12-16)
+
+
+### Features
+
+* switch to a more consistent object design ([f04048e](https://github.com/cailloumajor/influxdb-timeline/commit/f04048e685c0e57c2bb72286e9ff6c1129686133))
+
 ## [1.0.0](https://github.com/cailloumajor/influxdb-timeline/compare/v0.1.5...v1.0.0) (2022-12-16)
 
 
