@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.0.0](https://github.com/cailloumajor/influxdb-timeline/compare/v0.1.5...v1.0.0) (2022-12-16)
+
+
+### Bug Fixes
+
+* **deps:** update rust crate wasm-bindgen to 0.2.83 ([3463d30](https://github.com/cailloumajor/influxdb-timeline/commit/3463d30de8899e33702579c542263757fab96a71))
+* set missing Accept header ([7f04f61](https://github.com/cailloumajor/influxdb-timeline/commit/7f04f611301a3c87e4df910c38525180f981633e))
+* **tests:** move request tests to Cypress ([0f2ad2e](https://github.com/cailloumajor/influxdb-timeline/commit/0f2ad2e8de2bebe59ef0e034513b68784dafaf56))
+
+
+### Miscellaneous Chores
+
+* release 1.0.0 ([87685b5](https://github.com/cailloumajor/influxdb-timeline/commit/87685b5286e212c42a0b218a33438fbc8c3978f6))
+
 ## [0.1.5](https://github.com/cailloumajor/influxdb-timeline/compare/v0.1.4...v0.1.5) (2022-12-15)
 
 
