@@ -67,7 +67,7 @@ describe("timeline", () => {
 
     cy.get("@button").click()
 
-    cy.wait("@api-request").then(({ request }) => {
+    cy.wait("@api-request").should(({ request }) => {
       expect(request.method).to.equal("POST")
       expect(request.url).to.satisfy((rawUrl: string) => {
         const url = new URL(rawUrl)
