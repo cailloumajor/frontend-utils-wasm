@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/cailloumajor/influxdb-timeline/compare/v1.1.1...v1.2.0) (2022-12-20)
+
+
+### Features
+
+* use CSS color property to draw the mesh ([c08cbb8](https://github.com/cailloumajor/influxdb-timeline/commit/c08cbb84c0152638d8f74f4ddf678a1a33153bfc))
+
 ## [1.1.1](https://github.com/cailloumajor/influxdb-timeline/compare/v1.1.0...v1.1.1) (2022-12-20)
 
 
