@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.1.1](https://github.com/cailloumajor/influxdb-timeline/compare/v1.1.0...v1.1.1) (2022-12-20)
+
+
+### Bug Fixes
+
+* allow drawing the last rectangle ([04f4d6e](https://github.com/cailloumajor/influxdb-timeline/commit/04f4d6e2d9a2512320c16c613763378bda437250))
+* **deps:** update rust crate serde to 1.0.151 ([421ede1](https://github.com/cailloumajor/influxdb-timeline/commit/421ede1600faf1139e3bbddf6ebdbd07e8fddd4d))
+* **deps:** update rust crate thiserror to 1.0.38 ([3fe0f25](https://github.com/cailloumajor/influxdb-timeline/commit/3fe0f25ab10bef844ead5cb67780864a5dcec788))
+
 ## [1.1.0](https://github.com/cailloumajor/influxdb-timeline/compare/v1.0.0...v1.1.0) (2022-12-16)
 
 
