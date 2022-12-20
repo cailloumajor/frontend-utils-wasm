@@ -1,4 +1,5 @@
 mod errors;
+mod iter;
 mod model;
 mod utils;
 
@@ -8,7 +9,7 @@ use std::io::Cursor;
 use csv::ReaderBuilder;
 use gloo_net::http::Request;
 use hex_color::HexColor;
-use itertools::Itertools;
+use itertools::{process_results, Itertools};
 use plotters::prelude::*;
 use plotters::style::RelativeSize;
 use plotters_canvas::CanvasBackend;
@@ -18,6 +19,7 @@ use wasm_bindgen::{prelude::*, JsCast};
 use web_sys::{CanvasRenderingContext2d, Event, HtmlCanvasElement};
 
 use errors::TimelineError;
+use iter::IdentifyLast;
 use model::{Record, TimeRange};
 
 #[derive(Deserialize, Tsify)]
@@ -104,13 +106,14 @@ impl Timeline {
 
         reader.seek(initial_position)?;
 
-        let deduplicated: Vec<_> = reader
-            .deserialize::<Record>()
-            .dedup_by(|x, y| match (x, y) {
-                (Ok(x), Ok(y)) => x.color == y.color,
-                _ => false,
-            })
-            .try_collect()?;
+        let deduplicated: Vec<_> = process_results(reader.deserialize::<Record>(), |iter| {
+            iter.identify_last()
+                .dedup_by(|(previous, _), (current, is_last)| {
+                    !is_last && previous.color == current.color
+                })
+                .map(|(record, _)| record)
+                .collect()
+        })?;
         for hex in deduplicated.iter().map(|record| &record.color).unique() {
             let HexColor { r, g, b, .. } =
                 HexColor::parse_rgb(hex).map_err(|err| TimelineError::HexColorParse {
