@@ -1,4 +1,3 @@
-use hex_color::ParseHexColorError;
 use thiserror::Error;
 
 #[derive(Debug, Error)]
@@ -11,9 +10,4 @@ pub(super) enum TimelineError {
     EmptyDataset,
     #[error("error creating backend")]
     BackendCreation,
-    #[error("{source} (on value `{value}`)")]
-    HexColorParse {
-        source: ParseHexColorError,
-        value: String,
-    },
 }
