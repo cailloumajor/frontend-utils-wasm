@@ -14,9 +14,9 @@ crate-type = [ "cdylib", "rlib" ]
 default = [ "console_error_panic_hook" ]
 
 [dependencies]
+colorsys = "0.6.6"
 chrono = { version = "0.4.23", features = [ "serde" ] }
 csv = "1.1.6"
-hex_color = "2.0.0"
 itertools = "0.10.5"
 plotters-canvas = "0.3.0"
 serde = { version = "1.0.151", features = [ "derive" ] }
@@ -47,7 +47,14 @@ features = [ "js" ]
 
 [dependencies.web-sys]
 version = "0.3.60"
-features = [ "CanvasRenderingContext2d", "Event", "HtmlCanvasElement" ]
+features = [
+    "CanvasRenderingContext2d",
+    "CssStyleDeclaration",
+    "Element",
+    "Event",
+    "HtmlCanvasElement",
+    "Window",
+]
 
 [profile.release]
 # Tell `rustc` to optimize for small code size.

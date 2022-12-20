@@ -6,9 +6,9 @@ mod utils;
 use std::collections::HashMap;
 use std::io::Cursor;
 
+use colorsys::Rgb;
 use csv::ReaderBuilder;
 use gloo_net::http::Request;
-use hex_color::HexColor;
 use itertools::{process_results, Itertools};
 use plotters::prelude::*;
 use plotters::style::RelativeSize;
@@ -50,11 +50,25 @@ pub struct Timeline {
 impl Timeline {
     #[wasm_bindgen(constructor)]
     pub fn new(canvas: HtmlCanvasElement, config: Config) -> Self {
+        utils::set_panic_hook();
+
         Self { canvas, config }
     }
 
     pub async fn draw(&self) -> Result<(), JsError> {
-        utils::set_panic_hook();
+        let axis_color = {
+            let rgb = web_sys::window()
+                .unwrap()
+                .get_computed_style(&self.canvas)
+                .unwrap()
+                .unwrap()
+                .get_property_value("color")
+                .unwrap()
+                .parse::<Rgb>()
+                .unwrap();
+            let (r, g, b) = rgb.into();
+            RGBColor(r, g, b)
+        };
 
         self.canvas
             .get_context("2d")
@@ -91,9 +105,13 @@ impl Timeline {
 
         chart
             .configure_mesh()
+            .axis_style(axis_color)
+            .bold_line_style(axis_color.mix(0.4))
+            .light_line_style(axis_color.mix(0.3))
             .label_style((
                 FontFamily::Name(&self.config.font_family),
                 RelativeSize::Height(0.12),
+                &axis_color,
             ))
             .x_label_formatter(&|label| format!("{}", label.format("%H:%M")))
             .x_labels(13)
@@ -115,11 +133,8 @@ impl Timeline {
                 .collect()
         })?;
         for hex in deduplicated.iter().map(|record| &record.color).unique() {
-            let HexColor { r, g, b, .. } =
-                HexColor::parse_rgb(hex).map_err(|err| TimelineError::HexColorParse {
-                    source: err,
-                    value: hex.clone(),
-                })?;
+            let parsed = Rgb::from_hex_str(hex)?;
+            let (r, g, b) = parsed.into();
             palette.insert(hex.to_owned(), RGBColor(r, g, b));
         }
         let series = deduplicated.iter().tuple_windows().map(|(start, end)| {

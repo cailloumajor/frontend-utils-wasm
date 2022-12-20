@@ -58,8 +58,8 @@ describe("timeline", () => {
     cy.get("@button").click()
 
     cy.get("@error")
-      .should("include.text", "invalid")
-      .and("include.text", "color")
+      .should("include.text", "cannot parse")
+      .and("include.text", "zz")
   })
 
   it("sends a request compliant with InfluxDB needs", () => {
