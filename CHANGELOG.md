@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.3.0](https://github.com/cailloumajor/influxdb-timeline/compare/v1.2.0...v1.3.0) (2022-12-22)
+
+
+### Features
+
+* add opacity option ([b96847d](https://github.com/cailloumajor/influxdb-timeline/commit/b96847d2821c46050dcea462f744f9750e31eb27))
+
+
+### Bug Fixes
+
+* adjust margins to show labels in all cases ([ea8391b](https://github.com/cailloumajor/influxdb-timeline/commit/ea8391b93695dca9cdbbde796c3b10f21b4d5dbe))
+
 ## [1.2.0](https://github.com/cailloumajor/influxdb-timeline/compare/v1.1.1...v1.2.0) (2022-12-20)
 
 
