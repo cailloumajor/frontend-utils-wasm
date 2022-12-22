@@ -99,8 +99,9 @@ impl Timeline {
         let x_range = time_range.start..time_range.stop;
         let mut chart = ChartBuilder::on(&root)
             .margin(RelativeSize::Height(0.03))
+            .margin_left(RelativeSize::Height(0.13))
+            .margin_right(RelativeSize::Height(0.1))
             .x_label_area_size(RelativeSize::Height(0.13))
-            .y_label_area_size(RelativeSize::Height(0.1))
             .build_cartesian_2d(x_range, 0usize..10)?;
 
         chart
