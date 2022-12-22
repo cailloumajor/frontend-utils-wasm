@@ -9,6 +9,7 @@ const errorOut = document.getElementById("error-out") as HTMLElement
 init().then(() => {
   const timeline = new Timeline(canvas, {
     fontFamily: "Roboto",
+    opacity: 0.7,
     influxdbUrl: "/api/influxdb",
     influxdbOrg: "testorg",
     influxdbToken: "testtoken",

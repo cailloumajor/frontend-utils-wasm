@@ -36,6 +36,7 @@ struct InfluxdbConfig {
 #[serde(rename_all = "camelCase")]
 pub struct Config {
     font_family: String,
+    opacity: f64,
     #[serde(flatten)]
     influxdb: InfluxdbConfig,
 }
@@ -121,7 +122,7 @@ impl Timeline {
             .disable_y_axis()
             .draw()?;
 
-        let mut palette: HashMap<String, RGBColor> = HashMap::new();
+        let mut palette: HashMap<String, RGBAColor> = HashMap::new();
 
         reader.seek(initial_position)?;
 
@@ -136,11 +137,11 @@ impl Timeline {
         for hex in deduplicated.iter().map(|record| &record.color).unique() {
             let parsed = Rgb::from_hex_str(hex)?;
             let (r, g, b) = parsed.into();
-            palette.insert(hex.to_owned(), RGBColor(r, g, b));
+            palette.insert(hex.to_owned(), RGBColor(r, g, b).mix(self.config.opacity));
         }
         let series = deduplicated.iter().tuple_windows().map(|(start, end)| {
             let style = ShapeStyle {
-                color: palette[&start.color].into(),
+                color: palette[&start.color],
                 filled: true,
                 stroke_width: 0,
             };
