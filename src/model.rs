@@ -13,5 +13,5 @@ pub(super) struct TimeRange {
 pub(super) struct Record {
     #[serde(rename = "_time")]
     pub time: DateTime<Local>,
-    pub color: String,
+    pub color: Option<String>,
 }
