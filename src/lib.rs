@@ -134,19 +134,30 @@ impl Timeline {
                 .map(|(record, _)| record)
                 .collect()
         })?;
-        for hex in deduplicated.iter().map(|record| &record.color).unique() {
+        for hex in deduplicated
+            .iter()
+            .filter_map(|record| record.color.as_ref())
+            .unique()
+        {
             let parsed = Rgb::from_hex_str(hex)?;
             let (r, g, b) = parsed.into();
             palette.insert(hex.to_owned(), RGBColor(r, g, b).mix(self.config.opacity));
         }
-        let series = deduplicated.iter().tuple_windows().map(|(start, end)| {
-            let style = ShapeStyle {
-                color: palette[&start.color],
-                filled: true,
-                stroke_width: 0,
-            };
-            Rectangle::new([(start.time, 1), (end.time, 9)], style)
-        });
+        let series = deduplicated
+            .iter()
+            .tuple_windows()
+            .filter_map(|(start, end)| {
+                if let Some(color) = &start.color {
+                    let style = ShapeStyle {
+                        color: palette[color],
+                        filled: true,
+                        stroke_width: 0,
+                    };
+                    Some(Rectangle::new([(start.time, 1), (end.time, 9)], style))
+                } else {
+                    None
+                }
+            });
 
         chart.draw_series(series)?;
         root.present()?;
