@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/cailloumajor/influxdb-timeline/compare/v1.3.0...v1.4.0) (2023-01-02)
+
+
+### Features
+
+* allow null color in InfluxDB data ([5145b5b](https://github.com/cailloumajor/influxdb-timeline/commit/5145b5b61f9bf33333f09a5dd4819ffee97ed4bd))
+
 ## [1.3.0](https://github.com/cailloumajor/influxdb-timeline/compare/v1.2.0...v1.3.0) (2022-12-22)
 
 
