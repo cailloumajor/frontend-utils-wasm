@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.1](https://github.com/cailloumajor/influxdb-timeline/compare/v1.4.0...v1.4.1) (2023-01-15)
+
+
+### Miscellaneous Chores
+
+* release 1.4.1 ([c399170](https://github.com/cailloumajor/influxdb-timeline/commit/c39917042dfcc6f0c29c6206370bfe20ba5565ea))
+
 ## [1.4.0](https://github.com/cailloumajor/influxdb-timeline/compare/v1.3.0...v1.4.0) (2023-01-02)
 
 
