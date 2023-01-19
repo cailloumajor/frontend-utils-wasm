@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/cailloumajor/influxdb-utils-wasm/compare/v1.4.1...v2.0.0) (2023-01-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* rename the project
+
+### Bug Fixes
+
+* rename the project ([bfcd637](https://github.com/cailloumajor/influxdb-utils-wasm/commit/bfcd6377b645e95df9ee41430a8750822f3da7c6))
+
 ## [1.4.1](https://github.com/cailloumajor/influxdb-utils-wasm/compare/v1.4.0...v1.4.1) (2023-01-15)
 
 
