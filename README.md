@@ -1,6 +1,10 @@
-# InfluxDB timeline
+# InfluxDB-related utilities to use in frontend WASM
 
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
+
+## Exposed components
+
+### Timeline
 
 Draws a timeline on an existing `<canvas>` element, given a [Flux][flux] query returning a `color` column (in hex notation).
 

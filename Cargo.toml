@@ -1,9 +1,9 @@
 [package]
-name = "influxdb-timeline"
-description = "Draw a timeline from InfluxDB data"
+name = "influxdb-utils-wasm"
+description = "InfluxDB-related utilities to use in frontend WASM"
 version = "1.4.1"
 authors = [ "Arnaud Rocher <arnaud.roche3@gmail.com>" ]
-repository = "https://github.com/cailloumajor/influxdb-timeline"
+repository = "https://github.com/cailloumajor/influxdb-utils-wasm"
 license = "MIT"
 edition = "2021"
 
