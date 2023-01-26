@@ -31,7 +31,7 @@ wasm-bindgen-futures = "0.4.33"
 console_error_panic_hook = { version = "0.1.7", optional = true }
 
 [dependencies.gloo-net]
-version = "0.2.5"
+version = "0.2.6"
 default_features = false
 features = [ "http" ]
 
