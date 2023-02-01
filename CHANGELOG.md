@@ -1,5 +1,20 @@
 # Changelog
 
+## [2.1.0](https://github.com/cailloumajor/influxdb-utils-wasm/compare/v2.0.0...v2.1.0) (2023-02-01)
+
+
+### Features
+
+* add X axis configuration options ([2e69c75](https://github.com/cailloumajor/influxdb-utils-wasm/commit/2e69c75973e628d39abde7bed5358345521fff3b))
+
+
+### Bug Fixes
+
+* **deps:** update rust crate colorsys to 0.6.7 ([fb86b2b](https://github.com/cailloumajor/influxdb-utils-wasm/commit/fb86b2bc9de8e2c04439a36d0a32205a0ed259fb))
+* **deps:** update rust crate gloo-net to 0.2.6 ([1ba0679](https://github.com/cailloumajor/influxdb-utils-wasm/commit/1ba0679731eb5abde2f77871375fe2cdcb21dcc4))
+* **deps:** update rust docker tag to v1.67.0 ([44755be](https://github.com/cailloumajor/influxdb-utils-wasm/commit/44755be7d0f1a58d80c6fb4fc8da909715c90789))
+* wrongly reverted logic of identify_last iterator ([74b2151](https://github.com/cailloumajor/influxdb-utils-wasm/commit/74b2151ab60e61d4d5b31e62afc99ab029fe9e87))
+
 ## [2.0.0](https://github.com/cailloumajor/influxdb-utils-wasm/compare/v1.4.1...v2.0.0) (2023-01-19)
 
 
