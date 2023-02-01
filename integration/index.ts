@@ -10,6 +10,8 @@ init().then(() => {
   const timeline = new Timeline(canvas, {
     fontFamily: "Roboto",
     opacity: 0.7,
+    xIntervalMinutes: 120,
+    xOffsetMinutes: 1,
     influxdbUrl: "/api/influxdb",
     influxdbOrg: "testorg",
     influxdbToken: "testtoken",

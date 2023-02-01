@@ -1,8 +1,11 @@
 use std::collections::HashMap;
+use std::iter::{successors, zip};
 
+use chrono::{DateTime, Duration, DurationRound, Local};
 use colorsys::Rgb;
 use csv::ReaderBuilder;
 use itertools::{process_results, Itertools};
+use plotters::coord::combinators::WithKeyPoints;
 use plotters::prelude::*;
 use plotters::style::RelativeSize;
 use plotters_canvas::CanvasBackend;
@@ -23,6 +26,8 @@ use crate::utils;
 pub struct Config {
     font_family: String,
     opacity: f64,
+    x_interval_minutes: u16,
+    x_offset_minutes: u16,
     #[serde(flatten)]
     influxdb: InfluxdbConfig,
 }
@@ -83,7 +88,13 @@ impl Timeline {
             .ok_or(TimelineError::BackendCreation)?;
         let root = backend.into_drawing_area();
 
-        let x_range = time_range.start..time_range.stop;
+        let x_range = make_x_spec(
+            time_range.start,
+            time_range.stop,
+            Duration::minutes(self.config.x_interval_minutes.into()),
+            Duration::minutes(self.config.x_offset_minutes.into()),
+        );
+
         let mut chart = ChartBuilder::on(&root)
             .margin(RelativeSize::Height(0.03))
             .margin_left(RelativeSize::Height(0.13))
@@ -94,16 +105,14 @@ impl Timeline {
         chart
             .configure_mesh()
             .axis_style(axis_color)
-            .bold_line_style(axis_color.mix(0.4))
-            .light_line_style(axis_color.mix(0.3))
+            .bold_line_style(axis_color.mix(0.5))
+            .light_line_style(axis_color.mix(0.2))
             .label_style((
                 FontFamily::Name(&self.config.font_family),
                 RelativeSize::Height(0.12),
                 &axis_color,
             ))
             .x_label_formatter(&|label| format!("{}", label.format("%H:%M")))
-            .x_labels(13)
-            .x_max_light_lines(2)
             .disable_y_mesh()
             .disable_y_axis()
             .draw()?;
@@ -151,5 +160,171 @@ impl Timeline {
         let drawed_event = Event::new("drawed").unwrap();
         self.canvas.dispatch_event(&drawed_event).unwrap();
         Ok(())
+    }
+}
+
+fn make_x_spec(
+    start: DateTime<Local>,
+    end: DateTime<Local>,
+    bold_interval: Duration,
+    offset: Duration,
+) -> WithKeyPoints<RangedDateTime<DateTime<Local>>> {
+    let initial = start.duration_trunc(bold_interval).unwrap() + offset - bold_interval;
+    let mut bold_points = Vec::new();
+    let mut light_points = Vec::new();
+    let is_bold_iter = successors(Some(true), |is_bold| Some(!is_bold));
+    let datetime_iter = successors(Some(initial), |dt| Some(*dt + bold_interval / 2));
+    let zipped = zip(is_bold_iter, datetime_iter);
+    for (is_bold, dt) in zipped {
+        if dt < start {
+            continue;
+        }
+        if dt > end {
+            break;
+        }
+        if is_bold {
+            bold_points.push(dt);
+        } else {
+            light_points.push(dt);
+        }
+    }
+    (start..end)
+        .with_key_points(bold_points)
+        .with_light_points(light_points)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    mod make_x_spec {
+        use chrono::TimeZone;
+        use plotters::coord::ranged1d::{BoldPoints, LightPoints};
+
+        use super::*;
+
+        trait FormattedKeyPoints {
+            fn formatted_bold_points(&self) -> Vec<String>;
+            fn formatted_light_points(&self) -> Vec<String>;
+        }
+
+        impl FormattedKeyPoints for WithKeyPoints<RangedDateTime<DateTime<Local>>> {
+            fn formatted_bold_points(&self) -> Vec<String> {
+                self.bold_points()
+                    .iter()
+                    .map(|dt| dt.format("%H:%M").to_string())
+                    .collect()
+            }
+            fn formatted_light_points(&self) -> Vec<String> {
+                self.light_points()
+                    .iter()
+                    .map(|dt| dt.format("%H:%M").to_string())
+                    .collect()
+            }
+        }
+
+        #[test]
+        fn start_on_bold_line_no_offset() {
+            let start = Local.with_ymd_and_hms(1984, 12, 9, 22, 0, 0).unwrap();
+            let end = Local.with_ymd_and_hms(1984, 12, 10, 4, 0, 0).unwrap();
+            let interval = Duration::hours(1);
+            let offset = Duration::zero();
+
+            let x_spec = make_x_spec(start, end, interval, offset);
+
+            assert_eq!(
+                x_spec.formatted_bold_points(),
+                vec!["22:00", "23:00", "00:00", "01:00", "02:00", "03:00", "04:00"]
+            );
+            assert_eq!(
+                x_spec.formatted_light_points(),
+                vec!["22:30", "23:30", "00:30", "01:30", "02:30", "03:30"]
+            );
+        }
+
+        #[test]
+        fn start_on_light_line_no_offset() {
+            let start = Local.with_ymd_and_hms(1984, 12, 9, 22, 30, 0).unwrap();
+            let end = Local.with_ymd_and_hms(1984, 12, 10, 4, 30, 0).unwrap();
+            let interval = Duration::hours(1);
+            let offset = Duration::zero();
+
+            let x_spec = make_x_spec(start, end, interval, offset);
+
+            assert_eq!(
+                x_spec.formatted_bold_points(),
+                vec!["23:00", "00:00", "01:00", "02:00", "03:00", "04:00"]
+            );
+            assert_eq!(
+                x_spec.formatted_light_points(),
+                vec!["22:30", "23:30", "00:30", "01:30", "02:30", "03:30", "04:30"]
+            );
+        }
+
+        #[test]
+        fn start_after_bold_line_no_offset() {
+            let start = Local.with_ymd_and_hms(1984, 12, 9, 22, 5, 0).unwrap();
+            let end = Local.with_ymd_and_hms(1984, 12, 10, 4, 5, 0).unwrap();
+            let interval = Duration::hours(1);
+            let offset = Duration::zero();
+
+            let x_spec = make_x_spec(start, end, interval, offset);
+
+            assert_eq!(
+                x_spec.formatted_bold_points(),
+                vec!["23:00", "00:00", "01:00", "02:00", "03:00", "04:00"]
+            );
+            assert_eq!(
+                x_spec.formatted_light_points(),
+                vec!["22:30", "23:30", "00:30", "01:30", "02:30", "03:30"]
+            );
+        }
+
+        #[test]
+        fn start_after_light_line_no_offset() {
+            let start = Local.with_ymd_and_hms(1984, 12, 9, 22, 35, 0).unwrap();
+            let end = Local.with_ymd_and_hms(1984, 12, 10, 4, 35, 0).unwrap();
+            let interval = Duration::hours(1);
+            let offset = Duration::zero();
+
+            let x_spec = make_x_spec(start, end, interval, offset);
+
+            assert_eq!(
+                x_spec.formatted_bold_points(),
+                vec!["23:00", "00:00", "01:00", "02:00", "03:00", "04:00"]
+            );
+            assert_eq!(
+                x_spec.formatted_light_points(),
+                vec!["23:30", "00:30", "01:30", "02:30", "03:30", "04:30"]
+            );
+        }
+
+        #[test]
+        fn with_offset() {
+            let start = Local.with_ymd_and_hms(1984, 12, 9, 22, 0, 0).unwrap();
+            let end = Local.with_ymd_and_hms(1984, 12, 10, 4, 0, 0).unwrap();
+            let interval = Duration::hours(1);
+            let offset = Duration::minutes(30);
+
+            let x_spec = make_x_spec(start, end, interval, offset);
+
+            assert_eq!(
+                x_spec.formatted_bold_points(),
+                vec!["22:30", "23:30", "00:30", "01:30", "02:30", "03:30"]
+            );
+            assert_eq!(
+                x_spec.formatted_light_points(),
+                vec!["22:00", "23:00", "00:00", "01:00", "02:00", "03:00", "04:00"]
+            );
+        }
+
+        #[test]
+        fn playground() {
+            let start = Local.with_ymd_and_hms(1984, 12, 9, 22, 0, 0).unwrap();
+            let end = Local.with_ymd_and_hms(1984, 12, 10, 4, 0, 0).unwrap();
+            let ranged = RangedDateTime::from(start..end);
+            dbg!(ranged.key_points(BoldPoints(8)));
+            dbg!(ranged.key_points(LightPoints::new(8, 1)));
+        }
     }
 }
