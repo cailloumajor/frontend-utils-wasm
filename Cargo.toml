@@ -1,7 +1,7 @@
 [package]
 name = "influxdb-utils-wasm"
 description = "InfluxDB-related utilities to use in frontend WASM"
-version = "2.0.0"
+version = "2.1.0"
 authors = [ "Arnaud Rocher <arnaud.roche3@gmail.com>" ]
 repository = "https://github.com/cailloumajor/influxdb-utils-wasm"
 license = "MIT"
