@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.1](https://github.com/cailloumajor/influxdb-utils-wasm/compare/v2.1.0...v2.1.1) (2023-02-06)
+
+
+### Bug Fixes
+
+* **deps:** update rust-wasm-bindgen monorepo ([d784b20](https://github.com/cailloumajor/influxdb-utils-wasm/commit/d784b20b0cfcaa13447fbb48bf0e7862118f64bf))
+
 ## [2.1.0](https://github.com/cailloumajor/influxdb-utils-wasm/compare/v2.0.0...v2.1.0) (2023-02-01)
 
 
