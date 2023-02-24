@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.2.0](https://github.com/cailloumajor/influxdb-utils-wasm/compare/v2.1.1...v2.2.0) (2023-02-24)
+
+
+### Features
+
+* add emphasis on configured labels ([b80cd8d](https://github.com/cailloumajor/influxdb-utils-wasm/commit/b80cd8d2a94d7b2efdd4cbcbc63da67a1e6f60e5))
+
+
+### Bug Fixes
+
+* **deps:** update rust crate csv to 1.2.0 ([13b5d16](https://github.com/cailloumajor/influxdb-utils-wasm/commit/13b5d16b7c2892ca751280a56d26a18e7ea58e79))
+* **deps:** update rust docker tag to v1.67.1 ([820ccf8](https://github.com/cailloumajor/influxdb-utils-wasm/commit/820ccf8004af1a718c03758a2af543f9b7bf34d1))
+
 ## [2.1.1](https://github.com/cailloumajor/influxdb-utils-wasm/compare/v2.1.0...v2.1.1) (2023-02-06)
 
 
