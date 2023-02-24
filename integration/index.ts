@@ -12,6 +12,7 @@ init().then(() => {
     opacity: 0.7,
     xIntervalMinutes: 120,
     xOffsetMinutes: 1,
+    emphasisLabels: ["04:01", "16:01", "23:01"],
     influxdbUrl: "/api/influxdb",
     influxdbOrg: "testorg",
     influxdbToken: "testtoken",
