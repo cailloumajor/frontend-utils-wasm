@@ -28,6 +28,7 @@ pub struct Config {
     opacity: f64,
     x_interval_minutes: u16,
     x_offset_minutes: u16,
+    emphasis_labels: Vec<String>,
     #[serde(flatten)]
     influxdb: InfluxdbConfig,
 }
@@ -112,7 +113,14 @@ impl Timeline {
                 RelativeSize::Height(0.12),
                 &axis_color,
             ))
-            .x_label_formatter(&|label| format!("{}", label.format("%H:%M")))
+            .x_label_formatter(&|label| {
+                let formatted = format!("{}", label.format("%H:%M"));
+                if self.config.emphasis_labels.contains(&formatted) {
+                    format!(">{formatted}<")
+                } else {
+                    formatted
+                }
+            })
             .disable_y_mesh()
             .disable_y_axis()
             .draw()?;
