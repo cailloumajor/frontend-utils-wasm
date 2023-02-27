@@ -116,7 +116,7 @@ impl Timeline {
             .x_label_formatter(&|label| {
                 let formatted = format!("{}", label.format("%H:%M"));
                 if self.config.emphasis_labels.contains(&formatted) {
-                    format!(">{formatted}<")
+                    format!("<{formatted}>")
                 } else {
                     formatted
                 }
