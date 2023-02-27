@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.1](https://github.com/cailloumajor/influxdb-utils-wasm/compare/v2.2.0...v2.2.1) (2023-02-27)
+
+
+### Bug Fixes
+
+* change labels emphasis characters ([98ebcd6](https://github.com/cailloumajor/influxdb-utils-wasm/commit/98ebcd6ac4fe9f1b5743d4fda9292a5a477cb7d7))
+
 ## [2.2.0](https://github.com/cailloumajor/influxdb-utils-wasm/compare/v2.1.1...v2.2.0) (2023-02-24)
 
 
