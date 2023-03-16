@@ -11,7 +11,7 @@
         "semanticCommitType": "fix"
       },
       {
-        "matchDepTypes": ["dev-dependencies"],
+        "matchDepTypes": ["dev-dependencies", "devDependencies"],
         "automerge": true,
         "automergeType": "branch"
       }
