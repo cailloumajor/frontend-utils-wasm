@@ -1,5 +1,25 @@
 # Changelog
 
+## [2.2.2](https://github.com/cailloumajor/influxdb-utils-wasm/compare/v2.2.1...v2.2.2) (2023-03-29)
+
+
+### Bug Fixes
+
+* **deps:** update rust crate chrono to 0.4.24 ([4df2e18](https://github.com/cailloumajor/influxdb-utils-wasm/commit/4df2e1821c787dffdffe8ac4c9043e93c800c5dd))
+* **deps:** update rust crate csv to 1.2.1 ([ff2cfb4](https://github.com/cailloumajor/influxdb-utils-wasm/commit/ff2cfb4dbffa2dfc58458c5b440ee30b50fd6eb5))
+* **deps:** update rust crate serde to 1.0.153 ([d35a66c](https://github.com/cailloumajor/influxdb-utils-wasm/commit/d35a66c2554bb271f122e2ec07cfa5c8e4cd9e79))
+* **deps:** update rust crate serde to 1.0.154 ([f5da97c](https://github.com/cailloumajor/influxdb-utils-wasm/commit/f5da97cc364ef697138e66de01c553e62f12fb35))
+* **deps:** update rust crate serde to 1.0.155 ([2c04391](https://github.com/cailloumajor/influxdb-utils-wasm/commit/2c04391a6044c67db7e8c348331d19fcca4364ac))
+* **deps:** update rust crate serde to 1.0.156 ([f4fea90](https://github.com/cailloumajor/influxdb-utils-wasm/commit/f4fea90aa71e90bd6bf37081a642964eed571fb3))
+* **deps:** update rust crate serde to 1.0.157 ([de49c99](https://github.com/cailloumajor/influxdb-utils-wasm/commit/de49c99d6bf0cabee426ced1450ed2f6428540a1))
+* **deps:** update rust crate serde to 1.0.158 ([c6e431b](https://github.com/cailloumajor/influxdb-utils-wasm/commit/c6e431b8ddff424f5ea9e559d29bdb0f1d7efcee))
+* **deps:** update rust crate serde to 1.0.159 ([14f35e8](https://github.com/cailloumajor/influxdb-utils-wasm/commit/14f35e8361519023768688868e16c9b183ec575d))
+* **deps:** update rust crate thiserror to 1.0.39 ([8497662](https://github.com/cailloumajor/influxdb-utils-wasm/commit/8497662506e23d4de538fc99e4592d51073df544))
+* **deps:** update rust crate thiserror to 1.0.40 ([02a1bd0](https://github.com/cailloumajor/influxdb-utils-wasm/commit/02a1bd0f206eb6ca1145aa88c9d75f488e5303a8))
+* **deps:** update rust docker tag to v1.68.0 ([339b933](https://github.com/cailloumajor/influxdb-utils-wasm/commit/339b9335776f7234f058a3ae3d0a21cb4111b3eb))
+* **deps:** update rust docker tag to v1.68.1 ([83a62fb](https://github.com/cailloumajor/influxdb-utils-wasm/commit/83a62fb34cd83e5a125c6a7adfdc2e759fc03ded))
+* **deps:** update rust docker tag to v1.68.2 ([e2564a1](https://github.com/cailloumajor/influxdb-utils-wasm/commit/e2564a1849cbd4b9d1c695b36c34640fd98d2fb3))
+
 ## [2.2.1](https://github.com/cailloumajor/influxdb-utils-wasm/compare/v2.2.0...v2.2.1) (2023-02-27)
 
 
