@@ -11,6 +11,17 @@ describe("timeline", () => {
     cy.dataCy("error-out").as("error").should("be.empty")
   })
 
+  it("fails with an error (without throwing) if canvas was deleted", () => {
+    cy.get<HTMLCanvasElement>("@canvas").invoke("remove")
+
+    cy.get("@button").click()
+
+    cy.get("@error").should(
+      "include.text",
+      "error parsing canvas style property `color`"
+    )
+  })
+
   it("fails on bad response status code", () => {
     cy.intercept("/api/influxdb*", { statusCode: 400 })
 

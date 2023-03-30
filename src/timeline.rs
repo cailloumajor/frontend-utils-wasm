@@ -58,7 +58,7 @@ impl Timeline {
                 .get_property_value("color")
                 .unwrap()
                 .parse::<Rgb>()
-                .unwrap();
+                .map_err(TimelineError::ParsingCanvasColor)?;
             let (r, g, b) = rgb.into();
             RGBColor(r, g, b)
         };
