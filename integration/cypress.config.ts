@@ -6,7 +6,7 @@ export default defineConfig({
     pluginVisualRegressionCleanupUnusedImages: true,
   },
   e2e: {
-    baseUrl: "http://localhost:1234",
+    baseUrl: "http://localhost:8000",
     setupNodeEvents(on, config) {
       initPlugin(on, config)
     },

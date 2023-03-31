@@ -3,9 +3,9 @@
   "private": true,
   "source": "index.html",
   "scripts": {
-    "start": "parcel --port 1234 --no-cache --no-hmr",
-    "test:e2e": "cross-env TZ=UTC start-test 1234 'cypress open --e2e'",
-    "test:e2e:ci": "cross-env TZ=UTC start-test 1234 'cypress run --e2e'"
+    "start": "rimraf .parcel-cache && parcel --port 8000 --no-hmr",
+    "test:e2e": "cross-env TZ=UTC start-test 8000 'cypress open --e2e'",
+    "test:e2e:ci": "cross-env TZ=UTC start-test 8000 'cypress run --e2e'"
   },
   "devDependencies": {
     "@fontsource/roboto": "^4.5.8",
@@ -18,6 +18,7 @@
     "eslint": "^8.29.0",
     "eslint-plugin-cypress": "^2.12.1",
     "parcel": "^2.8.1",
+    "rimraf": "^4.4.1",
     "start-server-and-test": "^2.0.0",
     "typescript": "^4.9.4"
   }
