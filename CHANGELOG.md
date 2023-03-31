@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.3](https://github.com/cailloumajor/influxdb-utils-wasm/compare/v2.2.2...v2.2.3) (2023-03-31)
+
+
+### Bug Fixes
+
+* do not panic on canvas color parsing error ([a575ee7](https://github.com/cailloumajor/influxdb-utils-wasm/commit/a575ee7a9db4244bdcb89899e546244c31ab9840))
+
 ## [2.2.2](https://github.com/cailloumajor/influxdb-utils-wasm/compare/v2.2.1...v2.2.2) (2023-03-29)
 
 
