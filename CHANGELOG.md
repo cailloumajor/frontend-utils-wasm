@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.2.4](https://github.com/cailloumajor/influxdb-utils-wasm/compare/v2.2.3...v2.2.4) (2023-05-17)
+
+
+### Bug Fixes
+
+* **deps:** update rust crate serde to 1.0.160 ([2a4a9bc](https://github.com/cailloumajor/influxdb-utils-wasm/commit/2a4a9bc9bf8b77937b282b65ba94b2d2f997b69f))
+* **deps:** update rust crate serde to 1.0.162 ([2df7c58](https://github.com/cailloumajor/influxdb-utils-wasm/commit/2df7c58f4ea4cebaefe1a3751be0ce65e6b68e91))
+* **deps:** update rust crate serde to 1.0.163 ([2243909](https://github.com/cailloumajor/influxdb-utils-wasm/commit/2243909d99f04c209bd40219429739e5f40da4d4))
+* **deps:** update rust docker tag to v1.69.0 ([7f1f26b](https://github.com/cailloumajor/influxdb-utils-wasm/commit/7f1f26b6438370065f3685ff2c19ec4ee36a9595))
+* **deps:** update rust-wasm-bindgen monorepo ([8747a2f](https://github.com/cailloumajor/influxdb-utils-wasm/commit/8747a2fed615d7f061907395e4b120324cd2c671))
+
 ## [2.2.3](https://github.com/cailloumajor/influxdb-utils-wasm/compare/v2.2.2...v2.2.3) (2023-03-31)
 
 
