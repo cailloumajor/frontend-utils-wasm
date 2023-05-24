@@ -207,7 +207,6 @@ mod tests {
 
     mod make_x_spec {
         use chrono::TimeZone;
-        use plotters::coord::ranged1d::{BoldPoints, LightPoints};
 
         use super::*;
 
@@ -324,15 +323,6 @@ mod tests {
                 x_spec.formatted_light_points(),
                 vec!["22:00", "23:00", "00:00", "01:00", "02:00", "03:00", "04:00"]
             );
-        }
-
-        #[test]
-        fn playground() {
-            let start = Local.with_ymd_and_hms(1984, 12, 9, 22, 0, 0).unwrap();
-            let end = Local.with_ymd_and_hms(1984, 12, 10, 4, 0, 0).unwrap();
-            let ranged = RangedDateTime::from(start..end);
-            dbg!(ranged.key_points(BoldPoints(8)));
-            dbg!(ranged.key_points(LightPoints::new(8, 1)));
         }
     }
 }
