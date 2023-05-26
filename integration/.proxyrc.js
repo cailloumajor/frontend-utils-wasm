@@ -1,5 +1,5 @@
 //@ts-check
-const fs = require("node:fs")
+const fs = require("fs")
 
 /**
  * @param {import("connect").Server} app
