@@ -41,7 +41,7 @@ default_features = false
 features = [ "datetime" ]
 
 [dependencies.tsify]
-version = "0.4.3"
+version = "0.4.5"
 default_features = false
 features = [ "js" ]
 
