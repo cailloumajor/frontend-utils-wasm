@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.5](https://github.com/cailloumajor/influxdb-utils-wasm/compare/v2.2.4...v2.2.5) (2023-05-26)
+
+
+### Bug Fixes
+
+* **deps:** update rust crate tsify to 0.4.5 ([89b7eed](https://github.com/cailloumajor/influxdb-utils-wasm/commit/89b7eedbc1747591b3da94a29ba3e118533f092b))
+
 ## [2.2.4](https://github.com/cailloumajor/influxdb-utils-wasm/compare/v2.2.3...v2.2.4) (2023-05-17)
 
 
