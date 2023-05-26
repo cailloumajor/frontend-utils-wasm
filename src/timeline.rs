@@ -11,7 +11,7 @@ use plotters::style::RelativeSize;
 use plotters_canvas::CanvasBackend;
 use serde::Deserialize;
 use tsify::Tsify;
-use wasm_bindgen::{prelude::*, JsCast};
+use wasm_bindgen::prelude::*;
 use web_sys::{CanvasRenderingContext2d, Event, HtmlCanvasElement};
 
 use crate::errors::TimelineError;
