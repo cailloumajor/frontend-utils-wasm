@@ -16,7 +16,7 @@ default = [ "console_error_panic_hook" ]
 [dependencies]
 colorsys = "0.6.7"
 chrono = { version = "0.4.26", features = [ "serde" ] }
-csv = "1.2.1"
+csv = "1.2.2"
 itertools = "0.10.5"
 plotters-canvas = "0.3.0"
 serde = { version = "1.0.163", features = [ "derive" ] }
