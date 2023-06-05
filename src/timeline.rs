@@ -51,12 +51,12 @@ impl Timeline {
     pub async fn draw(&self) -> Result<(), JsError> {
         let axis_color = {
             let rgb = web_sys::window()
-                .unwrap()
+                .unwrap_throw()
                 .get_computed_style(&self.canvas)
-                .unwrap()
-                .unwrap()
+                .unwrap_throw()
+                .unwrap_throw()
                 .get_property_value("color")
-                .unwrap()
+                .unwrap_throw()
                 .parse::<Rgb>()
                 .map_err(TimelineError::ParsingCanvasColor)?;
             let (r, g, b) = rgb.into();
@@ -65,10 +65,10 @@ impl Timeline {
 
         self.canvas
             .get_context("2d")
-            .unwrap()
+            .unwrap_throw()
             .ok_or(TimelineError::GetCanvasContext)?
             .dyn_into::<CanvasRenderingContext2d>()
-            .unwrap()
+            .unwrap_throw()
             .clear_rect(
                 0.0,
                 0.0,
@@ -165,8 +165,8 @@ impl Timeline {
         chart.draw_series(series)?;
         root.present()?;
 
-        let drawed_event = Event::new("drawed").unwrap();
-        self.canvas.dispatch_event(&drawed_event).unwrap();
+        let drawed_event = Event::new("drawed").unwrap_throw();
+        self.canvas.dispatch_event(&drawed_event).unwrap_throw();
         Ok(())
     }
 }
@@ -177,7 +177,7 @@ fn make_x_spec(
     bold_interval: Duration,
     offset: Duration,
 ) -> WithKeyPoints<RangedDateTime<DateTime<Local>>> {
-    let initial = start.duration_trunc(bold_interval).unwrap() + offset - bold_interval;
+    let initial = start.duration_trunc(bold_interval).unwrap_throw() + offset - bold_interval;
     let mut bold_points = Vec::new();
     let mut light_points = Vec::new();
     let is_bold_iter = successors(Some(true), |is_bold| Some(!is_bold));
