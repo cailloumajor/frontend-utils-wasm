@@ -7,7 +7,7 @@ const drawButton = document.getElementById("draw-button") as HTMLElement
 const errorOut = document.getElementById("error-out") as HTMLElement
 
 init().then(() => {
-  const timeline = new Timeline(canvas, {
+  const timeline = new Timeline(canvas, "testfluxquery", {
     fontFamily: "Roboto",
     opacity: 0.7,
     xIntervalMinutes: 120,
@@ -16,7 +16,6 @@ init().then(() => {
     influxdbUrl: "/api/influxdb",
     influxdbOrg: "testorg",
     influxdbToken: "testtoken",
-    fluxQuery: "testfluxquery",
   })
   const drawedClass = "drawed"
   canvas.addEventListener("drawed", () => {

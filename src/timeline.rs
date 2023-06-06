@@ -5,6 +5,7 @@ use chrono::{DateTime, Duration, DurationRound, Local};
 use colorsys::Rgb;
 use csv::ReaderBuilder;
 use itertools::{process_results, Itertools};
+use js_sys::JsString;
 use plotters::coord::combinators::WithKeyPoints;
 use plotters::prelude::*;
 use plotters::style::RelativeSize;
@@ -36,16 +37,21 @@ pub struct Config {
 #[wasm_bindgen]
 pub struct Timeline {
     canvas: HtmlCanvasElement,
+    flux: JsString,
     config: Config,
 }
 
 #[wasm_bindgen]
 impl Timeline {
     #[wasm_bindgen(constructor)]
-    pub fn new(canvas: HtmlCanvasElement, config: Config) -> Self {
+    pub fn new(canvas: HtmlCanvasElement, flux: JsString, config: Config) -> Self {
         utils::set_panic_hook();
 
-        Self { canvas, config }
+        Self {
+            canvas,
+            config,
+            flux,
+        }
     }
 
     pub async fn draw(&self) -> Result<(), JsError> {
@@ -76,7 +82,7 @@ impl Timeline {
                 self.canvas.height().into(),
             );
 
-        let data = influxdb::get_data(&self.config.influxdb).await?;
+        let data = influxdb::get_data(&self.config.influxdb, &self.flux).await?;
         let mut reader = ReaderBuilder::new().comment(Some(b'#')).from_reader(data);
 
         let mut time_range_iter = reader.deserialize::<TimeRange>();
