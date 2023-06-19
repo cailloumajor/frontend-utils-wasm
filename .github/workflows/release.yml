@@ -22,7 +22,7 @@ jobs:
           toolchain: ${{ steps.get-rust-version.outputs.RUST_VERSION }}
       - uses: Swatinem/rust-cache@v2
       - name: Install wasm-pack
-        run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | bash
+        run: cargo install wasm-pack
       - name: Build
         run: wasm-pack build --target web --scope ${{ github.repository_owner }}
       - uses: actions/setup-node@v3
