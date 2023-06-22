@@ -15,7 +15,7 @@
     "@typescript-eslint/parser": "5.46",
     "cross-env": "7.0",
     "cypress": "12.1",
-    "eslint": "8.29",
+    "eslint": "8.43",
     "eslint-plugin-cypress": "2.12",
     "parcel": "2.9",
     "rimraf": "4.4",
