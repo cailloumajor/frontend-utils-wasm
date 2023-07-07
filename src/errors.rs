@@ -1,14 +1,17 @@
-use colorsys::ParseError;
 use thiserror::Error;
 
 #[derive(Debug, Error)]
-pub(super) enum TimelineError {
+pub(crate) enum TimelineError {
+    #[error("error parsing palette color `{0}`: {1}")]
+    PaletteColorParsing(String, colorsys::ParseError),
     #[error("error parsing canvas style property `color`: {0}")]
-    ParsingCanvasColor(ParseError),
+    ParsingCanvasColor(colorsys::ParseError),
     #[error("error getting canvas context")]
     GetCanvasContext,
-    #[error("bad response status: {0}")]
-    ResponseStatus(u16),
+    #[error("error decoding MessagePack data: {0}")]
+    MsgPackDecode(rmp_serde::decode::Error),
+    #[error("color index is not in palette: {0}")]
+    ColorIndexNotInPalette(usize),
     #[error("empty dataset")]
     EmptyDataset,
     #[error("error creating backend")]
