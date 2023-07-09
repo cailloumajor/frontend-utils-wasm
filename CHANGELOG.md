@@ -1,5 +1,20 @@
 # Changelog
 
+## [2.2.6](https://github.com/cailloumajor/frontend-utils-wasm/compare/v2.2.5...v2.2.6) (2023-07-09)
+
+
+### Bug Fixes
+
+* **deps:** update rust crate chrono to 0.4.26 ([a0ebd50](https://github.com/cailloumajor/frontend-utils-wasm/commit/a0ebd502820150777450193366b597c728f1537b))
+* **deps:** update rust crate csv to 1.2.2 ([b709445](https://github.com/cailloumajor/frontend-utils-wasm/commit/b7094454810176a60147f99d1dcffd6770e99fe2))
+* **deps:** update rust crate itertools to 0.11.0 ([802b697](https://github.com/cailloumajor/frontend-utils-wasm/commit/802b697b2a97c86d4f59dda3f62941354210b5e4))
+* **deps:** update rust crate plotters to 0.3.5 ([e08b775](https://github.com/cailloumajor/frontend-utils-wasm/commit/e08b7758161310fb9b4060b5234a3957a7b019bb))
+* **deps:** update rust crate serde to 1.0.164 ([7d3e912](https://github.com/cailloumajor/frontend-utils-wasm/commit/7d3e912277e2d722cb9da0dc9656d3a2cc4ee07b))
+* **deps:** update rust docker tag to v1.70.0 ([6f4d55b](https://github.com/cailloumajor/frontend-utils-wasm/commit/6f4d55bf9b7158e384a4a5f15cf8778c304b0f63))
+* **deps:** update rust-wasm-bindgen monorepo ([ead24ef](https://github.com/cailloumajor/frontend-utils-wasm/commit/ead24ef59b3328c1714f0387480971eea3a2ff88))
+* prevent flux query string copying ([557c5f9](https://github.com/cailloumajor/frontend-utils-wasm/commit/557c5f9fd9096656d93f143aba7863250b935bca))
+* use wasm_bindgen::UnwrapThrowExt ([3b83550](https://github.com/cailloumajor/frontend-utils-wasm/commit/3b8355035762e154e5ecf66c45c4148d75374048))
+
 ## [2.2.5](https://github.com/cailloumajor/influxdb-utils-wasm/compare/v2.2.4...v2.2.5) (2023-05-26)
 
 
