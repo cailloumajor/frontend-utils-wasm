@@ -46,7 +46,7 @@ jobs:
       - name: Run unit tests
         run: cargo test
       - name: Install wasm-pack
-        run: cargo install wasm-pack
+        run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | bash
       - name: Build
         run: wasm-pack build --target web
       - uses: actions/setup-node@v3
