@@ -53,7 +53,10 @@
     // "forwardPorts": [],
 
     // Use 'postCreateCommand' to run commands after the container is created.
-    "postCreateCommand": "curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | bash",
+    "postCreateCommand": {
+      "wasm-pack": "curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | bash",
+      "integration tests deps": "yarn --cwd integration/"
+    },
 
     // Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
     "remoteUser": "vscode"
