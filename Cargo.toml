@@ -1,9 +1,9 @@
 [package]
-name = "influxdb-utils-wasm"
-description = "InfluxDB-related utilities to use in frontend WASM"
+name = "frontend-utils-wasm"
+description = "WASM utilities for using in frontend"
 version = "2.2.5"
 authors = [ "Arnaud Rocher <arnaud.roche3@gmail.com>" ]
-repository = "https://github.com/cailloumajor/influxdb-utils-wasm"
+repository = "https://github.com/cailloumajor/frontend-utils-wasm"
 license = "MIT"
 edition = "2021"
 
@@ -16,10 +16,8 @@ default = [ "console_error_panic_hook" ]
 [dependencies]
 colorsys = "0.6.7"
 chrono = { version = "0.4.26", features = [ "serde" ] }
-csv = "1.2.2"
-itertools = "0.11.0"
-js-sys = "0.3.64"
 plotters-canvas = "0.3.0"
+rmp-serde = "1.1.1"
 serde = { version = "1.0.164", features = [ "derive" ] }
 thiserror = "1.0.40"
 wasm-bindgen = "0.2.87"
@@ -30,11 +28,6 @@ wasm-bindgen-futures = "0.4.37"
 # all the `std::fmt` and `std::panicking` infrastructure, so isn't great for
 # code size when deploying.
 console_error_panic_hook = { version = "0.1.7", optional = true }
-
-[dependencies.gloo-net]
-version = "0.2.6"
-default_features = false
-features = [ "http" ]
 
 [dependencies.plotters]
 version = "0.3.5"

@@ -1,11 +1,8 @@
-use std::collections::HashMap;
 use std::iter::{successors, zip};
 
-use chrono::{DateTime, Duration, DurationRound, Local};
+use chrono::serde::ts_seconds;
+use chrono::{DateTime, Duration, DurationRound, Local, Utc};
 use colorsys::Rgb;
-use csv::ReaderBuilder;
-use itertools::{process_results, Itertools};
-use js_sys::JsString;
 use plotters::coord::combinators::WithKeyPoints;
 use plotters::prelude::*;
 use plotters::style::RelativeSize;
@@ -16,54 +13,68 @@ use wasm_bindgen::prelude::*;
 use web_sys::{CanvasRenderingContext2d, Event, HtmlCanvasElement};
 
 use crate::errors::TimelineError;
-use crate::identify_last::IdentifyLast;
-use crate::influxdb::{self, InfluxdbConfig};
-use crate::model::{Record, TimeRange};
 use crate::utils;
+
+#[derive(Deserialize)]
+struct Slot {
+    #[serde(with = "ts_seconds")]
+    start_time: DateTime<Utc>,
+    color_index: Option<usize>,
+}
 
 #[derive(Deserialize, Tsify)]
 #[tsify(from_wasm_abi)]
 #[serde(rename_all = "camelCase")]
 pub struct Config {
+    palette: Vec<String>,
     font_family: String,
     opacity: f64,
     x_interval_minutes: u16,
     x_offset_minutes: u16,
     emphasis_labels: Vec<String>,
-    #[serde(flatten)]
-    influxdb: InfluxdbConfig,
 }
 
 #[wasm_bindgen]
 pub struct Timeline {
     canvas: HtmlCanvasElement,
-    flux: JsString,
     config: Config,
+    palette: Vec<RGBAColor>,
 }
 
 #[wasm_bindgen]
 impl Timeline {
     #[wasm_bindgen(constructor)]
-    pub fn new(canvas: HtmlCanvasElement, flux: JsString, config: Config) -> Self {
+    pub fn new(canvas: HtmlCanvasElement, config: Config) -> Result<Timeline, JsError> {
         utils::set_panic_hook();
 
-        Self {
+        let palette = config
+            .palette
+            .iter()
+            .map(|hex| {
+                let rgb = Rgb::from_hex_str(hex)
+                    .map_err(|err| TimelineError::PaletteColorParsing(hex.to_string(), err))?;
+                let (r, g, b) = rgb.into();
+                Ok(RGBColor(r, g, b).mix(config.opacity))
+            })
+            .collect::<Result<_, TimelineError>>()?;
+
+        Ok(Self {
             canvas,
             config,
-            flux,
-        }
+            palette,
+        })
     }
 
-    pub async fn draw(&self) -> Result<(), JsError> {
+    pub async fn draw(&self, data: &[u8]) -> Result<(), JsError> {
         let axis_color = {
-            let rgb = web_sys::window()
+            let rgb: Rgb = web_sys::window()
                 .unwrap_throw()
                 .get_computed_style(&self.canvas)
                 .unwrap_throw()
                 .unwrap_throw()
                 .get_property_value("color")
                 .unwrap_throw()
-                .parse::<Rgb>()
+                .parse()
                 .map_err(TimelineError::ParsingCanvasColor)?;
             let (r, g, b) = rgb.into();
             RGBColor(r, g, b)
@@ -82,22 +93,18 @@ impl Timeline {
                 self.canvas.height().into(),
             );
 
-        let data = influxdb::get_data(&self.config.influxdb, &self.flux).await?;
-        let mut reader = ReaderBuilder::new().comment(Some(b'#')).from_reader(data);
-
-        let mut time_range_iter = reader.deserialize::<TimeRange>();
-        let initial_position = time_range_iter.reader().position().clone();
-        let time_range = time_range_iter
-            .next()
-            .ok_or(TimelineError::EmptyDataset)??;
+        let slots: Vec<Slot> = rmp_serde::from_slice(data).map_err(TimelineError::MsgPackDecode)?;
 
         let backend = CanvasBackend::with_canvas_object(self.canvas.clone())
             .ok_or(TimelineError::BackendCreation)?;
         let root = backend.into_drawing_area();
 
+        let (Some(first), Some(last)) = (slots.first(),slots.last()) else {
+            return Err(TimelineError::EmptyDataset.into());
+        };
         let x_range = make_x_spec(
-            time_range.start,
-            time_range.stop,
+            first.start_time.into(),
+            last.start_time.into(),
             Duration::minutes(self.config.x_interval_minutes.into()),
             Duration::minutes(self.config.x_offset_minutes.into()),
         );
@@ -131,42 +138,29 @@ impl Timeline {
             .disable_y_axis()
             .draw()?;
 
-        let mut palette: HashMap<String, RGBAColor> = HashMap::new();
-
-        reader.seek(initial_position)?;
-
-        let deduplicated: Vec<_> = process_results(reader.deserialize::<Record>(), |iter| {
-            iter.identify_last()
-                .dedup_by(|(previous, _), (current, is_last)| {
-                    !is_last && previous.color == current.color
-                })
-                .map(|(record, _)| record)
-                .collect()
-        })?;
-        for hex in deduplicated
-            .iter()
-            .filter_map(|record| record.color.as_ref())
-            .unique()
-        {
-            let parsed = Rgb::from_hex_str(hex)?;
-            let (r, g, b) = parsed.into();
-            palette.insert(hex.to_owned(), RGBColor(r, g, b).mix(self.config.opacity));
-        }
-        let series = deduplicated
-            .iter()
-            .tuple_windows()
-            .filter_map(|(start, end)| {
-                if let Some(color) = &start.color {
+        let series: Vec<Rectangle<(DateTime<Local>, usize)>> = slots
+            .windows(2)
+            .filter_map(|window| {
+                let start = &window[0];
+                let end = &window[1];
+                if let Some(index) = start.color_index {
+                    let Some(color) = self.palette.get(index).cloned() else {
+                        return Some(Err(TimelineError::ColorIndexNotInPalette(index)));
+                    };
                     let style = ShapeStyle {
-                        color: palette[color],
+                        color,
                         filled: true,
                         stroke_width: 0,
                     };
-                    Some(Rectangle::new([(start.time, 1), (end.time, 9)], style))
+                    Some(Ok(Rectangle::new(
+                        [(start.start_time.into(), 1), (end.start_time.into(), 9)],
+                        style,
+                    )))
                 } else {
                     None
                 }
-            });
+            })
+            .collect::<Result<_, _>>()?;
 
         chart.draw_series(series)?;
         root.present()?;

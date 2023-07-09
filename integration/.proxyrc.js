@@ -5,10 +5,10 @@ const fs = require("fs")
  * @param {import("connect").Server} app
  */
 module.exports = function (app) {
-  app.use("/api/influxdb", (req, res) => {
-    const stream = fs.createReadStream("influxdb_data.csv")
+  app.use("/timeline", (req, res) => {
+    const stream = fs.createReadStream("timeline_data.bin")
     stream.on("open", () => {
-      res.setHeader("Content-Type", "application/csv")
+      res.setHeader("Content-Type", "application/msgpack")
       stream.pipe(res)
     })
     stream.on("error", (err) => {

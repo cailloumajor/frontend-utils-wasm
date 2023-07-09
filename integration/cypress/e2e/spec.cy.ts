@@ -22,80 +22,35 @@ describe("timeline", () => {
     )
   })
 
-  it("fails on bad response status code", () => {
-    cy.intercept("/api/influxdb*", { statusCode: 400 })
+  it("fails if MessagePack deserialization errors", () => {
+    cy.intercept("/timeline", { body: new Uint8Array([0xc1]).buffer })
 
     cy.get("@button").click()
 
-    cy.get("@error").should("include.text", "status").and("include.text", "400")
+    cy.get("@error")
+      .should("include.text", "MessagePack")
+      .and("include.text", "Reserved")
   })
 
   it("fails if there is no data", () => {
-    cy.intercept("/api/influxdb*", { body: "" })
+    cy.intercept("/timeline", { body: new Uint8Array([0x90]).buffer })
 
     cy.get("@button").click()
 
     cy.get("@error").should("include.text", "empty")
   })
 
-  it("fails if first datapoint is not good", () => {
-    cy.intercept("/api/influxdb*", {
-      body: "_start,_stop\nzz,2022-12-09T14:58:09Z",
+  it("fails if color index is not in palette", () => {
+    cy.intercept("/timeline", {
+      body: new Uint8Array([
+        0x92, 0x92, 0xce, 0x64, 0xa7, 0x37, 0xbc, 0x0f, 0x92, 0xce, 0x64, 0xa7,
+        0xe0, 0x9c, 0x01,
+      ]).buffer,
     })
 
     cy.get("@button").click()
 
-    cy.get("@error")
-      .should("include.text", "CSV")
-      .and("include.text", "deserialize")
-  })
-
-  it("fails if record deserialization errors", () => {
-    cy.intercept("/api/influxdb*", {
-      body:
-        "_start,_stop,_time,color\n" +
-        "2022-12-08T14:58:09Z,2022-12-09T14:58:09Z,zz,#f2c037\n",
-    })
-
-    cy.get("@button").click()
-
-    cy.get("@error")
-      .should("include.text", "CSV")
-      .and("include.text", "deserialize")
-  })
-
-  it("fails if color parsing errors", () => {
-    cy.intercept("/api/influxdb*", {
-      body:
-        "_start,_stop,_time,color\n" +
-        "2022-12-08T14:58:09Z,2022-12-09T14:58:09Z,2022-12-08T14:58:40Z,zz\n",
-    })
-
-    cy.get("@button").click()
-
-    cy.get("@error")
-      .should("include.text", "cannot parse")
-      .and("include.text", "zz")
-  })
-
-  it("sends a request compliant with InfluxDB needs", () => {
-    cy.intercept("/api/influxdb*").as("api-request")
-
-    cy.get("@button").click()
-
-    cy.wait("@api-request").should(({ request }) => {
-      expect(request.method).to.equal("POST")
-      expect(request.url).to.satisfy((rawUrl: string) => {
-        const url = new URL(rawUrl)
-        return url.searchParams.get("org") === "testorg"
-      })
-      expect(request.headers).to.include({
-        accept: "application/csv",
-        authorization: "Token testtoken",
-        "content-type": "application/vnd.flux",
-      })
-      expect(request.body).to.equal("testfluxquery")
-    })
+    cy.get("@error").should("include.text", "index").and("include.text", "15")
   })
 
   it("renders according to snapshot", () => {
