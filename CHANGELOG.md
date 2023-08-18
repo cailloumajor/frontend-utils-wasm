@@ -1,5 +1,15 @@
 # Changelog
 
+## [3.0.1](https://github.com/cailloumajor/frontend-utils-wasm/compare/v3.0.0...v3.0.1) (2023-08-18)
+
+
+### Bug Fixes
+
+* **deps:** update rust crate rmp-serde to 1.1.2 ([6db89ca](https://github.com/cailloumajor/frontend-utils-wasm/commit/6db89ca4b763166d9194314f75332e983660cc3f))
+* **deps:** update rust crate serde to 1.0.183 ([2a9281b](https://github.com/cailloumajor/frontend-utils-wasm/commit/2a9281b369713322fa93c77eb394f26d042ac368))
+* **deps:** update rust crate thiserror to 1.0.47 ([3bc6ab1](https://github.com/cailloumajor/frontend-utils-wasm/commit/3bc6ab13c8c3e663d5964dfe3d58a9c176037af0))
+* **deps:** update rust docker tag to v1.71.1 ([c8bc496](https://github.com/cailloumajor/frontend-utils-wasm/commit/c8bc49674cdc3ab5ee352cf2b39ed26b54970f4b))
+
 ## [3.0.0](https://github.com/cailloumajor/frontend-utils-wasm/compare/v2.2.5...v3.0.0) (2023-07-09)
 
 
