@@ -8,7 +8,7 @@
     "test:e2e:ci": "cross-env TZ=UTC start-test 8000 'cypress run --e2e'"
   },
   "devDependencies": {
-    "@fontsource/roboto": "4.5",
+    "@fontsource/roboto": "5.0",
     "@frsource/cypress-plugin-visual-regression-diff": "3.2",
     "@types/connect": "3.4",
     "@typescript-eslint/eslint-plugin": "5.46",
