@@ -99,7 +99,7 @@ impl Timeline {
             .ok_or(TimelineError::BackendCreation)?;
         let root = backend.into_drawing_area();
 
-        let (Some(first), Some(last)) = (slots.first(),slots.last()) else {
+        let (Some(first), Some(last)) = (slots.first(), slots.last()) else {
             return Err(TimelineError::EmptyDataset.into());
         };
         let x_range = make_x_spec(
