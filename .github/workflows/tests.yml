@@ -49,7 +49,7 @@ jobs:
         run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | bash
       - name: Build
         run: wasm-pack build --target web
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           cache: yarn
           cache-dependency-path: integration/yarn.lock
