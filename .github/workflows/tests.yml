@@ -59,7 +59,7 @@ jobs:
           command: yarn test:e2e:ci
           working-directory: integration
       - name: Upload Cypress screenshots and videos 🖥️📽️
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: cypress-results
