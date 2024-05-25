@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.2](https://github.com/cailloumajor/frontend-utils-wasm/compare/v3.0.1...v3.0.2) (2024-05-25)
+
+
+### Bug Fixes
+
+* **deps:** upgrade Rust to 1.77.2 ([2685668](https://github.com/cailloumajor/frontend-utils-wasm/commit/2685668ce7a2aaa4ab889dfa00e9aeadab290646))
+
 ## [3.0.1](https://github.com/cailloumajor/frontend-utils-wasm/compare/v3.0.0...v3.0.1) (2023-08-18)
 
 
