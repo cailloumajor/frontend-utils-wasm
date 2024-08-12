@@ -14,33 +14,33 @@ crate-type = [ "cdylib", "rlib" ]
 default = [ "console_error_panic_hook" ]
 
 [dependencies]
-colorsys = "0.6.7"
-chrono = { version = "0.4.26", features = [ "serde" ] }
-plotters-canvas = "0.3.0"
-rmp-serde = "1.1.2"
-serde = { version = "1.0.183", features = [ "derive" ] }
-thiserror = "1.0.47"
-wasm-bindgen = "0.2.87"
-wasm-bindgen-futures = "0.4.37"
+colorsys = "0.6"
+chrono = { version = "0.4", features = [ "serde" ] }
+plotters-canvas = "0.3"
+rmp-serde = "1.1"
+serde = { version = "1.0", features = [ "derive" ] }
+thiserror = "1.0"
+wasm-bindgen = "0.2"
+wasm-bindgen-futures = "0.4"
 
 # The `console_error_panic_hook` crate provides better debugging of panics by
 # logging them with `console.error`. This is great for development, but requires
 # all the `std::fmt` and `std::panicking` infrastructure, so isn't great for
 # code size when deploying.
-console_error_panic_hook = { version = "0.1.7", optional = true }
+console_error_panic_hook = { version = "0.1", optional = true }
 
 [dependencies.plotters]
-version = "0.3.5"
+version = "0.3"
 default_features = false
 features = [ "datetime" ]
 
 [dependencies.tsify]
-version = "0.4.5"
+version = "0.4"
 default_features = false
 features = [ "js" ]
 
 [dependencies.web-sys]
-version = "0.3.64"
+version = "0.3"
 features = [
     "CanvasRenderingContext2d",
     "CssStyleDeclaration",
