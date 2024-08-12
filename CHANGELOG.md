@@ -1,5 +1,14 @@
 # Changelog
 
+## [3.0.2](https://github.com/cailloumajor/frontend-utils-wasm/compare/v3.0.1...v3.0.2) (2024-08-12)
+
+
+### Bug Fixes
+
+* **deps:** update Rust docker tag to bookworm ([50758fa](https://github.com/cailloumajor/frontend-utils-wasm/commit/50758fa4ba6e234e2b94894a9ed5cdad67d2aabe))
+* **deps:** update rust docker tag to v1.80.1 ([1fd206a](https://github.com/cailloumajor/frontend-utils-wasm/commit/1fd206ac1c307cbb5ab5ae31895c228be70ab099))
+* **deps:** upgrade Rust to 1.77.2 ([2685668](https://github.com/cailloumajor/frontend-utils-wasm/commit/2685668ce7a2aaa4ab889dfa00e9aeadab290646))
+
 ## [3.0.1](https://github.com/cailloumajor/frontend-utils-wasm/compare/v3.0.0...v3.0.1) (2023-08-18)
 
 
