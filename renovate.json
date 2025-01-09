@@ -1,19 +1,26 @@
 {
-    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-    "extends": [
-      "config:base"
-    ],
-    "semanticCommits": "enabled",
-    "packageRules": [
-      {
-        "matchPackageNames": ["rust"],
-        "matchManagers": ["dockerfile"],
-        "semanticCommitType": "fix"
-      },
-      {
-        "matchDepTypes": ["dev-dependencies", "devDependencies"],
-        "automerge": true,
-        "automergeType": "branch"
-      }
-    ]
-  }
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended"
+  ],
+  "semanticCommits": "enabled",
+  "packageRules": [
+    {
+      "matchPackageNames": [
+        "rust"
+      ],
+      "matchManagers": [
+        "dockerfile"
+      ],
+      "semanticCommitType": "fix"
+    },
+    {
+      "matchDepTypes": [
+        "dev-dependencies",
+        "devDependencies"
+      ],
+      "automerge": true,
+      "automergeType": "branch"
+    }
+  ]
+}
