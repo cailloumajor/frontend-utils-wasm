@@ -18,7 +18,7 @@ describe("timeline", () => {
 
     cy.get("@error").should(
       "include.text",
-      "error parsing canvas style property `color`"
+      "error parsing canvas style property `color`",
     )
   })
 
