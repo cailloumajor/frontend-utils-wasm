@@ -13,7 +13,7 @@
     "@frsource/cypress-plugin-visual-regression-diff": "3.3",
     "@types/connect": "3.4",
     "cross-env": "7.0",
-    "cypress": "14.1",
+    "cypress": "14.3",
     "eslint": "9.22",
     "eslint-config-prettier": "10.0",
     "eslint-plugin-cypress": "4.1",
