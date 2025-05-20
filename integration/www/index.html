@@ -5,29 +5,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="index.css" rel="stylesheet" />
+    <!-- Disable favicon fetching -->
+    <link rel="icon" href="data:,">
     <title>Integration tests</title>
   </head>
   <body>
     <noscript>
-      This page contains webassembly and javascript content, please enable
-      javascript in your browser.
+      This page contains webassembly and javascript content, please enable javascript in your
+      browser.
     </noscript>
-    <script type="module" src="index.ts"></script>
+    <script type="module" src="index.js"></script>
     <main>
       <h1>Timeline</h1>
-      <canvas
-        id="target-canvas"
-        height="150"
-        width="900"
-        data-cy="timeline-canvas"
-      >
+      <canvas id="target-canvas" height="150" width="900">
         canvas is not supported
       </canvas>
       <div>
-        <button id="draw-button" data-cy="draw-button">Draw</button>
+        <button id="draw-button">Draw</button>
       </div>
       <h4>Error:</h4>
-      <div id="error-out" data-cy="error-out"></div>
+      <div id="error-out"></div>
     </main>
   </body>
 </html>

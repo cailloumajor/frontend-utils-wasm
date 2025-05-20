@@ -38,6 +38,7 @@ Cargo.lock
 
 # End of https://www.toptal.com/developers/gitignore/api/rust,visualstudiocode
 
-# wasm-pack
+# Built package
 pkg/
-wasm-pack.log
+
+coverage/

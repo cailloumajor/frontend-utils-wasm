@@ -16,8 +16,7 @@
     },
     {
       "matchDepTypes": [
-        "dev-dependencies",
-        "devDependencies"
+        "dev-dependencies"
       ],
       "automerge": true,
       "automergeType": "branch"
