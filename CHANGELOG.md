@@ -1,5 +1,23 @@
 # Changelog
 
+## [4.0.0](https://github.com/cailloumajor/frontend-utils-wasm/compare/frontend-utils-wasm-v3.0.3...frontend-utils-wasm-v4.0.0) (2025-05-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* use deno and wasmbuild ([#116](https://github.com/cailloumajor/frontend-utils-wasm/issues/116))
+
+### Features
+
+* use deno and wasmbuild ([#116](https://github.com/cailloumajor/frontend-utils-wasm/issues/116)) ([bd91075](https://github.com/cailloumajor/frontend-utils-wasm/commit/bd9107587d1e5aaa8cf74801c4c3964079a6ac3c))
+
+
+### Bug Fixes
+
+* **deps:** update rust docker tag to v1.85.1 ([#112](https://github.com/cailloumajor/frontend-utils-wasm/issues/112)) ([6d60918](https://github.com/cailloumajor/frontend-utils-wasm/commit/6d60918918ff0fcd2eb98943a8b0adc2af5bc893))
+* **deps:** update rust docker tag to v1.86.0 ([#114](https://github.com/cailloumajor/frontend-utils-wasm/issues/114)) ([566e9c5](https://github.com/cailloumajor/frontend-utils-wasm/commit/566e9c5a161c6ea060dbc8500f4bbf6d76cb46ae))
+* **deps:** update rust docker tag to v1.87.0 ([#117](https://github.com/cailloumajor/frontend-utils-wasm/issues/117)) ([1fcd2e2](https://github.com/cailloumajor/frontend-utils-wasm/commit/1fcd2e2a8fb4d32e5b34b5eeb36aaa604319e603))
+
 ## [3.0.3](https://github.com/cailloumajor/frontend-utils-wasm/compare/v3.0.2...v3.0.3) (2025-03-03)
 
 
