@@ -1,6 +1,6 @@
 FROM denoland/deno:bin-2.3.3 AS deno_bin
 
-FROM rust:1.86.0-bookworm
+FROM rust:1.87.0-bookworm
 
 COPY --from=deno_bin /deno /usr/local/bin/deno
 
