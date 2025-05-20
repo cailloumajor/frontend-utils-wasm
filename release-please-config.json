@@ -1,0 +1,10 @@
+{
+  "$schema": "https://github.com/googleapis/release-please/raw/refs/heads/main/schemas/config.json",
+  "release-type": "rust",
+  "packages": {
+    ".": {}
+  },
+  "extra-files": [
+    "deno.json"
+  ]
+}

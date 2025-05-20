@@ -9,8 +9,6 @@
         "context": "."
     },
 
-    "forwardPorts": [5901, 6080],
-
     "containerEnv": {
         "http_proxy": "${localEnv:http_proxy}",
         "https_proxy": "${localEnv:https_proxy}",
@@ -22,7 +20,6 @@
         "ghcr.io/devcontainers/features/rust:1": {
             "version": "none"
         },
-        "ghcr.io/devcontainers/features/node:1": {},
         "ghcr.io/devcontainers/features/desktop-lite:1": {}
     },
 
@@ -35,28 +32,28 @@
                 "[toml][rust]": {
                     "editor.formatOnSave": true
                 },
-                "[css][html][javascript][typescript]": {
-                    "editor.defaultFormatter": "esbenp.prettier-vscode",
-                    "editor.formatOnSave": true
+                "[css][html][json][typescript]": {
+                    "editor.defaultFormatter": "denoland.vscode-deno",
+                    "editor.formatOnSave": true,
+                    "editor.quickSuggestions": {
+                        "strings": "on"
+                    }
                 },
                 "rust-analyzer.check.command": "clippy"
             },
             // Add the IDs of extensions you want installed when the container is created.
             "extensions": [
-                "editorconfig.editorconfig",
-                "esbenp.prettier-vscode"
+                "denoland.vscode-deno",
+                "editorconfig.editorconfig"
             ]
         }
     },
 
     // Use 'forwardPorts' to make a list of ports inside the container available locally.
-    // "forwardPorts": [],
+    "forwardPorts": [5901, 6080],
 
     // Use 'postCreateCommand' to run commands after the container is created.
-    "postCreateCommand": {
-      "wasm-pack": "curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | bash",
-      "integration tests deps": "yarn --cwd integration/"
-    },
+    // "postCreateCommand": "rustc --version",
 
     // Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
     "remoteUser": "vscode"

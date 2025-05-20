@@ -38,32 +38,31 @@ jobs:
         with:
           toolchain: ${{ steps.get-rust-version.outputs.RUST_VERSION }}
           components: rustfmt, clippy
+      - name: Get Deno version from dev container Dockerfile
+        id: get-deno-version
+        run: |
+          echo "DENO_VERSION=$(grep -oP 'FROM denoland/deno:bin-\K[\d.]+' .devcontainer/Dockerfile)" \
+          >> $GITHUB_OUTPUT
+      - name: Install Deno
+        uses: denoland/setup-deno@v2
+        with:
+          deno-version: ${{ steps.get-deno-version.outputs.DENO_VERSION }}
+          cache: true
       - uses: Swatinem/rust-cache@v2
       - name: Run cargo fmt
         run: cargo fmt --all -- --check
       - name: Lint code with Clippy
         run: cargo clippy -- -D warnings
-      - name: Run unit tests
+      - name: Run unit tests 🧪
         run: cargo test
-      - name: Install wasm-pack
-        run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | bash
       - name: Build
-        run: wasm-pack build --target web
-      - uses: actions/setup-node@v4
-        with:
-          cache: yarn
-          cache-dependency-path: integration/yarn.lock
-      - name: Run end-to-end tests 🧪
-        uses: cypress-io/github-action@v4
-        with:
-          command: yarn test:e2e:ci
-          working-directory: integration
-      - name: Upload Cypress screenshots and videos 🖥️📽️
+        run: deno task build
+      - name: Run integration tests 🧪
+        run: deno task test
+      - name: Upload integration tests results
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: cypress-results
+          name: integration-tests-results
           path: |
-            integration/cypress/e2e/__image_snapshots__
-            integration/cypress/screenshots
-            integration/cypress/videos
+            integration/__image_snapshots__/*.diff.png

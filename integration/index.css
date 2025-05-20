@@ -1,9 +1,0 @@
-body {
-    /* Needed to preload the font for usage by canvas API */
-    font-family: Roboto;
-}
-
-#target-canvas {
-    border: 1px solid black;
-    color: mediumblue;
-}

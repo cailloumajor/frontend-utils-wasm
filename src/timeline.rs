@@ -13,7 +13,6 @@ use wasm_bindgen::prelude::*;
 use web_sys::{CanvasRenderingContext2d, Event, HtmlCanvasElement};
 
 use crate::errors::TimelineError;
-use crate::utils;
 
 #[derive(Deserialize)]
 struct Slot {
@@ -45,8 +44,6 @@ pub struct Timeline {
 impl Timeline {
     #[wasm_bindgen(constructor)]
     pub fn new(canvas: HtmlCanvasElement, config: Config) -> Result<Timeline, JsError> {
-        utils::set_panic_hook();
-
         let palette = config
             .palette
             .iter()

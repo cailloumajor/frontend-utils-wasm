@@ -6,9 +6,12 @@ on:
       - "v*"
 
 jobs:
-  docker-release:
+  release:
     name: Build and release Node.js package
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # The OIDC ID token is used for authentication with JSR.
     steps:
       - uses: actions/checkout@v4
       - name: Get Rust version from dev container Dockerfile
@@ -20,16 +23,18 @@ jobs:
         uses: dtolnay/rust-toolchain@master
         with:
           toolchain: ${{ steps.get-rust-version.outputs.RUST_VERSION }}
-      - uses: Swatinem/rust-cache@v2
-      - name: Install wasm-pack
-        run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | bash
-      - name: Build
-        run: wasm-pack build --target web --scope ${{ github.repository_owner }}
-      - uses: actions/setup-node@v4
+      - name: Get Deno version from dev container Dockerfile
+        id: get-deno-version
+        run: |
+          echo "DENO_VERSION=$(grep -oP 'FROM denoland/deno:bin-\K[\d.]+' .devcontainer/Dockerfile)" \
+          >> $GITHUB_OUTPUT
+      - name: Install Deno
+        uses: denoland/setup-deno@v2
         with:
-          registry-url: https://npm.pkg.github.com/
-          always-auth: true
+          deno-version: ${{ steps.get-deno-version.outputs.DENO_VERSION }}
+          cache: true
+      - uses: Swatinem/rust-cache@v2
+      - name: Build
+        run: deno task build
       - name: Publish the package
-        run: npm publish pkg/
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx jsr publish

@@ -1,1 +1,3 @@
+# yaml-language-server: $schema=https://github.com/googleapis/repo-automation-bots/raw/refs/heads/main/packages/release-please/src/config-schema.json
 handleGHRelease: true
+manifest: true
