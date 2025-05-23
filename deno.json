@@ -1,6 +1,6 @@
 {
   "name": "@cailloumajor/frontend-utils-wasm",
-  "version": "4.0.0",
+  "version": "5.0.0",
   "exports": "./pkg/frontend_utils_wasm.js",
   "exclude": [
     "target/"
