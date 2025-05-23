@@ -1,7 +1,7 @@
-import { decodePNG, encodePNG } from "@img/png"
 import { assert, assertEquals, assertStringIncludes } from "@std/assert"
 import { decodeBase64, encodeBase64 } from "@std/encoding/base64"
 import * as path from "@std/path"
+import { Image } from "imagescript"
 import pixelmatch from "pixelmatch"
 
 import { handler } from "./backend.ts"
@@ -126,34 +126,28 @@ Deno.test({
         return
       }
 
-      const canvasRawImage = await decodePNG(canvasPng)
+      const canvasImage = await Image.decode(canvasPng) //decodePNG(canvasPng)
 
       const expected = await Deno.readFile(snapshotFile)
-      const expectedRawImage = await decodePNG(expected)
+      const expectedImage = await Image.decode(expected)
 
-      const diff = new Uint8Array(canvasRawImage.body.length)
+      const diffImage = new Image(canvasImage.width, canvasImage.height) //Uint8Array(canvasImage.bitmap.length)
 
       const numDiffPixels = pixelmatch(
-        canvasRawImage.body,
-        expectedRawImage.body,
-        diff,
-        canvasRawImage.header.width,
-        canvasRawImage.header.height,
+        canvasImage.bitmap,
+        expectedImage.bitmap,
+        diffImage.bitmap,
+        canvasImage.width,
+        canvasImage.height,
         {
           threshold: 0.01,
         },
       )
 
       if (numDiffPixels > 0) {
-        const diffImage = await encodePNG(diff, {
-          width: canvasRawImage.header.width,
-          height: canvasRawImage.header.height,
-          compression: 0,
-          filter: 0,
-          interlace: 0,
-        })
-        const diffFile = path.join(snapshotDir, `${testId}.diff.png`)
-        await Deno.writeFile(diffFile, diffImage)
+        const diffFile = await diffImage.encode(0)
+        const diffPath = path.join(snapshotDir, `${testId}.diff.png`)
+        await Deno.writeFile(diffPath, diffFile)
       }
 
       assertEquals(numDiffPixels, 0, "rendered canvas is too different than expected")

@@ -3,7 +3,6 @@
   "specifiers": {
     "jsr:@astral/astral@0.5.3": "0.5.3",
     "jsr:@deno-library/progress@^1.5.1": "1.5.1",
-    "jsr:@img/png@0.1.2": "0.1.2",
     "jsr:@std/assert@1.0.13": "1.0.13",
     "jsr:@std/assert@^1.0.12": "1.0.13",
     "jsr:@std/async@1": "1.0.12",
@@ -26,6 +25,7 @@
     "jsr:@std/path@^1.0.9": "1.0.9",
     "jsr:@std/streams@^1.0.9": "1.0.9",
     "jsr:@zip-js/zip-js@^2.7.52": "2.7.60",
+    "npm:imagescript@1.3.0": "1.3.0",
     "npm:pixelmatch@7.1.0": "7.1.0",
     "npm:start-server-and-test@*": "2.0.11"
   },
@@ -46,9 +46,6 @@
         "jsr:@std/fmt@1.0.3",
         "jsr:@std/io"
       ]
-    },
-    "@img/png@0.1.2": {
-      "integrity": "f5a701e3ffc72306102620689ff3dfe5bbbd24c1996893c0dd77e7f234d4684d"
     },
     "@std/assert@1.0.13": {
       "integrity": "ae0d31e41919b12c656c742b22522c32fb26ed0cba32975cb0de2a273cb68b29",
@@ -309,6 +306,9 @@
     "human-signals@2.1.0": {
       "integrity": "sha512-B4FFZ6q/T2jhhksgkbEW3HBvWIfDW85snkQgawt07S7J5QXTk6BkNV+0yAeZrM5QpMAdYlocGoljn0sJ/WQkFw=="
     },
+    "imagescript@1.3.0": {
+      "integrity": "sha512-lCYzQrWzdnA68K03oMj/BUlBJrVBnslzDOgGFymAp49NmdGEJxGeN7sHh5mCva0nQkq+kkKSuru2zLf1m04+3A=="
+    },
     "is-stream@2.0.1": {
       "integrity": "sha512-hFoiJiTl63nn+kstHGBtewWSKnQLpyb155KHheA1l39uvtO9nWIop1p3udqPcUd/xbF1VLMO4n7OI6p7RbngDg=="
     },
@@ -480,11 +480,11 @@
   "workspace": {
     "dependencies": [
       "jsr:@astral/astral@0.5.3",
-      "jsr:@img/png@0.1.2",
       "jsr:@std/assert@1.0.13",
       "jsr:@std/encoding@1.0.10",
       "jsr:@std/http@1.0.15",
       "jsr:@std/path@1.0.9",
+      "npm:imagescript@1.3.0",
       "npm:pixelmatch@7.1.0"
     ]
   }
