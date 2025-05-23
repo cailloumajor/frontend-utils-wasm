@@ -1,5 +1,16 @@
 # Changelog
 
+## [5.0.0](https://github.com/cailloumajor/frontend-utils-wasm/compare/v4.0.0...v5.0.0) (2025-05-23)
+
+
+### ⚠ BREAKING CHANGES
+
+* change the name of the configuration object and add doc comments ([#120](https://github.com/cailloumajor/frontend-utils-wasm/issues/120))
+
+### Bug Fixes
+
+* change the name of the configuration object and add doc comments ([#120](https://github.com/cailloumajor/frontend-utils-wasm/issues/120)) ([3da512a](https://github.com/cailloumajor/frontend-utils-wasm/commit/3da512a21e9139e62dfbc9015be0f205fb89e1bb))
+
 ## [4.0.0](https://github.com/cailloumajor/frontend-utils-wasm/compare/frontend-utils-wasm-v3.0.3...frontend-utils-wasm-v4.0.0) (2025-05-20)
 
 
