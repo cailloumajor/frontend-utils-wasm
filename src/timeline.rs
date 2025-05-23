@@ -14,36 +14,59 @@ use web_sys::{CanvasRenderingContext2d, Event, HtmlCanvasElement};
 
 use crate::errors::TimelineError;
 
+/// Represents a slot to be drawed.
 #[derive(Deserialize)]
 struct Slot {
+    /// Start time of the slot.
     #[serde(with = "ts_seconds")]
     start_time: DateTime<Utc>,
+    /// The index in the color palette to use for drawing this slot.
+    /// If [`None`], the slot will not be drawed.
     color_index: Option<usize>,
 }
 
+/// Configuration for `Timeline`.
 #[derive(Deserialize, Tsify)]
 #[tsify(from_wasm_abi)]
 #[serde(rename_all = "camelCase")]
-pub struct Config {
+pub struct TimelineConfig {
+    /// The color palette to use for drawing slots, as hex strings.
     palette: Vec<String>,
+    /// The font family to use.
     font_family: String,
+    /// The opacity of drawed slots.
     opacity: f64,
+    /// The interval in minutes between horizontal axis labels.
     x_interval_minutes: u16,
+    /// The offset in minutes for horizontal axis labels.
     x_offset_minutes: u16,
+    /// The horizontal axis labels to emphasize.
+    emphasis_labels: Vec<String>,
+}
+
+/// Allows to draw an horizontal timeline on a canvas element.
+#[wasm_bindgen]
+pub struct Timeline {
+    canvas: HtmlCanvasElement,
+    palette: Vec<RGBAColor>,
+    font_family: String,
+    x_interval_minutes: Duration,
+    x_offset_minutes: Duration,
     emphasis_labels: Vec<String>,
 }
 
 #[wasm_bindgen]
-pub struct Timeline {
-    canvas: HtmlCanvasElement,
-    config: Config,
-    palette: Vec<RGBAColor>,
-}
-
-#[wasm_bindgen]
 impl Timeline {
+    /// Create a new `Timeline` instance.
+    ///
+    /// @throws Will throw an error if an invalid hex color string is found in `config.palette`.
     #[wasm_bindgen(constructor)]
-    pub fn new(canvas: HtmlCanvasElement, config: Config) -> Result<Timeline, JsError> {
+    pub fn new(
+        #[wasm_bindgen(param_description = "the canvas element to use for drawing")]
+        canvas: HtmlCanvasElement,
+        #[wasm_bindgen(param_description = "the configuration for this timeline")]
+        config: TimelineConfig,
+    ) -> Result<Timeline, JsError> {
         let palette = config
             .palette
             .iter()
@@ -55,14 +78,34 @@ impl Timeline {
             })
             .collect::<Result<_, TimelineError>>()?;
 
+        let x_interval_minutes = Duration::minutes(config.x_interval_minutes.into());
+        let x_offset_minutes = Duration::minutes(config.x_offset_minutes.into());
+
         Ok(Self {
             canvas,
-            config,
             palette,
+            font_family: config.font_family,
+            x_interval_minutes,
+            x_offset_minutes,
+            emphasis_labels: config.emphasis_labels,
         })
     }
 
-    pub async fn draw(&self, data: &[u8]) -> Result<(), JsError> {
+    /// Draw the timeline using the provided `data`.
+    ///
+    /// Upon success, a `drawed` event will be emitted by the canvas element.
+    ///
+    /// Deserialized slot data is an array of objects with two members:
+    ///
+    ///  * start time in seconds since Unix epoch
+    ///  * an optional index in the color palette; if omitted, the slot will not be drawed
+    ///
+    /// @throws Will throw an error if something goes wrong during execution
+    pub async fn draw(
+        &self,
+        #[wasm_bindgen(param_description = "binary slots data, serialized in MessagePack format")]
+        data: &[u8],
+    ) -> Result<(), JsError> {
         let axis_color = {
             let rgb: Rgb = web_sys::window()
                 .unwrap_throw()
@@ -102,8 +145,8 @@ impl Timeline {
         let x_range = make_x_spec(
             first.start_time.into(),
             last.start_time.into(),
-            Duration::minutes(self.config.x_interval_minutes.into()),
-            Duration::minutes(self.config.x_offset_minutes.into()),
+            self.x_interval_minutes,
+            self.x_offset_minutes,
         );
 
         let mut chart = ChartBuilder::on(&root)
@@ -119,13 +162,13 @@ impl Timeline {
             .bold_line_style(axis_color.mix(0.5))
             .light_line_style(axis_color.mix(0.2))
             .label_style((
-                FontFamily::Name(&self.config.font_family),
+                FontFamily::Name(&self.font_family),
                 RelativeSize::Height(0.12),
                 &axis_color,
             ))
             .x_label_formatter(&|label| {
                 let formatted = format!("{}", label.format("%H:%M"));
-                if self.config.emphasis_labels.contains(&formatted) {
+                if self.emphasis_labels.contains(&formatted) {
                     format!("<{formatted}>")
                 } else {
                     formatted
