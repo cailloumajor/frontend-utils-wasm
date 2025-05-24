@@ -126,12 +126,12 @@ Deno.test({
         return
       }
 
-      const canvasImage = await Image.decode(canvasPng) //decodePNG(canvasPng)
+      const canvasImage = await Image.decode(canvasPng)
 
       const expected = await Deno.readFile(snapshotFile)
       const expectedImage = await Image.decode(expected)
 
-      const diffImage = new Image(canvasImage.width, canvasImage.height) //Uint8Array(canvasImage.bitmap.length)
+      const diffImage = new Image(canvasImage.width, canvasImage.height)
 
       const numDiffPixels = pixelmatch(
         canvasImage.bitmap,
