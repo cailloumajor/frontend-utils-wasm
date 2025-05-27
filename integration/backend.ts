@@ -45,3 +45,7 @@ export function handler(req: Request) {
     fsRoot: wwwDir,
   })
 }
+
+if (import.meta.main) {
+  Deno.serve(handler)
+}
