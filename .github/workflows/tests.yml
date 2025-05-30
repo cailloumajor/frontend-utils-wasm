@@ -66,3 +66,4 @@ jobs:
           name: integration-tests-results
           path: |
             integration/__image_snapshots__/*.diff.png
+            integration/videos/*.webm

@@ -5,7 +5,7 @@ import { Image } from "imagescript"
 import pixelmatch from "pixelmatch"
 
 import { handler } from "./backend.ts"
-import { interceptResponse, withBackendAndBrowser } from "./test_utils.ts"
+import { interceptResponse, testId, withBackendAndBrowser } from "./test_utils.ts"
 
 const updateSnapshot = Deno.args.includes("--update-snapshot")
 const ignoreNonSnapshot = updateSnapshot ? { ignore: true } : {}
@@ -13,8 +13,8 @@ const ignoreNonSnapshot = updateSnapshot ? { ignore: true } : {}
 Deno.test({
   name: "timeline fails with an error (without throwing) if canvas was deleted",
   ...ignoreNonSnapshot,
-  fn: async () => {
-    await withBackendAndBrowser(handler, async (page, addr) => {
+  fn: async (t) => {
+    await withBackendAndBrowser(t, handler, async (page, addr) => {
       await page.goto(addr, { waitUntil: "load" })
 
       await page
@@ -36,8 +36,8 @@ Deno.test({
 Deno.test({
   name: "timeline fails if MessagePack deserialization errors",
   ...ignoreNonSnapshot,
-  fn: async () => {
-    await withBackendAndBrowser(handler, async (page, addr) => {
+  fn: async (t) => {
+    await withBackendAndBrowser(t, handler, async (page, addr) => {
       await page.goto(addr, { waitUntil: "load" })
 
       const body = encodeBase64(new Uint8Array([0xc1]))
@@ -58,8 +58,8 @@ Deno.test({
 Deno.test({
   name: "timeline fails if there is no data",
   ...ignoreNonSnapshot,
-  fn: async () => {
-    await withBackendAndBrowser(handler, async (page, addr) => {
+  fn: async (t) => {
+    await withBackendAndBrowser(t, handler, async (page, addr) => {
       await page.goto(addr, { waitUntil: "load" })
 
       const body = encodeBase64(new Uint8Array([0x90]))
@@ -79,8 +79,8 @@ Deno.test({
 Deno.test({
   name: "timeline fails if color index is not in the palette",
   ...ignoreNonSnapshot,
-  fn: async () => {
-    await withBackendAndBrowser(handler, async (page, addr) => {
+  fn: async (t) => {
+    await withBackendAndBrowser(t, handler, async (page, addr) => {
       await page.goto(addr, { waitUntil: "load" })
 
       // deno-fmt-ignore
@@ -104,10 +104,9 @@ Deno.test({
 Deno.test({
   name: "timeline renders according to snapshot",
   fn: async (t) => {
-    await withBackendAndBrowser(handler, async (page, addr) => {
+    await withBackendAndBrowser(t, handler, async (page, addr) => {
       const snapshotDir = path.join(import.meta.dirname!, "__image_snapshots__")
-      const testId = t.name.replaceAll(" ", "_")
-      const snapshotFile = path.join(snapshotDir, `${testId}.png`)
+      const snapshotFile = path.join(snapshotDir, `${testId(t)}.png`)
 
       await page.goto(addr, { waitUntil: "load" })
 

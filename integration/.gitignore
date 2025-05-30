@@ -1,0 +1,3 @@
+__image_snapshots__/*.diff.png
+videos/*
+!videos/.gitkeep
