@@ -1,4 +1,4 @@
-FROM denoland/deno:bin-2.3.3 AS deno_bin
+FROM denoland/deno:bin-2.3.5 AS deno_bin
 
 FROM rust:1.87.0-bookworm
 
