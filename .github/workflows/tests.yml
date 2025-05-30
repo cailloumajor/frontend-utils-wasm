@@ -38,6 +38,13 @@ jobs:
         with:
           toolchain: ${{ steps.get-rust-version.outputs.RUST_VERSION }}
           components: rustfmt, clippy
+      - uses: Swatinem/rust-cache@v2
+      - name: Run cargo fmt
+        run: cargo fmt --all -- --check
+      - name: Lint code with Clippy
+        run: cargo clippy -- -D warnings
+      - name: Run unit tests 🧪
+        run: cargo test
       - name: Get Deno version from dev container Dockerfile
         id: get-deno-version
         run: |
@@ -48,15 +55,12 @@ jobs:
         with:
           deno-version: ${{ steps.get-deno-version.outputs.DENO_VERSION }}
           cache: true
-      - uses: Swatinem/rust-cache@v2
-      - name: Run cargo fmt
-        run: cargo fmt --all -- --check
-      - name: Lint code with Clippy
-        run: cargo clippy -- -D warnings
-      - name: Run unit tests 🧪
-        run: cargo test
       - name: Build
         run: deno task build
+      - name: Install FFmpeg
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends ffmpeg
       - name: Run integration tests 🧪
         run: deno task test
       - name: Upload integration tests results
