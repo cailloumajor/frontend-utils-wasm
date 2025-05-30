@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.0.1](https://github.com/cailloumajor/frontend-utils-wasm/compare/v5.0.0...v5.0.1) (2025-05-30)
+
+
+### Miscellaneous Chores
+
+* release 5.0.1 ([79cbcb1](https://github.com/cailloumajor/frontend-utils-wasm/commit/79cbcb1f1f0a155550f13195adebcb1a815b36d5))
+
 ## [5.0.0](https://github.com/cailloumajor/frontend-utils-wasm/compare/v4.0.0...v5.0.0) (2025-05-23)
 
 
