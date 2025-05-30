@@ -11,8 +11,11 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
+    outputs:
+      release_created: ${{ steps.release-please.outputs.release_created }}
     steps:
-      - uses: googleapis/release-please-action@v4
+      - id: release-please
+        uses: googleapis/release-please-action@v4
         with:
           # Token permissions: read access to metadata, read and write access to
           # actions, code and pull requests.
