@@ -36,14 +36,12 @@ async function withRecording(
 
   let errorDuringInterval: Error | null = null
 
-  let i = 0
   const timer = setInterval(
     async () => {
       try {
         const png = await page.screenshot({ optimizeForSpeed: true })
         await toFFmpeg.ready
         await toFFmpeg.write(png)
-        i += 1
       } catch (err) {
         clearInterval(timer)
         errorDuringInterval = err as Error
