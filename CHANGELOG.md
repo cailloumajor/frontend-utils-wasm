@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.0.3](https://github.com/cailloumajor/frontend-utils-wasm/compare/v5.0.2...v5.0.3) (2025-06-19)
+
+
+### Bug Fixes
+
+* **deps:** update rust crate colorsys to 0.7 ([#127](https://github.com/cailloumajor/frontend-utils-wasm/issues/127)) ([4023126](https://github.com/cailloumajor/frontend-utils-wasm/commit/4023126ab6d4c1058fae89bd6e2d04726e008ca5))
+
 ## [5.0.2](https://github.com/cailloumajor/frontend-utils-wasm/compare/v5.0.1...v5.0.2) (2025-05-30)
 
 
