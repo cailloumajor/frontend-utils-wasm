@@ -145,7 +145,7 @@ Deno.test({
 
       if (numDiffPixels > 0) {
         const diffFile = await diffImage.encode(0)
-        const diffPath = path.join(snapshotDir, `${testId}.diff.png`)
+        const diffPath = path.join(snapshotDir, `${testId(t)}.diff.png`)
         await Deno.writeFile(diffPath, diffFile)
       }
 
