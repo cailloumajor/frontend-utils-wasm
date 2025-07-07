@@ -2,7 +2,7 @@ use std::iter::{successors, zip};
 
 use chrono::serde::ts_seconds;
 use chrono::{DateTime, Duration, DurationRound, Local, Utc};
-use colorsys::Rgb;
+use csscolorparser::ParseColorError;
 use plotters::coord::combinators::WithKeyPoints;
 use plotters::prelude::*;
 use plotters::style::RelativeSize;
@@ -30,7 +30,7 @@ struct Slot {
 #[tsify(from_wasm_abi)]
 #[serde(rename_all = "camelCase")]
 pub struct TimelineConfig {
-    /// The color palette to use for drawing slots, as hex strings.
+    /// The color palette to use for drawing slots, as CSS color strings.
     palette: Vec<String>,
     /// The font family to use.
     font_family: String,
@@ -69,14 +69,13 @@ impl Timeline {
     ) -> Result<Timeline, JsError> {
         let palette = config
             .palette
-            .iter()
-            .map(|hex| {
-                let rgb = Rgb::from_hex_str(hex)
-                    .map_err(|err| TimelineError::PaletteColorParsing(hex.to_string(), err))?;
-                let (r, g, b) = rgb.into();
-                Ok(RGBColor(r, g, b).mix(config.opacity))
+            .into_iter()
+            .map(|color_str| {
+                parse_css_color_to_rgba(&color_str)
+                    .map(|color| color.mix(config.opacity))
+                    .map_err(|err| TimelineError::PaletteColorParsing(color_str, err))
             })
-            .collect::<Result<_, TimelineError>>()?;
+            .collect::<Result<_, _>>()?;
 
         let x_interval_minutes = Duration::minutes(config.x_interval_minutes.into());
         let x_offset_minutes = Duration::minutes(config.x_offset_minutes.into());
@@ -106,19 +105,15 @@ impl Timeline {
         #[wasm_bindgen(param_description = "binary slots data, serialized in MessagePack format")]
         data: &[u8],
     ) -> Result<(), JsError> {
-        let axis_color = {
-            let rgb: Rgb = web_sys::window()
-                .unwrap_throw()
-                .get_computed_style(&self.canvas)
-                .unwrap_throw()
-                .unwrap_throw()
-                .get_property_value("color")
-                .unwrap_throw()
-                .parse()
-                .map_err(TimelineError::ParsingCanvasColor)?;
-            let (r, g, b) = rgb.into();
-            RGBColor(r, g, b)
-        };
+        let canvas_css_color = web_sys::window()
+            .unwrap_throw()
+            .get_computed_style(&self.canvas)
+            .unwrap_throw()
+            .unwrap_throw()
+            .get_property_value("color")
+            .unwrap_throw();
+        let axis_color = parse_css_color_to_rgba(&canvas_css_color)
+            .map_err(TimelineError::ParsingCanvasColor)?;
 
         self.canvas
             .get_context("2d")
@@ -209,6 +204,12 @@ impl Timeline {
         self.canvas.dispatch_event(&drawed_event).unwrap_throw();
         Ok(())
     }
+}
+
+fn parse_css_color_to_rgba(s: &str) -> Result<RGBAColor, ParseColorError> {
+    let css_color = csscolorparser::parse(s)?;
+    let [r, g, b, _] = css_color.to_rgba8();
+    Ok(RGBAColor(r, g, b, css_color.a.into()))
 }
 
 fn make_x_spec(

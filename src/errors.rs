@@ -1,11 +1,12 @@
+use csscolorparser::ParseColorError;
 use thiserror::Error;
 
 #[derive(Debug, Error)]
 pub(crate) enum TimelineError {
     #[error("error parsing palette color `{0}`: {1}")]
-    PaletteColorParsing(String, colorsys::ParseError),
+    PaletteColorParsing(String, ParseColorError),
     #[error("error parsing canvas style property `color`: {0}")]
-    ParsingCanvasColor(colorsys::ParseError),
+    ParsingCanvasColor(ParseColorError),
     #[error("error getting canvas context")]
     GetCanvasContext,
     #[error("error decoding MessagePack data: {0}")]
