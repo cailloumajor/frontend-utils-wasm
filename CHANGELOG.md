@@ -1,5 +1,18 @@
 # Changelog
 
+## [5.1.0](https://github.com/cailloumajor/frontend-utils-wasm/compare/v5.0.2...v5.1.0) (2025-07-07)
+
+
+### Features
+
+* allow CSS color strings for palette and canvas element ([22a079e](https://github.com/cailloumajor/frontend-utils-wasm/commit/22a079e57c982a6a6e2a3e9d58c925a27c06ae8e))
+
+
+### Bug Fixes
+
+* **deps:** update rust crate colorsys to 0.7 ([#127](https://github.com/cailloumajor/frontend-utils-wasm/issues/127)) ([4023126](https://github.com/cailloumajor/frontend-utils-wasm/commit/4023126ab6d4c1058fae89bd6e2d04726e008ca5))
+* **deps:** update rust docker tag to v1.88.0 ([#130](https://github.com/cailloumajor/frontend-utils-wasm/issues/130)) ([9920366](https://github.com/cailloumajor/frontend-utils-wasm/commit/9920366084a625739bb5077c6819be546ff23e60))
+
 ## [5.0.2](https://github.com/cailloumajor/frontend-utils-wasm/compare/v5.0.1...v5.0.2) (2025-05-30)
 
 
