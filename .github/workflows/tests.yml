@@ -58,9 +58,10 @@ jobs:
       - name: Build
         run: deno task build
       - name: Install FFmpeg
-        run: |
-          sudo apt-get update
-          sudo apt-get install --no-install-recommends ffmpeg
+        uses: awalsh128/cache-apt-pkgs-action@v1
+        with:
+          packages: ffmpeg
+          version: 1.0
       - name: Run integration tests 🧪
         run: deno task test
       - name: Upload integration tests results
