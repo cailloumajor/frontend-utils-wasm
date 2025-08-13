@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.1.1](https://github.com/cailloumajor/frontend-utils-wasm/compare/v5.1.0...v5.1.1) (2025-08-13)
+
+
+### Bug Fixes
+
+* **deps:** update rust docker tag to v1.89.0 ([#140](https://github.com/cailloumajor/frontend-utils-wasm/issues/140)) ([71b2cac](https://github.com/cailloumajor/frontend-utils-wasm/commit/71b2caca71922583692816b31536859a3aa25ae7))
+
 ## [5.1.0](https://github.com/cailloumajor/frontend-utils-wasm/compare/v5.0.2...v5.1.0) (2025-07-07)
 
 
