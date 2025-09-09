@@ -32,4 +32,3 @@ drawButton.addEventListener("click", () => {
       errorOut.textContent = String(err)
     })
 })
-drawButton.classList.add("ready")
