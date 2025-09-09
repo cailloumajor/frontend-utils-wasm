@@ -100,7 +100,7 @@ impl Timeline {
     ///  * an optional index in the color palette; if omitted, the slot will not be drawed
     ///
     /// @throws Will throw an error if something goes wrong during execution
-    pub async fn draw(
+    pub fn draw(
         &self,
         #[wasm_bindgen(param_description = "binary slots data, serialized in MessagePack format")]
         data: &[u8],
