@@ -1,7 +1,7 @@
-use std::iter::{successors, zip};
+use std::iter;
 
 use chrono::serde::ts_seconds;
-use chrono::{DateTime, Duration, DurationRound, Local, Utc};
+use chrono::{DateTime, DurationRound, Local, TimeDelta, Utc};
 use csscolorparser::ParseColorError;
 use plotters::coord::combinators::WithKeyPoints;
 use plotters::prelude::*;
@@ -50,8 +50,8 @@ pub struct Timeline {
     canvas: HtmlCanvasElement,
     palette: Vec<RGBAColor>,
     font_family: String,
-    x_interval_minutes: Duration,
-    x_offset_minutes: Duration,
+    x_interval_minutes: TimeDelta,
+    x_offset_minutes: TimeDelta,
     emphasis_labels: Vec<String>,
 }
 
@@ -77,8 +77,8 @@ impl Timeline {
             })
             .collect::<Result<_, _>>()?;
 
-        let x_interval_minutes = Duration::minutes(config.x_interval_minutes.into());
-        let x_offset_minutes = Duration::minutes(config.x_offset_minutes.into());
+        let x_interval_minutes = TimeDelta::minutes(config.x_interval_minutes.into());
+        let x_offset_minutes = TimeDelta::minutes(config.x_offset_minutes.into());
 
         Ok(Self {
             canvas,
@@ -211,15 +211,15 @@ fn parse_css_color_to_rgba(s: &str) -> Result<RGBAColor, ParseColorError> {
 fn make_x_spec(
     start: DateTime<Local>,
     end: DateTime<Local>,
-    bold_interval: Duration,
-    offset: Duration,
+    bold_interval: TimeDelta,
+    offset: TimeDelta,
 ) -> WithKeyPoints<RangedDateTime<DateTime<Local>>> {
     let initial = start.duration_trunc(bold_interval).unwrap_throw() + offset - bold_interval;
     let mut bold_points = Vec::new();
     let mut light_points = Vec::new();
-    let is_bold_iter = successors(Some(true), |is_bold| Some(!is_bold));
-    let datetime_iter = successors(Some(initial), |dt| Some(*dt + bold_interval / 2));
-    let zipped = zip(is_bold_iter, datetime_iter);
+    let is_bold_iter = iter::successors(Some(true), |is_bold| Some(!is_bold));
+    let datetime_iter = iter::successors(Some(initial), |dt| Some(*dt + bold_interval / 2));
+    let zipped = iter::zip(is_bold_iter, datetime_iter);
     for (is_bold, dt) in zipped {
         if dt < start {
             continue;
@@ -271,8 +271,8 @@ mod tests {
         fn start_on_bold_line_no_offset() {
             let start = Local.with_ymd_and_hms(1984, 12, 9, 22, 0, 0).unwrap();
             let end = Local.with_ymd_and_hms(1984, 12, 10, 4, 0, 0).unwrap();
-            let interval = Duration::hours(1);
-            let offset = Duration::zero();
+            let interval = TimeDelta::hours(1);
+            let offset = TimeDelta::zero();
 
             let x_spec = make_x_spec(start, end, interval, offset);
 
@@ -292,8 +292,8 @@ mod tests {
         fn start_on_light_line_no_offset() {
             let start = Local.with_ymd_and_hms(1984, 12, 9, 22, 30, 0).unwrap();
             let end = Local.with_ymd_and_hms(1984, 12, 10, 4, 30, 0).unwrap();
-            let interval = Duration::hours(1);
-            let offset = Duration::zero();
+            let interval = TimeDelta::hours(1);
+            let offset = TimeDelta::zero();
 
             let x_spec = make_x_spec(start, end, interval, offset);
 
@@ -313,8 +313,8 @@ mod tests {
         fn start_after_bold_line_no_offset() {
             let start = Local.with_ymd_and_hms(1984, 12, 9, 22, 5, 0).unwrap();
             let end = Local.with_ymd_and_hms(1984, 12, 10, 4, 5, 0).unwrap();
-            let interval = Duration::hours(1);
-            let offset = Duration::zero();
+            let interval = TimeDelta::hours(1);
+            let offset = TimeDelta::zero();
 
             let x_spec = make_x_spec(start, end, interval, offset);
 
@@ -332,8 +332,8 @@ mod tests {
         fn start_after_light_line_no_offset() {
             let start = Local.with_ymd_and_hms(1984, 12, 9, 22, 35, 0).unwrap();
             let end = Local.with_ymd_and_hms(1984, 12, 10, 4, 35, 0).unwrap();
-            let interval = Duration::hours(1);
-            let offset = Duration::zero();
+            let interval = TimeDelta::hours(1);
+            let offset = TimeDelta::zero();
 
             let x_spec = make_x_spec(start, end, interval, offset);
 
@@ -351,8 +351,8 @@ mod tests {
         fn with_offset() {
             let start = Local.with_ymd_and_hms(1984, 12, 9, 22, 0, 0).unwrap();
             let end = Local.with_ymd_and_hms(1984, 12, 10, 4, 0, 0).unwrap();
-            let interval = Duration::hours(1);
-            let offset = Duration::minutes(30);
+            let interval = TimeDelta::hours(1);
+            let offset = TimeDelta::minutes(30);
 
             let x_spec = make_x_spec(start, end, interval, offset);
 
