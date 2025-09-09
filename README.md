@@ -27,8 +27,4 @@ const timeline = new Timeline(canvas, {
   emphasisLabels: ["07:53", "15:53", "23:53"],
 });
 
-canvas.addEventListener("drawed", () => {
-  canvas.classList.add("drawed");
-});
-
 ```

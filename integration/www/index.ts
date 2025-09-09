@@ -12,10 +12,9 @@ const timeline = new Timeline(canvas as HTMLCanvasElement, {
   xOffsetMinutes: 53,
   emphasisLabels: ["07:53", "15:53", "23:53"],
 })
+
 const drawedClass = "drawed"
-canvas.addEventListener("drawed", () => {
-  canvas.classList.add(drawedClass)
-})
+
 drawButton.addEventListener("click", () => {
   canvas.classList.remove(drawedClass)
   fetch("/timeline_data.bin")
@@ -25,6 +24,7 @@ drawButton.addEventListener("click", () => {
       console.time("draw function")
       timeline.draw(data)
       console.timeEnd("draw function")
+      canvas.classList.add(drawedClass)
     })
     .catch((err) => {
       errorOut.textContent = String(err)

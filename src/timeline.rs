@@ -10,7 +10,7 @@ use plotters_canvas::CanvasBackend;
 use serde::Deserialize;
 use tsify::Tsify;
 use wasm_bindgen::prelude::*;
-use web_sys::{CanvasRenderingContext2d, Event, HtmlCanvasElement};
+use web_sys::{CanvasRenderingContext2d, HtmlCanvasElement};
 
 use crate::errors::TimelineError;
 
@@ -91,8 +91,6 @@ impl Timeline {
     }
 
     /// Draw the timeline using the provided `data`.
-    ///
-    /// Upon success, a `drawed` event will be emitted by the canvas element.
     ///
     /// Deserialized slot data is an array of objects with two members:
     ///
@@ -200,8 +198,6 @@ impl Timeline {
         chart.draw_series(series)?;
         root.present()?;
 
-        let drawed_event = Event::new("drawed").unwrap_throw();
-        self.canvas.dispatch_event(&drawed_event).unwrap_throw();
         Ok(())
     }
 }
