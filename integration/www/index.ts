@@ -23,9 +23,7 @@ drawButton.addEventListener("click", () => {
     .then((buffer) => {
       const data = new Uint8Array(buffer)
       console.time("draw function")
-      return timeline.draw(data)
-    })
-    .then(() => {
+      timeline.draw(data)
       console.timeEnd("draw function")
     })
     .catch((err) => {
