@@ -1,5 +1,24 @@
 # Changelog
 
+## [6.0.0](https://github.com/cailloumajor/frontend-utils-wasm/compare/v5.1.1...v6.0.0) (2025-09-09)
+
+
+### ⚠ BREAKING CHANGES
+
+* separate setting the data to draw and drawing
+* remove `drawed` event emission
+* make the draw method sync
+
+### Features
+
+* separate setting the data to draw and drawing ([dd99290](https://github.com/cailloumajor/frontend-utils-wasm/commit/dd99290ddb4051ab74eb5a81f9e6d2cdf0c694f1))
+
+
+### Bug Fixes
+
+* make the draw method sync ([7c77b74](https://github.com/cailloumajor/frontend-utils-wasm/commit/7c77b7411c1983839ced574e20f44ece8b9a0630))
+* remove `drawed` event emission ([6502060](https://github.com/cailloumajor/frontend-utils-wasm/commit/6502060cd747f838c0a6172d6d83982a8d683bc5))
+
 ## [5.1.1](https://github.com/cailloumajor/frontend-utils-wasm/compare/v5.1.0...v5.1.1) (2025-08-14)
 
 
