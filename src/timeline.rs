@@ -53,6 +53,9 @@ pub struct Timeline {
     x_interval_minutes: TimeDelta,
     x_offset_minutes: TimeDelta,
     emphasis_labels: Vec<String>,
+
+    /// Internal data storage.
+    slots: Option<Vec<Slot>>,
 }
 
 #[wasm_bindgen]
@@ -87,22 +90,34 @@ impl Timeline {
             x_interval_minutes,
             x_offset_minutes,
             emphasis_labels: config.emphasis_labels,
+            slots: None,
         })
     }
 
-    /// Draw the timeline using the provided `data`.
+    /// Record the timeline data for use when drawing.
     ///
     /// Deserialized slot data is an array of objects with two members:
     ///
     ///  * start time in seconds since Unix epoch
     ///  * an optional index in the color palette; if omitted, the slot will not be drawed
     ///
-    /// @throws Will throw an error if something goes wrong during execution
-    pub fn draw(
-        &self,
+    /// @throws Will throw an error if something goes wrong when deserializing the data.
+    #[wasm_bindgen(js_name = "setData")]
+    pub fn set_data(
+        &mut self,
         #[wasm_bindgen(param_description = "binary slots data, serialized in MessagePack format")]
         data: &[u8],
     ) -> Result<(), JsError> {
+        let slots = rmp_serde::from_slice(data).map_err(TimelineError::MsgPackDecode)?;
+        self.slots = Some(slots);
+
+        Ok(())
+    }
+
+    /// Draw the timeline using the provided `data`.
+    ///
+    /// @throws Will throw an error if something goes wrong during execution.
+    pub fn draw(&self) -> Result<(), JsError> {
         let canvas_css_color = web_sys::window()
             .unwrap_throw()
             .get_computed_style(&self.canvas)
@@ -126,11 +141,13 @@ impl Timeline {
                 self.canvas.height().into(),
             );
 
-        let slots: Vec<Slot> = rmp_serde::from_slice(data).map_err(TimelineError::MsgPackDecode)?;
-
         let backend = CanvasBackend::with_canvas_object(self.canvas.clone())
             .ok_or(TimelineError::BackendCreation)?;
         let root = backend.into_drawing_area();
+
+        let Some(slots) = &self.slots else {
+            return Err(TimelineError::EmptyDataset.into());
+        };
 
         let (Some(first), Some(last)) = (slots.first(), slots.last()) else {
             return Err(TimelineError::EmptyDataset.into());
