@@ -1,6 +1,7 @@
 import { Timeline } from "../../pkg/frontend_utils_wasm.js"
 
 const canvas = document.getElementById("target-canvas")!
+const setDataButton = document.getElementById("set-data-button")!
 const drawButton = document.getElementById("draw-button")!
 const errorOut = document.getElementById("error-out")!
 
@@ -13,20 +14,34 @@ const timeline = new Timeline(canvas as HTMLCanvasElement, {
   emphasisLabels: ["07:53", "15:53", "23:53"],
 })
 
-const drawedClass = "drawed"
+const drawReadyClass = "ready"
 
-drawButton.addEventListener("click", () => {
-  canvas.classList.remove(drawedClass)
+setDataButton.addEventListener("click", () => {
+  drawButton.classList.remove(drawReadyClass)
   fetch("/timeline_data.bin")
     .then((response) => response.arrayBuffer())
     .then((buffer) => {
       const data = new Uint8Array(buffer)
-      console.time("draw function")
-      timeline.draw(data)
-      console.timeEnd("draw function")
-      canvas.classList.add(drawedClass)
+      console.time("setData function")
+      timeline.setData(data)
+      console.timeEnd("setData function")
+      drawButton.classList.add(drawReadyClass)
     })
     .catch((err) => {
       errorOut.textContent = String(err)
     })
+})
+
+const drawedClass = "drawed"
+
+drawButton.addEventListener("click", () => {
+  canvas.classList.remove(drawedClass)
+  try {
+    console.time("draw function")
+    timeline.draw()
+    console.timeEnd("draw function")
+  } catch (err) {
+    errorOut.textContent = String(err)
+  }
+  canvas.classList.add(drawedClass)
 })

@@ -17,13 +17,15 @@ Deno.test({
     await withBackendAndBrowser(t, handler, async (page, addr) => {
       await page.goto(addr, { waitUntil: "load" })
 
+      await page.locator("#set-data-button").click()
+
       await page
         .locator<HTMLCanvasElement>("#target-canvas")
         .evaluate((el) => {
           el.remove()
         })
 
-      await page.locator("#draw-button").click()
+      await page.locator("#draw-button.ready").click()
 
       const errorText = await page
         .locator<HTMLDivElement>("#error-out:not(:empty)")
@@ -44,7 +46,7 @@ Deno.test({
 
       await interceptResponse(page, "*/timeline_data.bin", body)
 
-      await page.locator("#draw-button").click()
+      await page.locator("#set-data-button").click()
 
       const errorText = await page
         .locator<HTMLDivElement>("#error-out:not(:empty)")
@@ -56,7 +58,24 @@ Deno.test({
 })
 
 Deno.test({
-  name: "timeline fails if there is no data",
+  name: "timeline fails draw is requested before having slots data",
+  ...ignoreNonSnapshot,
+  fn: async (t) => {
+    await withBackendAndBrowser(t, handler, async (page, addr) => {
+      await page.goto(addr, { waitUntil: "load" })
+
+      await page.locator("#draw-button").click()
+
+      const errorText = await page
+        .locator<HTMLDivElement>("#error-out:not(:empty)")
+        .evaluate((el) => el.innerText)
+      assertStringIncludes(errorText, "empty")
+    })
+  },
+})
+
+Deno.test({
+  name: "timeline fails if fetched data has no slot",
   ...ignoreNonSnapshot,
   fn: async (t) => {
     await withBackendAndBrowser(t, handler, async (page, addr) => {
@@ -66,7 +85,9 @@ Deno.test({
 
       await interceptResponse(page, "*/timeline_data.bin", body)
 
-      await page.locator("#draw-button").click()
+      await page.locator("#set-data-button").click()
+
+      await page.locator("#draw-button.ready").click()
 
       const errorText = await page
         .locator<HTMLDivElement>("#error-out:not(:empty)")
@@ -90,7 +111,9 @@ Deno.test({
 
       await interceptResponse(page, "*/timeline_data.bin", body)
 
-      await page.locator("#draw-button").click()
+      await page.locator("#set-data-button").click()
+
+      await page.locator("#draw-button.ready").click()
 
       const errorText = await page
         .locator<HTMLDivElement>("#error-out:not(:empty)")
@@ -112,7 +135,9 @@ Deno.test({
 
       await page.locator("#target-canvas:not(.drawed)").wait()
 
-      await page.locator("#draw-button").click()
+      await page.locator("#set-data-button").click()
+
+      await page.locator("#draw-button.ready").click()
 
       const canvasDataURL = await page
         .locator<HTMLCanvasElement>("#target-canvas.drawed")
