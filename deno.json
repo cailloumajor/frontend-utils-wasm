@@ -15,7 +15,7 @@
     "bundle"
   ],
   "tasks": {
-    "wasmbuild": "deno run -A jsr:@deno/wasmbuild@0.19.2",
+    "wasmbuild": "deno run -A jsr:@deno/wasmbuild@0.19.3",
     "build": "deno task wasmbuild --inline --out pkg",
     "test": "deno test -A",
     "update_snapshot": "deno test -A -- --update-snapshot"
