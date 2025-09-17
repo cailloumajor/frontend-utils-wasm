@@ -1,12 +1,10 @@
 import { serveDir } from "@std/http"
 import * as path from "@std/path"
-import * as esbuild from "esbuild"
 
 const wwwDir = path.join(import.meta.dirname!, "www")
 
-const jsEntryPoint = await esbuild.build({
-  bundle: false,
-  entryPoints: [path.join(wwwDir, "index.ts")],
+const jsEntryPoint = await Deno.bundle({
+  entrypoints: [path.join(wwwDir, "index.ts")],
   write: false,
 })
 
@@ -22,11 +20,16 @@ if (jsEntryPoint.errors.length > 0) {
   Deno.exit(1)
 }
 
+if (jsEntryPoint.outputFiles == null) {
+  console.error("Missing bundle output")
+  Deno.exit(1)
+}
+
 export function handler(req: Request) {
   const reqURL = new URL(req.url)
 
   if (reqURL.pathname === "/index.js") {
-    return new Response(jsEntryPoint.outputFiles[0].contents, {
+    return new Response(jsEntryPoint.outputFiles![0].contents, {
       headers: {
         "Content-Type": "text/javascript",
       },
