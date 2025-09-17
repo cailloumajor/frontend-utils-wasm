@@ -21,7 +21,7 @@
     "update_snapshot": "deno test -A -- --update-snapshot"
   },
   "imports": {
-    "@astral/astral": "jsr:@astral/astral@0.5.3",
+    "@astral/astral": "jsr:@astral/astral@0.5.4",
     "@std/assert": "jsr:@std/assert@1.0.14",
     "@std/encoding": "jsr:@std/encoding@1.0.10",
     "@std/http": "jsr:@std/http@1.0.20",
