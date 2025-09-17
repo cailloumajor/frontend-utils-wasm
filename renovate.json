@@ -7,6 +7,18 @@
   "semanticCommits": "enabled",
   "packageRules": [
     {
+      "matchSourceUrls": [
+        "https://github.com/wasm-bindgen/wasm-bindgen"
+      ],
+      "groupName": "rust-wasm-bindgen monorepo",
+      "matchUpdateTypes": [
+        "digest",
+        "patch",
+        "minor",
+        "major"
+      ]
+    },
+    {
       "matchPackageNames": [
         "rust"
       ],
