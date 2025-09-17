@@ -1,4 +1,4 @@
-FROM rust:1.89.0-bookworm
+FROM rust:1.89.0-trixie
 
 COPY --from=denoland/deno:bin-2.5.1 /deno /usr/local/bin/deno
 
