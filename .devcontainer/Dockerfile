@@ -1,6 +1,6 @@
 FROM rust:1.89.0-bookworm
 
-COPY --from=denoland/deno:bin-2.4.5 /deno /usr/local/bin/deno
+COPY --from=denoland/deno:bin-2.5.1 /deno /usr/local/bin/deno
 
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     # Remove imagemagick due to https://security-tracker.debian.org/tracker/CVE-2019-10131
