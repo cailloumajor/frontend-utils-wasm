@@ -1,5 +1,4 @@
 import { assert, assertEquals, assertStringIncludes } from "@std/assert"
-import { decodeBase64, encodeBase64 } from "@std/encoding/base64"
 import * as path from "@std/path"
 import { Image } from "imagescript"
 import pixelmatch from "pixelmatch"
@@ -42,9 +41,9 @@ Deno.test({
     await withBackendAndBrowser(t, handler, async (page, addr) => {
       await page.goto(addr, { waitUntil: "load" })
 
-      const body = encodeBase64(new Uint8Array([0xc1]))
+      const body = new Uint8Array([0xc1])
 
-      await interceptResponse(page, "*/timeline_data.bin", body)
+      await interceptResponse(page, "*/timeline_data.bin", body.toBase64())
 
       await page.locator("#set-data-button").click()
 
@@ -81,9 +80,9 @@ Deno.test({
     await withBackendAndBrowser(t, handler, async (page, addr) => {
       await page.goto(addr, { waitUntil: "load" })
 
-      const body = encodeBase64(new Uint8Array([0x90]))
+      const body = new Uint8Array([0x90])
 
-      await interceptResponse(page, "*/timeline_data.bin", body)
+      await interceptResponse(page, "*/timeline_data.bin", body.toBase64())
 
       await page.locator("#set-data-button").click()
 
@@ -105,11 +104,12 @@ Deno.test({
       await page.goto(addr, { waitUntil: "load" })
 
       // deno-fmt-ignore
-      const body = encodeBase64(new Uint8Array([
-        0x92, 0x92, 0xce, 0x64, 0xa7, 0x37, 0xbc, 0x0f, 0x92, 0xce, 0x64, 0xa7, 0xe0, 0x9c, 0x01
-      ]))
+      const body = new Uint8Array([
+        0x92, 0x92, 0xce, 0x64, 0xa7, 0x37, 0xbc, 0x0f, 0x92, 0xce, 0x64, 0xa7,
+        0xe0, 0x9c, 0x01,
+      ])
 
-      await interceptResponse(page, "*/timeline_data.bin", body)
+      await interceptResponse(page, "*/timeline_data.bin", body.toBase64())
 
       await page.locator("#set-data-button").click()
 
@@ -143,7 +143,7 @@ Deno.test({
         .locator<HTMLCanvasElement>("#target-canvas.drawed")
         .evaluate((el) => el.toDataURL())
       assert(canvasDataURL.startsWith("data:image/png;base64,"), "bad canvas data URL format")
-      const canvasPng = decodeBase64(canvasDataURL.substring(22))
+      const canvasPng = Uint8Array.fromBase64(canvasDataURL.substring(22))
 
       if (Deno.args.includes("--update-snapshot")) {
         await Deno.writeFile(snapshotFile, canvasPng)
