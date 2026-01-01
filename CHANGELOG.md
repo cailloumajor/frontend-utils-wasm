@@ -1,5 +1,18 @@
 # Changelog
 
+## [6.0.1](https://github.com/cailloumajor/frontend-utils-wasm/compare/v6.0.0...v6.0.1) (2026-01-01)
+
+
+### Bug Fixes
+
+* **deps:** specify full dependencies versions ([27233a9](https://github.com/cailloumajor/frontend-utils-wasm/commit/27233a9223630aeecc05cbe73983c4f86566428e))
+* **deps:** update rust crate csscolorparser to 0.8 ([f452c9a](https://github.com/cailloumajor/frontend-utils-wasm/commit/f452c9aaa71f7c4db65eb48cff5d2aff019bc173))
+* **deps:** update rust docker tag to v1.90.0 ([779a336](https://github.com/cailloumajor/frontend-utils-wasm/commit/779a3368bc3b95d90e348d45f62ab01651e5e04c))
+* **deps:** update rust docker tag to v1.91.0 ([2d785b1](https://github.com/cailloumajor/frontend-utils-wasm/commit/2d785b1a68c0b76ec9be75ef56f792f044c2496e))
+* **deps:** update rust docker tag to v1.91.1 ([0dd0b27](https://github.com/cailloumajor/frontend-utils-wasm/commit/0dd0b2759fee7a78f733e02db9c468590742d0df))
+* **deps:** update rust docker tag to v1.92.0 ([f5be95e](https://github.com/cailloumajor/frontend-utils-wasm/commit/f5be95e45819fd008889ef1f424226821ccd931e))
+* **deps:** upgrade wasm-bindgen and wasmbuild ([0035e91](https://github.com/cailloumajor/frontend-utils-wasm/commit/0035e914bfb53ce6eb79b0049b35cb63ae3373cf))
+
 ## [6.0.0](https://github.com/cailloumajor/frontend-utils-wasm/compare/v5.1.1...v6.0.0) (2025-09-09)
 
 
