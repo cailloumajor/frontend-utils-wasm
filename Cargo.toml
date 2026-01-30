@@ -17,8 +17,8 @@ plotters-canvas = "0.3.1"
 rmp-serde = "1.3.1"
 serde = { version = "1.0.228", features = ["derive"] }
 thiserror = "2.0.17"
-# Should be the version supported by the current version of wasmbuild.
-wasm-bindgen = "=0.2.105"
+# Must be the version supported by the current version of `wasmbuild`.
+wasm-bindgen = "=0.2.106"
 
 [dependencies.plotters]
 version = "0.3.7"
@@ -31,7 +31,8 @@ default-features = false
 features = ["js"]
 
 [dependencies.web-sys]
-version = "=0.3.82"
+# Must be the version supported by the current version of `wasmbuild`.
+version = "=0.3.83"
 features = [
     "CanvasRenderingContext2d",
     "CssStyleDeclaration",
