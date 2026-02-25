@@ -1,6 +1,6 @@
 FROM rust:1.93.1-trixie
 
-COPY --from=denoland/deno:bin-2.6.10 /deno /usr/local/bin/deno
+COPY --from=denoland/deno:bin-2.7.1 /deno /usr/local/bin/deno
 
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     # Remove imagemagick due to https://security-tracker.debian.org/tracker/CVE-2019-10131
