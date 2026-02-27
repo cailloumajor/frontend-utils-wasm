@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.0.3](https://github.com/cailloumajor/frontend-utils-wasm/compare/v6.0.2...v6.0.3) (2026-02-27)
+
+
+### Bug Fixes
+
+* **deps:** update rust docker tag to v1.93.1 ([78f24aa](https://github.com/cailloumajor/frontend-utils-wasm/commit/78f24aab3a667b2568abfecaba7e156fbba12a60))
+
 ## [6.0.2](https://github.com/cailloumajor/frontend-utils-wasm/compare/v6.0.1...v6.0.2) (2026-01-30)
 
 
