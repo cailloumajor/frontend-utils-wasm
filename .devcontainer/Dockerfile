@@ -1,4 +1,4 @@
-FROM rust:1.94.0-trixie
+FROM rust:1.94.1-trixie
 
 COPY --from=denoland/deno:bin-2.7.8 /deno /usr/local/bin/deno
 
