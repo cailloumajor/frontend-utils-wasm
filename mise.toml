@@ -1,0 +1,22 @@
+[tools]
+deno = "2.7.12"
+tombi = "latest"
+"aqua:wasm-bindgen/wasm-pack" = "latest"
+ffmpeg = "latest"
+hk = "latest"
+pkl = "latest"
+"aqua:betterleaks/betterleaks" = "latest"
+hadolint = "latest"
+editorconfig-checker = "latest"
+rumdl = "latest"
+typos = "latest"
+
+[tools.rust]
+version = "1.94.1"
+components = "rust-analyzer"
+targets = "wasm32-unknown-unknown"
+
+[hooks]
+enter = "mise outdated --local"
+# Automatically install/update hooks when tools are installed
+postinstall = "hk install --mise"
