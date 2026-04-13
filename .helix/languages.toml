@@ -1,0 +1,20 @@
+[[language]]
+name = "css"
+roots = ["deno.json", "deno.jsonc", "package.json"]
+language-servers = ["deno-lsp", "tailwindcss-ls"]
+
+[[language]]
+name = "json"
+roots = ["deno.json", "deno.jsonc", "package.json"]
+language-servers = ["deno-lsp"]
+
+[[language]]
+name = "typescript"
+roots = ["deno.json", "deno.jsonc", "package.json"]
+auto-format = true
+language-servers = ["deno-lsp"]
+
+[language-server.deno-lsp]
+command = "deno"
+args = ["lsp"]
+config.deno.enable = true
