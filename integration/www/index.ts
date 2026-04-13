@@ -32,10 +32,10 @@ setDataButton.addEventListener("click", () => {
     })
 })
 
-const drawedClass = "drawed"
+const drawnClass = "drawn"
 
 drawButton.addEventListener("click", () => {
-  canvas.classList.remove(drawedClass)
+  canvas.classList.remove(drawnClass)
   try {
     console.time("draw function")
     timeline.draw()
@@ -43,5 +43,5 @@ drawButton.addEventListener("click", () => {
   } catch (err) {
     errorOut.textContent = String(err)
   }
-  canvas.classList.add(drawedClass)
+  canvas.classList.add(drawnClass)
 })

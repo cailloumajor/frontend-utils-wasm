@@ -133,14 +133,14 @@ Deno.test({
 
       await page.goto(addr, { waitUntil: "load" })
 
-      await page.locator("#target-canvas:not(.drawed)").wait()
+      await page.locator("#target-canvas:not(.drawn)").wait()
 
       await page.locator("#set-data-button").click()
 
       await page.locator("#draw-button.ready").click()
 
       const canvasDataURL = await page
-        .locator<HTMLCanvasElement>("#target-canvas.drawed")
+        .locator<HTMLCanvasElement>("#target-canvas.drawn")
         .evaluate((el) => el.toDataURL())
       assert(canvasDataURL.startsWith("data:image/png;base64,"), "bad canvas data URL format")
       const canvasPng = Uint8Array.fromBase64(canvasDataURL.substring(22))

@@ -14,14 +14,14 @@ use web_sys::{CanvasRenderingContext2d, HtmlCanvasElement};
 
 use crate::errors::TimelineError;
 
-/// Represents a slot to be drawed.
+/// Represents a slot to be drawn.
 #[derive(Deserialize)]
 struct Slot {
     /// Start time of the slot.
     #[serde(with = "ts_seconds")]
     start_time: DateTime<Utc>,
     /// The index in the color palette to use for drawing this slot.
-    /// If [`None`], the slot will not be drawed.
+    /// If [`None`], the slot will not be drawn.
     color_index: Option<usize>,
 }
 
@@ -34,7 +34,7 @@ pub struct TimelineConfig {
     palette: Vec<String>,
     /// The font family to use.
     font_family: String,
-    /// The opacity of drawed slots.
+    /// The opacity of drawn slots.
     opacity: f64,
     /// The interval in minutes between horizontal axis labels.
     x_interval_minutes: u16,
@@ -99,7 +99,7 @@ impl Timeline {
     /// Deserialized slot data is an array of objects with two members:
     ///
     ///  * start time in seconds since Unix epoch
-    ///  * an optional index in the color palette; if omitted, the slot will not be drawed
+    ///  * an optional index in the color palette; if omitted, the slot will not be drawn
     ///
     /// @throws Will throw an error if something goes wrong when deserializing the data.
     #[wasm_bindgen(js_name = "setData")]
