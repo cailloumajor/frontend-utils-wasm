@@ -17,6 +17,6 @@ components = "rust-analyzer"
 targets = "wasm32-unknown-unknown"
 
 [hooks]
-enter = "mise outdated --local"
+enter = "mise outdated --local --silent"
 # Automatically install/update hooks when tools are installed
 postinstall = "hk install --mise"
