@@ -3,6 +3,8 @@ import "package://github.com/jdx/hk/releases/download/v1.41.0/hk@1.41.0#/Builtin
 
 local linters = new Mapping<String, Step> {
   ["betterleaks"] = Builtins.betterleaks
+  ["cargo-clippy"] = Builtins.cargo_clippy
+  ["cargo-fmt"] = Builtins.cargo_fmt
   ["deno"] = Builtins.deno
   ["deno-check"] = Builtins.deno_check
   ["deno-lint"] {
