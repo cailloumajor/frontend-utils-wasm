@@ -1,3 +1,4 @@
+import type { WaitForOptions } from "@astral/astral"
 import { assert, assertEquals, assertStringIncludes } from "@std/assert"
 import * as path from "@std/path"
 import { Image } from "imagescript"
@@ -9,12 +10,17 @@ import { interceptResponse, testId, withBackendAndBrowser } from "./test_utils.t
 const updateSnapshot = Deno.args.includes("--update-snapshot")
 const ignoreNonSnapshot = updateSnapshot ? { ignore: true } : {}
 
+const waitForIdle: WaitForOptions = {
+  waitUntil: "networkidle0",
+  idleTime: 100,
+}
+
 Deno.test({
   name: "timeline fails with an error (without throwing) if canvas was deleted",
   ...ignoreNonSnapshot,
   fn: async (t) => {
     await withBackendAndBrowser(t, handler, async (page, addr) => {
-      await page.goto(addr, { waitUntil: "load" })
+      await page.goto(addr, { ...waitForIdle })
 
       await page.locator("#set-data-button").click()
 
@@ -39,7 +45,7 @@ Deno.test({
   ...ignoreNonSnapshot,
   fn: async (t) => {
     await withBackendAndBrowser(t, handler, async (page, addr) => {
-      await page.goto(addr, { waitUntil: "load" })
+      await page.goto(addr, { ...waitForIdle })
 
       const body = new Uint8Array([0xc1])
 
@@ -57,11 +63,11 @@ Deno.test({
 })
 
 Deno.test({
-  name: "timeline fails draw is requested before having slots data",
+  name: "timeline fails if draw is requested before having slots data",
   ...ignoreNonSnapshot,
   fn: async (t) => {
     await withBackendAndBrowser(t, handler, async (page, addr) => {
-      await page.goto(addr, { waitUntil: "load" })
+      await page.goto(addr, { ...waitForIdle })
 
       await page.locator("#draw-button").click()
 
@@ -78,7 +84,7 @@ Deno.test({
   ...ignoreNonSnapshot,
   fn: async (t) => {
     await withBackendAndBrowser(t, handler, async (page, addr) => {
-      await page.goto(addr, { waitUntil: "load" })
+      await page.goto(addr, { ...waitForIdle })
 
       const body = new Uint8Array([0x90])
 
@@ -101,7 +107,7 @@ Deno.test({
   ...ignoreNonSnapshot,
   fn: async (t) => {
     await withBackendAndBrowser(t, handler, async (page, addr) => {
-      await page.goto(addr, { waitUntil: "load" })
+      await page.goto(addr, { ...waitForIdle })
 
       // deno-fmt-ignore
       const body = new Uint8Array([
@@ -131,7 +137,7 @@ Deno.test({
       const snapshotDir = path.join(import.meta.dirname!, "__image_snapshots__")
       const snapshotFile = path.join(snapshotDir, `${testId(t)}.png`)
 
-      await page.goto(addr, { waitUntil: "load" })
+      await page.goto(addr, { ...waitForIdle })
 
       await page.locator("#target-canvas:not(.drawn)").wait()
 
