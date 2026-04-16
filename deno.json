@@ -16,9 +16,7 @@
   ],
   "tasks": {
     "wasmbuild": "deno run -A jsr:@deno/wasmbuild@0.21.0",
-    "build": "deno task wasmbuild --inline --out pkg",
-    "test": "TZ=UTC deno test -A",
-    "update_snapshot": "deno task test -- --update-snapshot"
+    "build": "deno task wasmbuild --inline --out pkg"
   },
   "imports": {
     "@astral/astral": "jsr:@astral/astral@0.5.5",

@@ -2,7 +2,6 @@
 deno = "2.7.12"
 tombi = "latest"
 "aqua:wasm-bindgen/wasm-pack" = "latest"
-ffmpeg = "latest"
 hk = "latest"
 pkl = "latest"
 "aqua:betterleaks/betterleaks" = "latest"
@@ -20,3 +19,12 @@ targets = "wasm32-unknown-unknown"
 enter = "mise outdated --local --silent"
 # Automatically install/update hooks when tools are installed
 postinstall = "hk install --mise"
+
+[tasks.test]
+description = "Run Deno integration tests"
+tools.ffmpeg = "latest"
+usage = '''
+  flag "--update-snapshot" help="Update the visual tests snapshot"
+'''
+env.TZ = "UTC"
+run = "deno test -A -- ${usage_update_snapshot:+--update-snapshot}"
