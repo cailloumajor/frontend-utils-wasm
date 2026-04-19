@@ -23,8 +23,11 @@ targets = "wasm32-unknown-unknown"
 enter = "mise outdated --local --silent"
 
 [tasks.build]
-description = "Build WASM/JS library"
-run = "deno task build"
+description = "Build the library"
+run = "cargo xtask build-deno"
+
+[tasks.build.tools]
+"aqua:WebAssembly/binaryen" = "latest"
 
 [tasks."test:unit"]
 description = "Run Rust unit tests"
@@ -33,12 +36,14 @@ run = "cargo test"
 [tasks."test:integration"]
 description = "Run Deno integration tests"
 depends = ["build"]
-tools.ffmpeg = "latest"
 usage = '''
   flag "--update-snapshot" help="Update the visual tests snapshot"
 '''
 env.TZ = "UTC"
 run = "deno test -A -- ${usage_update_snapshot:+--update-snapshot}"
+
+[tasks."test:integration".tools]
+ffmpeg = "latest"
 
 [tasks.lint]
 description = "Run hk lints"
@@ -51,4 +56,5 @@ run = "echo 'CI completed successfully'"
 
 [tasks.publish]
 description = "Publish the package"
+depends = ["build"]
 run = "deno publish"

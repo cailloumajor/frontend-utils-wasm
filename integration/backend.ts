@@ -5,6 +5,7 @@ const wwwDir = path.join(import.meta.dirname!, "www")
 
 const jsEntryPoint = await Deno.bundle({
   entrypoints: [path.join(wwwDir, "index.ts")],
+  inlineImports: false,
   write: false,
 })
 
