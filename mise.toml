@@ -23,8 +23,9 @@ targets = "wasm32-unknown-unknown"
 enter = "mise outdated --local --silent"
 
 [tasks.build]
-description = "Build WASM/JS library"
-run = "deno task build"
+description = "Build the library"
+tools."aqua:WebAssembly/binaryen" = "latest"
+run = "cargo xtask build-deno"
 
 [tasks."test:unit"]
 description = "Run Rust unit tests"
@@ -51,4 +52,5 @@ run = "echo 'CI completed successfully'"
 
 [tasks.publish]
 description = "Publish the package"
+depends = ["build"]
 run = "deno publish"

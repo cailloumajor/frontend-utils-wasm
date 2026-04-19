@@ -20,5 +20,4 @@ jobs:
       - uses: jdx/mise-action@1648a7812b9aeae629881980618f079932869151 # v4.0.1
         with:
           cache: false
-      - name: Publish the package
-        run: mise run publish
+      - run: mise run publish

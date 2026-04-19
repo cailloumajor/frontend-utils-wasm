@@ -1,9 +1,11 @@
-import { Timeline } from "../../pkg/frontend_utils_wasm.js"
+import init, { Timeline } from "../../pkg/frontend_utils_wasm.js"
 
 const canvas = document.getElementById("target-canvas")!
 const setDataButton = document.getElementById("set-data-button")!
 const drawButton = document.getElementById("draw-button")!
 const errorOut = document.getElementById("error-out")!
+
+await init("../../pkg/frontend_utils_wasm_bg.wasm")
 
 const timeline = new Timeline(canvas as HTMLCanvasElement, {
   palette: ["#00ff00", "#ffff00", "#ff0000", "#ff00ff"],
