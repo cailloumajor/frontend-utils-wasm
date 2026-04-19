@@ -1,23 +1,29 @@
 [[language]]
 name = "css"
-roots = ["deno.json", "deno.jsonc", "package.json"]
+roots = ["deno.json"]
 language-servers = ["deno-lsp", "tailwindcss-ls"]
 
 [[language]]
 name = "json"
-roots = ["deno.json", "deno.jsonc", "package.json"]
+roots = ["deno.json"]
+language-servers = ["deno-lsp"]
+
+[[language]]
+name = "javascript"
+roots = ["deno.json"]
+file-types = ["js", "jsx"]
 language-servers = ["deno-lsp"]
 
 [[language]]
 name = "typescript"
-roots = ["deno.json", "deno.jsonc", "package.json"]
+roots = ["deno.json"]
 auto-format = true
 language-servers = ["deno-lsp"]
 
 [language-server.deno-lsp]
 command = "deno"
 args = ["lsp"]
-config.deno.enable = true
 
-[language-server.rust-analyzer]
-config.imports.granularity.group = "module"
+[language-server.deno-lsp.config.deno]
+enable = true
+unstable = true
