@@ -13,14 +13,14 @@ jobs:
       contents: read
       id-token: write # The OIDC ID token is used for authentication with JSR.
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
       - name: Get Rust version from dev container Dockerfile
         id: get-rust-version
         run: |
           echo "RUST_VERSION=$(grep -oP 'FROM rust:\K[\d.]+' .devcontainer/Dockerfile)" \
           >> $GITHUB_OUTPUT
       - name: Install Rust toolchain
-        uses: dtolnay/rust-toolchain@master
+        uses: dtolnay/rust-toolchain@3c5f7ea28cd621ae0bf5283f0e981fb97b8a7af9 # master
         with:
           toolchain: ${{ steps.get-rust-version.outputs.RUST_VERSION }}
       - name: Get Deno version from dev container Dockerfile
@@ -33,7 +33,7 @@ jobs:
         with:
           deno-version: ${{ steps.get-deno-version.outputs.DENO_VERSION }}
           cache: true
-      - uses: Swatinem/rust-cache@v2
+      - uses: Swatinem/rust-cache@e18b497796c12c097a38f9edb9d0641fb99eee32 # v2
       - name: Build
         run: deno task build
       - name: Publish the package

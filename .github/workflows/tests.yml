@@ -16,7 +16,7 @@ jobs:
       should_skip: ${{ steps.skip_check.outputs.should_skip }}
     steps:
       - id: skip_check
-        uses: fkirc/skip-duplicate-actions@v5
+        uses: fkirc/skip-duplicate-actions@f75f66ce1886f00957d99748a42c724f4330bdcf # v5
         with:
           concurrent_skipping: same_content
           do_not_skip: '["pull_request", "release", "workflow_dispatch", "schedule"]'
@@ -27,18 +27,18 @@ jobs:
     needs: pre_job
     if: needs.pre_job.outputs.should_skip != 'true'
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
       - name: Get Rust version from dev container Dockerfile
         id: get-rust-version
         run: |
           echo "RUST_VERSION=$(grep -oP 'FROM rust:\K[\d.]+' .devcontainer/Dockerfile)" \
           >> $GITHUB_OUTPUT
       - name: Install Rust toolchain
-        uses: dtolnay/rust-toolchain@master
+        uses: dtolnay/rust-toolchain@3c5f7ea28cd621ae0bf5283f0e981fb97b8a7af9 # master
         with:
           toolchain: ${{ steps.get-rust-version.outputs.RUST_VERSION }}
           components: rustfmt, clippy
-      - uses: Swatinem/rust-cache@v2
+      - uses: Swatinem/rust-cache@e18b497796c12c097a38f9edb9d0641fb99eee32 # v2
       - name: Run cargo fmt
         run: cargo fmt --all -- --check
       - name: Lint code with Clippy
@@ -64,7 +64,7 @@ jobs:
       - name: Run integration tests 🧪
         run: deno task test
       - name: Upload integration tests results
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         if: always()
         with:
           name: integration-tests-results
