@@ -42,7 +42,7 @@ jobs:
         with:
           experimental: true
       - name: Ensure Rust toolchain and components are installed
-        run: rustup install --profile default
+        run: mise install --force rust
       - name: Run CI task
         env:
           GITHUB_TOKEN: ${{ github.token }}

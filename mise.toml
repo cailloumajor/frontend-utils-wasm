@@ -16,6 +16,7 @@ actionlint = "latest"
 [tools.rust]
 version = "1.94.1"
 components = "rust-analyzer"
+profile = "default"
 targets = "wasm32-unknown-unknown"
 
 [hooks]
