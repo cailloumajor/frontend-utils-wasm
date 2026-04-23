@@ -42,3 +42,6 @@ Cargo.lock
 pkg/
 
 coverage/
+
+mise.local.toml
+mise.*.local.toml
