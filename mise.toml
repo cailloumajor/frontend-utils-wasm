@@ -1,7 +1,6 @@
 [tools]
 deno = "2.7.12"
 tombi = "latest"
-"aqua:wasm-bindgen/wasm-pack" = "latest"
 hk = "latest"
 pkl = "latest"
 "aqua:betterleaks/betterleaks" = "latest"
@@ -9,6 +8,10 @@ hadolint = "latest"
 editorconfig-checker = "latest"
 rumdl = "latest"
 typos = "latest"
+ghalint = "latest"
+zizmor = "latest"
+pinact = "latest"
+actionlint = "latest"
 
 [tools.rust]
 version = "1.94.1"
@@ -17,14 +20,34 @@ targets = "wasm32-unknown-unknown"
 
 [hooks]
 enter = "mise outdated --local --silent"
-# Automatically install/update hooks when tools are installed
-postinstall = "hk install --mise"
 
-[tasks.test]
+[tasks.build]
+description = "Build WASM/JS library"
+run = "deno task build"
+
+[tasks."test:unit"]
+description = "Run Rust unit tests"
+run = "cargo test"
+
+[tasks."test:integration"]
 description = "Run Deno integration tests"
+depends = ["build"]
 tools.ffmpeg = "latest"
 usage = '''
   flag "--update-snapshot" help="Update the visual tests snapshot"
 '''
 env.TZ = "UTC"
 run = "deno test -A -- ${usage_update_snapshot:+--update-snapshot}"
+
+[tasks.lint]
+description = "Run hk lints"
+run = "hk check --all"
+
+[tasks.ci]
+description = "Run CI related tasks"
+depends = ["lint", "test:*"]
+run = "echo 'CI completed successfully'"
+
+[tasks.publish]
+description = "Publish the package"
+run = "deno publish"

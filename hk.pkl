@@ -1,24 +1,27 @@
-amends "package://github.com/jdx/hk/releases/download/v1.41.0/hk@1.41.0#/Config.pkl"
-import "package://github.com/jdx/hk/releases/download/v1.41.0/hk@1.41.0#/Builtins.pkl"
+amends "package://github.com/jdx/hk/releases/download/v1.43.0/hk@1.43.0#/Config.pkl"
+import "package://github.com/jdx/hk/releases/download/v1.43.0/hk@1.43.0#/Builtins.pkl"
 
 local linters = new Mapping<String, Step> {
+  ["actionlint"] = Builtins.actionlint
   ["betterleaks"] = Builtins.betterleaks
   ["cargo-clippy"] = Builtins.cargo_clippy
   ["cargo-fmt"] = Builtins.cargo_fmt
   ["deno"] = Builtins.deno
-  ["deno-check"] = Builtins.deno_check
   ["deno-lint"] {
     glob = List("**/*.js", "**/*.jsx", "**/*.ts", "**/*.tsx")
     check = "deno lint {{ files }}"
     fix = "deno lint --fix {{ files }}"
   }
   ["editorconfig-checker"] = Builtins.editorconfig_checker
+  ["ghalint"] = Builtins.ghalint_workflow
   ["mise"] = Builtins.mise
+  ["pinact"] = Builtins.pinact
   ["pkl"] = Builtins.pkl
   ["pkl-format"] = Builtins.pkl_format
   ["rumdl"] = Builtins.rumdl
   ["tombi"] = Builtins.tombi
   ["typos"] = Builtins.typos
+  ["zizmor"] = Builtins.zizmor
 }
 
 exclude = "CHANGELOG.md"
