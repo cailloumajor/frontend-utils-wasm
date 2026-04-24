@@ -19,7 +19,7 @@
     "build": "deno task wasmbuild --inline --out pkg"
   },
   "imports": {
-    "@astral/astral": "jsr:@astral/astral@0.5.5",
+    "@astral/astral": "jsr:@astral/astral@0.5.6",
     "@std/assert": "jsr:@std/assert@1.0.18",
     "@std/http": "jsr:@std/http@1.0.24",
     "@std/path": "jsr:@std/path@1.1.4",
