@@ -1,6 +1,7 @@
 # WASM utilities for using in frontend
 
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
+[![JSR](https://jsr.io/badges/@cailloumajor/frontend-utils-wasm)](https://jsr.io/@cailloumajor/frontend-utils-wasm)
 
 ## Exposed components
 
