@@ -3,25 +3,25 @@ import * as path from "@std/path"
 
 const wwwDir = path.join(import.meta.dirname!, "www")
 
-const jsEntryPoint = await Deno.bundle({
+const bundleResult = await Deno.bundle({
   entrypoints: [path.join(wwwDir, "index.ts")],
-  inlineImports: false,
+  platform: "browser",
   write: false,
 })
 
-for (const warn of jsEntryPoint.warnings) {
+for (const warn of bundleResult.warnings) {
   console.warn(warn)
 }
 
-for (const error of jsEntryPoint.errors) {
+for (const error of bundleResult.errors) {
   console.error(error)
 }
 
-if (jsEntryPoint.errors.length > 0) {
+if (bundleResult.errors.length > 0) {
   Deno.exit(1)
 }
 
-if (jsEntryPoint.outputFiles == null) {
+if (!bundleResult.outputFiles) {
   console.error("Missing bundle output")
   Deno.exit(1)
 }
@@ -30,18 +30,10 @@ export function handler(req: Request) {
   const reqURL = new URL(req.url)
 
   if (reqURL.pathname === "/index.js") {
-    return new Response(jsEntryPoint.outputFiles![0].contents, {
+    return new Response(bundleResult.outputFiles![0].contents, {
       headers: {
         "Content-Type": "text/javascript",
       },
-    })
-  }
-
-  if (reqURL.pathname.startsWith("/pkg/")) {
-    return serveDir(req, {
-      fsRoot: "pkg",
-      urlRoot: "pkg",
-      showIndex: false,
     })
   }
 

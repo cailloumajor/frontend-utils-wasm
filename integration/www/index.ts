@@ -1,3 +1,5 @@
+import "./polyfill.ts"
+
 import { Timeline } from "../../pkg/frontend_utils_wasm.js"
 
 const canvas = document.getElementById("target-canvas")!
