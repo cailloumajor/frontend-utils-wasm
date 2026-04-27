@@ -1,6 +1,6 @@
 [package]
 name = "frontend-utils-wasm"
-version = "6.0.3"
+version = "6.0.4"
 edition.workspace = true
 description = "WASM utilities for using in frontend"
 publish.workspace = true

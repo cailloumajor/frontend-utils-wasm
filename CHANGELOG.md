@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.0.4](https://github.com/cailloumajor/frontend-utils-wasm/compare/v6.0.3...v6.0.4) (2026-04-27)
+
+
+### Bug Fixes
+
+* restore inlined WASM ([53ae860](https://github.com/cailloumajor/frontend-utils-wasm/commit/53ae860736192611267862983456b65f68fd43d4))
+
 ## [6.0.3](https://github.com/cailloumajor/frontend-utils-wasm/compare/v6.0.2...v6.0.3) (2026-04-25)
 
 
