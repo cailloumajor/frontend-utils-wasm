@@ -11,4 +11,4 @@ clap = { version = "4.6.0", features = ["derive"] }
 duct = "1.1.1"
 escargot = "0.5.15"
 indoc = "2.0.7"
-wasm-bindgen-cli-support = "=0.2.118"
+wasm-bindgen-cli-support = "=0.2.120"
