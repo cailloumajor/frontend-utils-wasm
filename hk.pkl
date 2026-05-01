@@ -6,11 +6,14 @@ local linters = new Mapping<String, Step> {
   ["betterleaks"] = Builtins.betterleaks
   ["cargo-clippy"] = Builtins.cargo_clippy
   ["cargo-fmt"] = Builtins.cargo_fmt
-  ["deno"] = Builtins.deno
+  ["deno"] = (Builtins.deno) {
+    exclude = "crates/xtask/templates/*"
+  }
   ["deno-lint"] {
     glob = List("**/*.js", "**/*.jsx", "**/*.ts", "**/*.tsx")
     check = "deno lint {{ files }}"
     fix = "deno lint --fix {{ files }}"
+    exclude = "crates/xtask/templates/*"
   }
   ["editorconfig-checker"] = Builtins.editorconfig_checker
   ["ghalint"] = Builtins.ghalint_workflow
@@ -24,7 +27,7 @@ local linters = new Mapping<String, Step> {
   ["zizmor"] = Builtins.zizmor
 }
 
-exclude = "CHANGELOG.md"
+exclude = List("CHANGELOG.md", "pkg/*")
 
 hooks {
   ["commit-msg"] {
