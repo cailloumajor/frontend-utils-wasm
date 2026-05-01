@@ -28,6 +28,7 @@ run = "cargo xtask build-deno"
 
 [tasks.build.tools]
 "aqua:WebAssembly/binaryen" = "latest"
+biome = "latest"
 
 [tasks."test:unit"]
 description = "Run Rust unit tests"

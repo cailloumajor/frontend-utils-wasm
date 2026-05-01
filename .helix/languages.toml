@@ -20,6 +20,10 @@ roots = ["deno.json"]
 auto-format = true
 language-servers = ["deno-lsp"]
 
+[[language]]
+name = "pkl"
+auto-format = true
+
 [language-server.deno-lsp]
 command = "deno"
 args = ["lsp"]
