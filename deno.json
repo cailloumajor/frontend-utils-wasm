@@ -1,6 +1,6 @@
 {
   "name": "@cailloumajor/frontend-utils-wasm",
-  "version": "6.0.4",
+  "version": "6.0.5",
   "exports": "./pkg/frontend_utils_wasm.js",
   "exclude": [
     "crates/xtask/templates/",
