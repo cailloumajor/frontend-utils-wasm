@@ -1,5 +1,13 @@
 # Changelog
 
+## [6.0.5](https://github.com/cailloumajor/frontend-utils-wasm/compare/v6.0.4...v6.0.5) (2026-05-01)
+
+
+### Bug Fixes
+
+* compress WASM bytecode ([62d9316](https://github.com/cailloumajor/frontend-utils-wasm/commit/62d931685f33cb5f55cfeabb9ee0e69c1972258c))
+* **deps:** update rust-wasm-bindgen monorepo ([567a751](https://github.com/cailloumajor/frontend-utils-wasm/commit/567a751543cbb437f69f82e1c2932f74c964253b))
+
 ## [6.0.4](https://github.com/cailloumajor/frontend-utils-wasm/compare/v6.0.3...v6.0.4) (2026-04-27)
 
 
