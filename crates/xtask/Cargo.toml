@@ -12,4 +12,4 @@ clap = { version = "4.6.0", features = ["derive"] }
 duct = "1.1.1"
 escargot = "0.5.15"
 flate2 = "1.1.9"
-wasm-bindgen-cli-support = "=0.2.120"
+wasm-bindgen-cli-support = "=0.2.121"
