@@ -39,10 +39,34 @@ jobs:
           persist-credentials: false
       - uses: Swatinem/rust-cache@c19371144df3bb44fab255c43d04cbc2ab54d1c4 # v2.9.1
       - uses: jdx/mise-action@1648a7812b9aeae629881980618f079932869151 # v4.0.1
-        env:
-          MISE_AQUA_BAKED_REGISTRY: false
         with:
           experimental: true
+      - name: Get Deno cache directory
+        id: deno-cache-dir
+        run: echo "dir=$(deno info --json | jq --raw-output '.denoDir')" >> "${GITHUB_OUTPUT}"
+      - name: Setup Deno cache
+        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
+        with:
+          path: ${{ steps.deno-cache-dir.outputs.dir }}
+          key: ${{ runner.os }}-deno-${{ hashFiles('**/deno.lock') }}
+      - name: Get Chrome version used by Puppeteer
+        id: chrome-version
+        run: |
+          script=$(cat <<'EOF'
+          import { PUPPETEER_REVISIONS } from "puppeteer"
+          const chromeVersion = PUPPETEER_REVISIONS.chrome
+          if (!chromeVersion) throw new Error("undefined chrome version")
+          console.log(chromeVersion)
+          EOF
+          )
+          echo "version=$(deno eval "${script}")" >> "${GITHUB_OUTPUT}"
+      - name: Setup Chrome installation cache
+        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
+        with:
+          path: ~/.cache/puppeteer/chrome
+          key: ${{ runner.os }}-chrome-${{ steps.chrome-version.outputs.version }}
+      - name: Install Chrome for Puppeteer
+        run: deno x puppeteer browsers install chrome
       - name: Ensure Rust toolchain and components are installed
         run: mise install --force rust
       - name: Run CI task
