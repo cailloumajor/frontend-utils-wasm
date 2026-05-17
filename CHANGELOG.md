@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.0.6](https://github.com/cailloumajor/frontend-utils-wasm/compare/v6.0.5...v6.0.6) (2026-05-17)
+
+
+### Bug Fixes
+
+* **deps:** update rust-wasm-bindgen monorepo ([49de167](https://github.com/cailloumajor/frontend-utils-wasm/commit/49de167b04703415c6f5e904434080910d76200a))
+
 ## [6.0.5](https://github.com/cailloumajor/frontend-utils-wasm/compare/v6.0.4...v6.0.5) (2026-05-01)
 
 
