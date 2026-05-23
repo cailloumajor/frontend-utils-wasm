@@ -15,8 +15,6 @@ Deno.test.afterAll(stopBrowser)
 
 Deno.test({
   name: "timeline fails with an error (without throwing) if canvas was deleted",
-  sanitizeOps: false,
-  sanitizeResources: false,
   ...ignoreNonSnapshot,
   async fn(t) {
     await withBackendAndBrowser(t, handler, async (page, addr) => {
@@ -43,8 +41,6 @@ Deno.test({
 
 Deno.test({
   name: "timeline fails if MessagePack deserialization errors",
-  sanitizeOps: false,
-  sanitizeResources: false,
   ...ignoreNonSnapshot,
   async fn(t) {
     await withBackendAndBrowser(t, handler, async (page, addr) => {
@@ -81,8 +77,6 @@ Deno.test({
 
 Deno.test({
   name: "timeline fails if draw is requested before having slots data",
-  sanitizeOps: false,
-  sanitizeResources: false,
   ...ignoreNonSnapshot,
   async fn(t) {
     await withBackendAndBrowser(t, handler, async (page, addr) => {
@@ -103,8 +97,6 @@ Deno.test({
 
 Deno.test({
   name: "timeline fails if fetched data has no slot",
-  sanitizeOps: false,
-  sanitizeResources: false,
   ...ignoreNonSnapshot,
   async fn(t) {
     await withBackendAndBrowser(t, handler, async (page, addr) => {
@@ -142,8 +134,6 @@ Deno.test({
 
 Deno.test({
   name: "timeline fails if color index is not in the palette",
-  sanitizeOps: false,
-  sanitizeResources: false,
   ...ignoreNonSnapshot,
   async fn(t) {
     await withBackendAndBrowser(t, handler, async (page, addr) => {
@@ -186,8 +176,6 @@ Deno.test({
 
 Deno.test({
   name: "timeline renders according to snapshot",
-  sanitizeOps: false,
-  sanitizeResources: false,
   async fn(t) {
     await withBackendAndBrowser(t, handler, async (page, addr) => {
       const snapshotDir = path.join(import.meta.dirname!, "__image_snapshots__")
