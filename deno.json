@@ -15,6 +15,7 @@
   "unstable": [
     "bundle"
   ],
+  "minimumDependencyAge": "P7D",
   "imports": {
     "@std/assert": "jsr:@std/assert@1.0.19",
     "@std/http": "jsr:@std/http@1.1.1",

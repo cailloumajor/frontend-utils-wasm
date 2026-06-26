@@ -5,13 +5,8 @@
     "helpers:pinGitHubActionDigestsToSemver"
   ],
   "semanticCommits": "enabled",
+  "minimumReleaseAge": "7 days",
   "packageRules": [
-    {
-      "matchManagers": [
-        "github-actions"
-      ],
-      "minimumReleaseAge": "7 days"
-    },
     {
       "matchPackageNames": [
         "rust"
