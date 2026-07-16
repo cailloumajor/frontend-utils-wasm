@@ -28,6 +28,10 @@ local linters = new Mapping<String, Step> {
   ["zizmor"] = Builtins.zizmor
 }
 
+env {
+  ["CARGO_BUILD_WARNINGS"] = "deny"
+}
+
 exclude = List("CHANGELOG.md", "pkg/*")
 
 hooks {
