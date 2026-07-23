@@ -14,7 +14,7 @@ pinact = "latest"
 actionlint = "latest"
 
 [tools.rust]
-version = "1.97.0"
+version = "1.97.1"
 components = "rust-analyzer"
 profile = "default"
 targets = "wasm32-unknown-unknown"
