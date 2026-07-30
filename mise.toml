@@ -1,5 +1,5 @@
 [tools]
-deno = "2.9.3"
+deno = "2.9.4"
 tombi = "latest"
 hk = "latest"
 pkl = "latest"
