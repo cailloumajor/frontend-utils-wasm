@@ -8,7 +8,7 @@ use plotters::prelude::*;
 use plotters::style::RelativeSize;
 use plotters_canvas::CanvasBackend;
 use serde::Deserialize;
-use tsify::Tsify;
+use tsify::{Ts, Tsify};
 use wasm_bindgen::prelude::*;
 use web_sys::{CanvasRenderingContext2d, HtmlCanvasElement};
 
@@ -27,7 +27,6 @@ struct Slot {
 
 /// Configuration for `Timeline`.
 #[derive(Deserialize, Tsify)]
-#[tsify(from_wasm_abi)]
 #[serde(rename_all = "camelCase")]
 pub struct TimelineConfig {
     /// The color palette to use for drawing slots, as CSS color strings.
@@ -67,9 +66,11 @@ impl Timeline {
     pub fn new(
         #[wasm_bindgen(param_description = "the canvas element to use for drawing")]
         canvas: HtmlCanvasElement,
-        #[wasm_bindgen(param_description = "the configuration for this timeline")]
-        config: TimelineConfig,
+        #[wasm_bindgen(param_description = "the configuration for this timeline")] //
+        config: Ts<TimelineConfig>,
     ) -> Result<Timeline, JsError> {
+        let config = config.to_rust()?;
+
         let palette = config
             .palette
             .into_iter()
