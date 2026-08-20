@@ -31,3 +31,9 @@ args = ["lsp"]
 [language-server.deno-lsp.config.deno]
 enable = true
 unstable = true
+
+[language-server.rust-analyzer.config]
+check.command = "clippy"
+imports.granularity.enforce = true
+imports.granularity.group = "module"
+imports.prefix = "self"
