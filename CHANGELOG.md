@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.0.7](https://github.com/cailloumajor/frontend-utils-wasm/compare/v6.0.6...v6.0.7) (2026-08-28)
+
+
+### Bug Fixes
+
+* **deps:** update dependency rust to v1.98.0 ([b3b26e2](https://github.com/cailloumajor/frontend-utils-wasm/commit/b3b26e29bf87daa77c300db2eda4270bc01c3c4d))
+
 ## [6.0.6](https://github.com/cailloumajor/frontend-utils-wasm/compare/v6.0.5...v6.0.6) (2026-08-20)
 
 
