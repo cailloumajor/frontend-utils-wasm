@@ -1,6 +1,6 @@
 [tools]  # tombi: format.rules.table-keys-order = "ascending"
 actionlint = "latest"
-"aqua:betterleaks/betterleaks" = "latest"
+betterleaks = "latest"
 deno = "2.9.6"
 editorconfig-checker = "latest"
 ghalint = "latest"
