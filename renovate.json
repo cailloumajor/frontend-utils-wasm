@@ -7,26 +7,33 @@
   "automergeType": "branch",
   "lockFileMaintenance": {
     "enabled": true,
+    "schedule": ["* 0-4 * * *"],
     "automerge": true
   },
   "semanticCommits": "enabled",
   "minimumReleaseAge": "7 days",
   "packageRules": [
     {
-      "matchDepNames": [
-        "rust"
-      ],
-      "matchManagers": [
-        "mise"
-      ],
+      "matchDepNames": ["rust"],
+      "matchManagers": ["mise"],
       "semanticCommitType": "fix"
     },
     {
-      "matchDepTypes": [
-        "dev-dependencies"
-      ],
-      "automerge": true,
-      "automergeType": "branch"
+      "matchDepTypes": ["dev-dependencies"],
+      "automerge": true
+    },
+    {
+      "matchManagers": ["cargo", "deno", "github-actions"],
+      "minimumReleaseAge": "3 days"
+    },
+    {
+      "matchDepTypes": ["tools"],
+      "minimumReleaseAge": "1 day"
+    },
+    {
+      "matchDepTypes": ["tools"],
+      "matchCurrentValue": "latest",
+      "enabled": false
     }
   ]
 }
