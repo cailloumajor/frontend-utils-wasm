@@ -41,9 +41,6 @@ usage = '''
 env.TZ = "UTC"
 run = "deno test -A -- ${usage_update_snapshot:+--update-snapshot}"
 
-[tasks."test:integration".tools]
-ffmpeg = "latest"
-
 [tasks.lint]
 description = "Run hk lints"
 run = "hk check --all"
