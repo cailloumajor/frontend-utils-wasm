@@ -15,7 +15,7 @@ typos = "latest"
 zizmor = "latest"
 
 [tools.rust]
-version = "1.98.0"
+version = "1.98.1"
 components = "rust-analyzer"
 profile = "default"
 targets = "wasm32-unknown-unknown"
