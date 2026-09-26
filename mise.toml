@@ -1,7 +1,7 @@
 [tools]  # tombi: format.rules.table-keys-order = "ascending"
 actionlint = "latest"
 betterleaks = "latest"
-deno = "2.9.6"
+deno = "2.9.7"
 editorconfig-checker = "latest"
 ghalint = "latest"
 hadolint = "latest"
