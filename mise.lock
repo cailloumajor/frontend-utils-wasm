@@ -49,6 +49,46 @@ url = "https://github.com/rhysd/actionlint/releases/download/v1.7.12/actionlint_
 url_api = "https://api.github.com/repos/rhysd/actionlint/releases/assets/384924919"
 provenance = "github-attestations"
 
+[[tools."aqua:Tyrrrz/FFmpegBin"]]
+version = "9.0.2"
+backend = "aqua:Tyrrrz/FFmpegBin"
+specifiers = ["latest"]
+
+[tools."aqua:Tyrrrz/FFmpegBin"."platforms.linux-arm64"]
+checksum = "sha256:4d756cbae5e3c4af824956325f9d3fb5b624791ae692dc719703cf54991dc67b"
+url = "https://github.com/Tyrrrz/FFmpegBin/releases/download/9.0.2/ffmpeg-linux-arm64.zip"
+url_api = "https://api.github.com/repos/Tyrrrz/FFmpegBin/releases/assets/575572364"
+
+[tools."aqua:Tyrrrz/FFmpegBin"."platforms.linux-arm64-musl"]
+checksum = "sha256:4d756cbae5e3c4af824956325f9d3fb5b624791ae692dc719703cf54991dc67b"
+url = "https://github.com/Tyrrrz/FFmpegBin/releases/download/9.0.2/ffmpeg-linux-arm64.zip"
+url_api = "https://api.github.com/repos/Tyrrrz/FFmpegBin/releases/assets/575572364"
+
+[tools."aqua:Tyrrrz/FFmpegBin"."platforms.linux-x64"]
+checksum = "sha256:2483332318255c1001facbc6a6bf91941e5f35651bf8b7d4cfd768e1da18567f"
+url = "https://github.com/Tyrrrz/FFmpegBin/releases/download/9.0.2/ffmpeg-linux-x64.zip"
+url_api = "https://api.github.com/repos/Tyrrrz/FFmpegBin/releases/assets/575572487"
+
+[tools."aqua:Tyrrrz/FFmpegBin"."platforms.linux-x64-musl"]
+checksum = "sha256:2483332318255c1001facbc6a6bf91941e5f35651bf8b7d4cfd768e1da18567f"
+url = "https://github.com/Tyrrrz/FFmpegBin/releases/download/9.0.2/ffmpeg-linux-x64.zip"
+url_api = "https://api.github.com/repos/Tyrrrz/FFmpegBin/releases/assets/575572487"
+
+[tools."aqua:Tyrrrz/FFmpegBin"."platforms.macos-arm64"]
+checksum = "sha256:7d22a2893ccd761c3b4214165975e306d6c85c1de188f79f7e2723070c0006e4"
+url = "https://github.com/Tyrrrz/FFmpegBin/releases/download/9.0.2/ffmpeg-osx-arm64.zip"
+url_api = "https://api.github.com/repos/Tyrrrz/FFmpegBin/releases/assets/575572273"
+
+[tools."aqua:Tyrrrz/FFmpegBin"."platforms.macos-x64"]
+checksum = "sha256:e1938c2df4024c13eeef068f5561e7782ec4003b3f40b428065147e40b92e9a0"
+url = "https://github.com/Tyrrrz/FFmpegBin/releases/download/9.0.2/ffmpeg-osx-x64.zip"
+url_api = "https://api.github.com/repos/Tyrrrz/FFmpegBin/releases/assets/575572310"
+
+[tools."aqua:Tyrrrz/FFmpegBin"."platforms.windows-x64"]
+checksum = "sha256:bcc61c7027eefbed7d87af0a619ce8e6c4a5c5f8bb0d31a2acec8fe7ed749850"
+url = "https://github.com/Tyrrrz/FFmpegBin/releases/download/9.0.2/ffmpeg-windows-x64.zip"
+url_api = "https://api.github.com/repos/Tyrrrz/FFmpegBin/releases/assets/575572218"
+
 [[tools."aqua:WebAssembly/binaryen"]]
 version = "133"
 backend = "aqua:WebAssembly/binaryen"
