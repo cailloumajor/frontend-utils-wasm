@@ -20,9 +20,6 @@ components = "rust-analyzer"
 profile = "default"
 targets = "wasm32-unknown-unknown"
 
-[hooks]
-enter = "mise outdated --local --silent"
-
 [tasks.build]
 description = "Build the library"
 run = "cargo xtask build-deno"
