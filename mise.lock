@@ -303,56 +303,35 @@ checksum = "sha256:203a22c70b40bb161626973ad2a8dd06aeb736699fc8e03dd425dee8ff340
 url = "https://github.com/suzuki-shunsuke/ghalint/releases/download/v1.5.6/ghalint_1.5.6_linux_arm64.tar.gz"
 url_api = "https://api.github.com/repos/suzuki-shunsuke/ghalint/releases/assets/409631231"
 
-[tools.ghalint."platforms.linux-arm64".provenance.slsa]
-url = "https://github.com/suzuki-shunsuke/ghalint/releases/download/v1.5.6/multiple.intoto.jsonl"
-
 [tools.ghalint."platforms.linux-arm64-musl"]
 checksum = "sha256:203a22c70b40bb161626973ad2a8dd06aeb736699fc8e03dd425dee8ff3406e6"
 url = "https://github.com/suzuki-shunsuke/ghalint/releases/download/v1.5.6/ghalint_1.5.6_linux_arm64.tar.gz"
 url_api = "https://api.github.com/repos/suzuki-shunsuke/ghalint/releases/assets/409631231"
-
-[tools.ghalint."platforms.linux-arm64-musl".provenance.slsa]
-url = "https://github.com/suzuki-shunsuke/ghalint/releases/download/v1.5.6/multiple.intoto.jsonl"
 
 [tools.ghalint."platforms.linux-x64"]
 checksum = "sha256:98ee0e3330de7286f470d1e89c03ff7ce70d7a5998ba0f15969c400447be579c"
 url = "https://github.com/suzuki-shunsuke/ghalint/releases/download/v1.5.6/ghalint_1.5.6_linux_amd64.tar.gz"
 url_api = "https://api.github.com/repos/suzuki-shunsuke/ghalint/releases/assets/409631220"
 
-[tools.ghalint."platforms.linux-x64".provenance.slsa]
-url = "https://github.com/suzuki-shunsuke/ghalint/releases/download/v1.5.6/multiple.intoto.jsonl"
-
 [tools.ghalint."platforms.linux-x64-musl"]
 checksum = "sha256:98ee0e3330de7286f470d1e89c03ff7ce70d7a5998ba0f15969c400447be579c"
 url = "https://github.com/suzuki-shunsuke/ghalint/releases/download/v1.5.6/ghalint_1.5.6_linux_amd64.tar.gz"
 url_api = "https://api.github.com/repos/suzuki-shunsuke/ghalint/releases/assets/409631220"
-
-[tools.ghalint."platforms.linux-x64-musl".provenance.slsa]
-url = "https://github.com/suzuki-shunsuke/ghalint/releases/download/v1.5.6/multiple.intoto.jsonl"
 
 [tools.ghalint."platforms.macos-arm64"]
 checksum = "sha256:1262cac411e27b4653e6b66b7b06580ebcc2026fdd903e12e6cb0e4591639de6"
 url = "https://github.com/suzuki-shunsuke/ghalint/releases/download/v1.5.6/ghalint_1.5.6_darwin_arm64.tar.gz"
 url_api = "https://api.github.com/repos/suzuki-shunsuke/ghalint/releases/assets/409631219"
 
-[tools.ghalint."platforms.macos-arm64".provenance.slsa]
-url = "https://github.com/suzuki-shunsuke/ghalint/releases/download/v1.5.6/multiple.intoto.jsonl"
-
 [tools.ghalint."platforms.macos-x64"]
 checksum = "sha256:d2a0e8605333068065dcf4c9b7b7a24891eda1750ac01fb755dfba426a390883"
 url = "https://github.com/suzuki-shunsuke/ghalint/releases/download/v1.5.6/ghalint_1.5.6_darwin_amd64.tar.gz"
 url_api = "https://api.github.com/repos/suzuki-shunsuke/ghalint/releases/assets/409631204"
 
-[tools.ghalint."platforms.macos-x64".provenance.slsa]
-url = "https://github.com/suzuki-shunsuke/ghalint/releases/download/v1.5.6/multiple.intoto.jsonl"
-
 [tools.ghalint."platforms.windows-x64"]
 checksum = "sha256:109ea9b39c8e263cef924bd3b4fe5505964204f934ca60d986f4090d01a99ba5"
 url = "https://github.com/suzuki-shunsuke/ghalint/releases/download/v1.5.6/ghalint_1.5.6_windows_amd64.zip"
 url_api = "https://api.github.com/repos/suzuki-shunsuke/ghalint/releases/assets/409631234"
-
-[tools.ghalint."platforms.windows-x64".provenance.slsa]
-url = "https://github.com/suzuki-shunsuke/ghalint/releases/download/v1.5.6/multiple.intoto.jsonl"
 
 [[tools.hadolint]]
 version = "2.15.1"
