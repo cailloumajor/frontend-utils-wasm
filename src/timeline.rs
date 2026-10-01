@@ -195,7 +195,7 @@ impl Timeline {
                 let start = &window[0];
                 let end = &window[1];
                 if let Some(index) = start.color_index {
-                    let Some(color) = self.palette.get(index).cloned() else {
+                    let Some(color) = self.palette.get(index).copied() else {
                         return Some(Err(TimelineError::ColorIndexNotInPalette(index)));
                     };
                     let style = ShapeStyle {
