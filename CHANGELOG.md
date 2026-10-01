@@ -1,5 +1,14 @@
 # Changelog
 
+## [6.0.9](https://github.com/cailloumajor/frontend-utils-wasm/compare/v6.0.8...v6.0.9) (2026-10-01)
+
+
+### Bug Fixes
+
+* copy color object instead of cloning ([014c925](https://github.com/cailloumajor/frontend-utils-wasm/commit/014c92554490f2c4eb471495e993f6fc4d1a1b89))
+* **deps:** update rust crate csscolorparser to 0.9.0 ([85c3aff](https://github.com/cailloumajor/frontend-utils-wasm/commit/85c3afffc43cbd56fae9ce7730910fec42cffa2e))
+* **deps:** update rust-wasm-bindgen monorepo ([882ee16](https://github.com/cailloumajor/frontend-utils-wasm/commit/882ee16a41fb5b7a193e4003366c37f53cc9d67d))
+
 ## [6.0.8](https://github.com/cailloumajor/frontend-utils-wasm/compare/v6.0.7...v6.0.8) (2026-09-26)
 
 
