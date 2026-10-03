@@ -187,8 +187,8 @@
         "ansi-regex"
       ]
     },
-    "typed-query-selector@2.12.2": {
-      "integrity": "sha512-EOPFbyIub4ngnEdqi2yOcNeDLaX/0jcE1JoAXQDDMIthap7FoN795lc/SHfIq2d416VufXpM8z/lD+WRm2gfOQ=="
+    "typed-query-selector@2.12.3": {
+      "integrity": "sha512-/dtuMZyutHLlrxWhhC1uib00ELUr2dZ8C9B8YzZYsJmeE3V56OxRblrSM2UaF142pcMtak7ehZ6+poWGeehNIg=="
     },
     "webdriver-bidi-protocol@0.4.3": {
       "integrity": "sha512-uuN0goWfxP22B7J/uAgBpOYNPttC+XVseYE+rSY5+rQ+YBeVz/VORw8WbmLVcqW78zNg5A4qnjNXYUWR3il2ig=="
