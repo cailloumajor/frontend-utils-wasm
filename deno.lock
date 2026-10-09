@@ -16,7 +16,7 @@
     "jsr:@std/path@1.1.6": "1.1.6",
     "jsr:@std/path@^1.1.6": "1.1.6",
     "jsr:@std/streams@^1.2.0": "1.2.0",
-    "npm:pixelmatch@7.2.0": "7.2.0",
+    "npm:pixelmatch@8.0.0": "8.0.0",
     "npm:puppeteer@25.12.0": "25.12.0"
   },
   "jsr": {
@@ -132,8 +132,8 @@
     "modern-tar@0.8.5": {
       "integrity": "sha512-snEhs+6G5Tjd4I7tLCDOaoln2RgE0bD19RzEKgvgK2hZ5VKy3MpLhLTZ2fWpXSTg4K2cyPwp+VHATFJhxfnOeA=="
     },
-    "pixelmatch@7.2.0": {
-      "integrity": "sha512-xhcb4yHu9sM/G7foGzoLtXYcC0zHEaOXXjRKhGup0fw78Nf2Tkiapv4EQyMzrbcmQPsllAI7DbFY2UT7PlI9Pg==",
+    "pixelmatch@8.0.0": {
+      "integrity": "sha512-cIqOLfh5k52us715qf3B3+kTOxZv+WDv77HN7xokLScYQGYQHi4m/ynoDIPpvF2LvCyUJGyvzY64i0QCXtzu1g==",
       "dependencies": [
         "pngjs"
       ],
@@ -231,7 +231,7 @@
       "jsr:@std/assert@1.0.19",
       "jsr:@std/http@1.1.4",
       "jsr:@std/path@1.1.6",
-      "npm:pixelmatch@7.2.0",
+      "npm:pixelmatch@8.0.0",
       "npm:puppeteer@25.12.0"
     ]
   }
