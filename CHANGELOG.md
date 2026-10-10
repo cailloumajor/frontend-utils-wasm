@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.0.10](https://github.com/cailloumajor/frontend-utils-wasm/compare/v6.0.9...v6.0.10) (2026-10-10)
+
+
+### Bug Fixes
+
+* **deps:** update dependency rust to v1.99.0 ([542e533](https://github.com/cailloumajor/frontend-utils-wasm/commit/542e5334cb406361d176230f8e555c143d9e5243))
+
 ## [6.0.9](https://github.com/cailloumajor/frontend-utils-wasm/compare/v6.0.8...v6.0.9) (2026-10-01)
 
 
