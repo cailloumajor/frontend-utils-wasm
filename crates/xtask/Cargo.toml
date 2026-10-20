@@ -10,6 +10,6 @@ base64 = "0.23.0"
 cargo_metadata = "0.23.1"
 clap = { version = "4.6.0", features = ["derive"] }
 duct = "1.1.1"
-escargot = "0.5.15"
+escargot = "1.0.0"
 flate2 = "1.1.9"
 wasm-bindgen-cli-support = "=0.2.129"
