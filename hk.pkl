@@ -1,9 +1,8 @@
-amends "package://github.com/jdx/hk/releases/download/v2.0.0/hk@2.0.0#/Config.pkl"
+amends "package://github.com/jdx/hk/releases/download/v2.8.0/hk@2.8.0#/Config.pkl"
 
-import "package://github.com/jdx/hk/releases/download/v2.0.0/hk@2.0.0#/Builtins.pkl"
+import "package://github.com/jdx/hk/releases/download/v2.8.0/hk@2.8.0#/Builtins.pkl"
 
 steps {
-  ["actionlint"] = Builtins.actionlint
   ["betterleaks"] = Builtins.betterleaks
   ["cargo-clippy"] = Builtins.cargo_clippy
   ["cargo-fmt"] = Builtins.cargo_fmt
@@ -18,13 +17,13 @@ steps {
   }
   ["editorconfig-checker"] = Builtins.editorconfig_checker
   ["ghalint"] = Builtins.ghalint_workflow
+  ["jactionlint"] = Builtins.jactionlint
   ["pinact"] = Builtins.pinact
   ["pkl"] = Builtins.pkl
   ["pkl-format"] = Builtins.pkl_format
   ["rumdl"] = Builtins.rumdl
   ["tombi"] = Builtins.tombi
   ["typos"] = Builtins.typos
-  ["zizmor"] = Builtins.zizmor
 }
 
 env {
