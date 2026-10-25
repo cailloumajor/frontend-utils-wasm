@@ -22,7 +22,7 @@
     "@std/path": "jsr:@std/path@1.1.6",
     "imagescript": "jsr:@matmen/imagescript@3.3.0",
     "pixelmatch": "npm:pixelmatch@8.0.0",
-    "puppeteer": "npm:puppeteer@25.15.0"
+    "puppeteer": "npm:puppeteer@25.16.0"
   },
   "fmt": {
     "lineWidth": 100,
