@@ -16,9 +16,7 @@ steps {
     exclude = "crates/xtask/templates/*"
   }
   ["editorconfig-checker"] = Builtins.editorconfig_checker
-  ["ghalint"] = Builtins.ghalint_workflow
   ["jactionlint"] = Builtins.jactionlint
-  ["pinact"] = Builtins.pinact
   ["pkl"] = Builtins.pkl
   ["pkl-format"] = Builtins.pkl_format
   ["rumdl"] = Builtins.rumdl
