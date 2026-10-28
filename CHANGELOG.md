@@ -1,5 +1,14 @@
 # Changelog
 
+## [6.0.10](https://github.com/cailloumajor/frontend-utils-wasm/compare/v6.0.9...v6.0.10) (2026-10-28)
+
+
+### Bug Fixes
+
+* **deps:** update dependency rust to v1.99.0 ([542e533](https://github.com/cailloumajor/frontend-utils-wasm/commit/542e5334cb406361d176230f8e555c143d9e5243))
+* **deps:** update dependency rust to v1.99.1 ([54b271e](https://github.com/cailloumajor/frontend-utils-wasm/commit/54b271e6d354e868519db5446074d53d04abeac8))
+* **deps:** update rust crate escargot to v1 ([35f0a5c](https://github.com/cailloumajor/frontend-utils-wasm/commit/35f0a5c1f7b65bad0def4caef49d8807988452a9))
+
 ## [6.0.9](https://github.com/cailloumajor/frontend-utils-wasm/compare/v6.0.8...v6.0.9) (2026-10-01)
 
 
