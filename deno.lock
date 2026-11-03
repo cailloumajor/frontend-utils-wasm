@@ -1,7 +1,7 @@
 {
   "version": "5",
   "specifiers": {
-    "jsr:@matmen/imagescript@3.12.2": "3.12.2",
+    "jsr:@matmen/imagescript@3.13.0": "3.13.0",
     "jsr:@std/assert@1.0.19": "1.0.19",
     "jsr:@std/cli@^1.0.32": "1.0.32",
     "jsr:@std/encoding@^1.0.11": "1.0.11",
@@ -20,8 +20,8 @@
     "npm:puppeteer@25.16.0": "25.16.0"
   },
   "jsr": {
-    "@matmen/imagescript@3.12.2": {
-      "integrity": "a0f1188900a71060499606978078dadb1b221f8df3e2e074b5ac2275d565a4ee"
+    "@matmen/imagescript@3.13.0": {
+      "integrity": "8dff7d879a26e58143c34818f522f4c518b165d259887537ae393caf9865da5c"
     },
     "@std/assert@1.0.19": {
       "integrity": "eaada96ee120cb980bc47e040f82814d786fe8162ecc53c91d8df60b8755991e",
@@ -227,7 +227,7 @@
   },
   "workspace": {
     "dependencies": [
-      "jsr:@matmen/imagescript@3.12.2",
+      "jsr:@matmen/imagescript@3.13.0",
       "jsr:@std/assert@1.0.19",
       "jsr:@std/http@1.1.4",
       "jsr:@std/path@1.1.6",
