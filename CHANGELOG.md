@@ -1,5 +1,13 @@
 # Changelog
 
+## [6.0.11](https://github.com/cailloumajor/frontend-utils-wasm/compare/v6.0.10...v6.0.11) (2026-11-15)
+
+
+### Bug Fixes
+
+* **deps:** update dependency rust to v1.100.0 ([452d7b1](https://github.com/cailloumajor/frontend-utils-wasm/commit/452d7b1398ca4a1c3be443251eaf5a6bfa606d7c))
+* **deps:** update rust-wasm-bindgen monorepo ([349fa9b](https://github.com/cailloumajor/frontend-utils-wasm/commit/349fa9bc3268bfd19ed14162bc23ab630fb2b6ad))
+
 ## [6.0.10](https://github.com/cailloumajor/frontend-utils-wasm/compare/v6.0.9...v6.0.10) (2026-10-28)
 
 
