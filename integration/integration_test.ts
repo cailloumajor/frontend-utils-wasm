@@ -221,11 +221,9 @@ Deno.test({
         },
       )
 
-      if (numDiffPixels > 0) {
-        const diffFile = await diffImage.encode(0)
-        const diffPath = path.join(snapshotDir, `${testId(t)}.diff.png`)
-        await Deno.writeFile(diffPath, diffFile)
-      }
+      const diffFile = await diffImage.encodePNG({ compression: 0 })
+      const diffPath = path.join(snapshotDir, `${testId(t)}.diff.png`)
+      await Deno.writeFile(diffPath, diffFile)
 
       assertEquals(numDiffPixels, 0, "rendered canvas is too different than expected")
     })
