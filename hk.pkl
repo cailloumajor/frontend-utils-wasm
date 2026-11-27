@@ -5,6 +5,13 @@ import "package://github.com/jdx/hk/releases/download/v2.8.0/hk@2.8.0#/Builtins.
 steps {
   ["betterleaks"] = Builtins.betterleaks
   ["cargo-clippy"] = Builtins.cargo_clippy
+  ["cargo-doc"] {
+    glob = "**/*.rs"
+    workspace_indicator = "Cargo.toml"
+    // Warnings (e.g. broken intra-doc links) are turned into errors by CARGO_BUILD_WARNINGS below.
+    check =
+      "cargo doc --manifest-path {{workspace_indicator}} --no-deps --document-private-items --quiet"
+  }
   ["cargo-fmt"] = Builtins.cargo_fmt
   ["deno"] = (Builtins.deno) {
     exclude = "crates/xtask/templates/*"
@@ -33,7 +40,7 @@ exclude = List("CHANGELOG.md", "pkg/*")
 hooks {
   ["commit-msg"] {
     steps {
-      ["check-conventional-commit"] = Builtins.check_conventional_commit
+      ["check-conventional-commit"] = Builtins.cocogitto_commit_msg
     }
   }
 }
